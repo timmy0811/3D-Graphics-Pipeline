@@ -27,8 +27,8 @@
 /// \brief Helper functions to copy sf::Transform to sf::Glsl::Mat3/4
 ///
 ////////////////////////////////////////////////////////////
-void SFML_GRAPHICS_API copyMatrix(const Transform& source, Matrix<3, 3>& dest);
-void SFML_GRAPHICS_API copyMatrix(const Transform& source, Matrix<4, 4>& dest);
+void SFML_GRAPHICS_API copyMatrix(const Transform& source, Matrix3X3<3, 3>& dest);
+void SFML_GRAPHICS_API copyMatrix(const Transform& source, Matrix3X3<4, 4>& dest);
 
 ////////////////////////////////////////////////////////////
 /// \brief Copy array-based matrix with given number of elements
@@ -52,7 +52,7 @@ void SFML_GRAPHICS_API copyVector(const Color& source, Vector4<int>& dest);
 ///
 ////////////////////////////////////////////////////////////
 template <std::size_t Columns, std::size_t Rows>
-struct Matrix
+struct Matrix3X3
 {
     ////////////////////////////////////////////////////////////
     /// \brief Construct from raw data
@@ -62,7 +62,7 @@ struct Matrix
     ///                are copied to the instance.
     ///
     ////////////////////////////////////////////////////////////
-    explicit Matrix(const float* pointer)
+    explicit Matrix3X3(const float* pointer)
     {
         copyMatrix(pointer, Columns * Rows, array);
     }
@@ -76,7 +76,7 @@ struct Matrix
     /// \param transform Object containing a transform.
     ///
     ////////////////////////////////////////////////////////////
-    Matrix(const Transform& transform)
+    Matrix3X3(const Transform& transform)
     {
         copyMatrix(transform, *this);
     }

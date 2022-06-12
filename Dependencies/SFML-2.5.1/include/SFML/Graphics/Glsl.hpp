@@ -40,7 +40,7 @@ namespace priv
 {
     // Forward declarations
     template <std::size_t Columns, std::size_t Rows>
-    struct Matrix;
+    struct Matrix3X3;
 
     template <typename T>
     struct Vector4;
@@ -185,8 +185,8 @@ namespace Glsl
     typedef priv::Vector4<float> Vec4;
     typedef priv::Vector4<int> Ivec4;
     typedef priv::Vector4<bool> Bvec4;
-    typedef priv::Matrix<3, 3> Mat3;
-    typedef priv::Matrix<4, 4> Mat4;
+    typedef priv::Matrix3X3<3, 3> Mat3;
+    typedef priv::Matrix3X3<4, 4> Mat4;
 
 #endif // SFML_DOXYGEN
 

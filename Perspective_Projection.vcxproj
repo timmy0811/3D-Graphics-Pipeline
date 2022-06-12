@@ -147,9 +147,17 @@
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="Matrix3X3.cpp" />
+    <ClCompile Include="Matrix3X1.cpp" />
+    <ClCompile Include="MatrixOperations.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Matrix.h" />
+    <ClInclude Include="Matrix3X3.h" />
+    <ClInclude Include="Matrix3X1.h" />
+    <ClInclude Include="MatrixOperations.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
