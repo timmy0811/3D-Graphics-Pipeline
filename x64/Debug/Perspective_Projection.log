@@ -1,11 +1,5 @@
-﻿  Game.cpp
-  main.cpp
-  Matrix.cpp
-  Matrix3X3.cpp
-  Matrix3X1.cpp
-C:\Git\Perspective_Projection\Perspective_Projection\Matrix3X1.cpp(3,66): error C2572: 'Matrix3X1::Matrix3X1': redefinition of default argument: parameter 1
-C:\Git\Perspective_Projection\Perspective_Projection\Matrix3X1.h(11): message : see declaration of 'Matrix3X1::Matrix3X1'
-  MatrixOperations.cpp
-C:\Git\Perspective_Projection\Perspective_Projection\MatrixOperations.cpp(16,32): error C2440: 'initializing': cannot convert from 'Matrix3X1' to 'Matrix3X3'
-C:\Git\Perspective_Projection\Perspective_Projection\MatrixOperations.cpp(16,19): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+﻿  Pipeline.cpp
+  Renderable.cpp
+  RenderQueue.cpp
   Generating Code...
+  Perspective_Projection.vcxproj -> C:\Git\Perspective_Projection\x64\Debug\Perspective_Projection.exe

@@ -145,19 +145,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="Matrix3X3.cpp" />
     <ClCompile Include="Matrix3X1.cpp" />
     <ClCompile Include="MatrixOperations.cpp" />
+    <ClCompile Include="Pipeline.cpp" />
+    <ClCompile Include="Point.cpp" />
+    <ClCompile Include="Renderable.cpp" />
+    <ClCompile Include="RenderQueue.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cube.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Matrix3X3.h" />
     <ClInclude Include="Matrix3X1.h" />
     <ClInclude Include="MatrixOperations.h" />
+    <ClInclude Include="Pipeline.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="Renderable.h" />
+    <ClInclude Include="RenderQueue.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Perspective_Projection.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

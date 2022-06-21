@@ -16,6 +16,12 @@
     <Filter Include="Headerdateien\Matrix">
       <UniqueIdentifier>{90b50933-f579-4113-8201-c11303929629}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\RenderPipeline">
+      <UniqueIdentifier>{0d7bc9f0-e7bf-4264-9fc3-38da83cda57b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\RenderPipeline\Renderable">
+      <UniqueIdentifier>{a30495a6-d4a7-4d07-90a0-79b575fe758d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -36,6 +42,21 @@
     <ClCompile Include="MatrixOperations.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Pipeline.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderQueue.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderable.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -51,7 +72,30 @@
       <Filter>Headerdateien\Matrix</Filter>
     </ClInclude>
     <ClInclude Include="MatrixOperations.h">
+      <Filter>Headerdateien\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Renderable.h">
+      <Filter>Headerdateien\RenderPipeline\Renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderQueue.h">
+      <Filter>Headerdateien\RenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="Pipeline.h">
+      <Filter>Headerdateien\RenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Headerdateien\RenderPipeline\Renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Headerdateien\RenderPipeline\Renderable</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Perspective_Projection.rc">
+      <Filter>Ressourcendateien</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

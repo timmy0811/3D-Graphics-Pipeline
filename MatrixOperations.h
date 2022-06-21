@@ -4,7 +4,7 @@
 #include "Matrix3X1.h"
 #include "Matrix3X3.h"
 
-namespace MatrixOperations
+namespace maop
 {
 	Matrix3X1 matMul(Matrix3X3 m1, Matrix3X1 m2);
 	Matrix3X3 matMul(Matrix3X3 m1, Matrix3X3 m2);
