@@ -1,5 +1,5 @@
-﻿  Pipeline.cpp
-  Renderable.cpp
-  RenderQueue.cpp
+﻿  Cube.cpp
+  Game.cpp
+  main.cpp
   Generating Code...
   Perspective_Projection.vcxproj -> C:\Git\Perspective_Projection\x64\Debug\Perspective_Projection.exe

@@ -1,12 +1,14 @@
 #include "Pipeline.h"
 
-Pipeline::Pipeline()
+Pipeline::Pipeline(float distance)
 {
+	this->distance = distance;
 	projection = Matrix3X3(0.f, MATRIX_TYPE::PROJECTION);
 }
 
 void Pipeline::renderAll(sf::RenderTarget* target)
 {
+	queue.applyPerspective(distance);
 	queue.renderAll(target);
 }
 

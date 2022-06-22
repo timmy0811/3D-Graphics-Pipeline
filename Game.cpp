@@ -1,18 +1,16 @@
 #include "Game.h"
 
 // Constructors
-Game::Game() {
+Game::Game() 
+{
     this->initVariables();
     this->initWindow();
+    this->initObjects();
 }
 
 // Destructors
 Game::~Game() {
     delete this->window;
-
-    for (Point* p : this->point) {
-        delete p;
-    }
 }
 
 // Private functions
@@ -30,7 +28,15 @@ void Game::initWindow() {
     this->window = new sf::RenderWindow(this->videoMode, this->windowTitle, sf::Style::Titlebar | sf::Style::Close);
     this->window->setFramerateLimit(60);
 
-    z0 = (window->getSize().x / 2.f) / tan((FOV / 2.f) * M_PI / 180.f);
+    //z0 = (window->getSize().x / 2.f) / tan((FOV / 2.f) * M_PI / 180.f);
+}
+
+void Game::initObjects()
+{
+    pl = new Pipeline(DISTANCE);
+
+    cubes.push_back(new Cube(sf::Vector2f(0, 0), 0.5f));
+    pl->addObjectToQueue(cubes[cubes.size() - 1]);
 }
 
 void Game::setTitle()
@@ -74,8 +80,6 @@ void Game::update() {
 
     this->pollEvents();
 
-    this->rotateObjects();
-    //this->projectObjects();
 }
 
 // main render method
@@ -86,47 +90,7 @@ void  Game::render() {
 
     this->window->clear(sf::Color(0, 0, 0, 255));
 
-    this->renderPoints();
-    Point::connect(window, point);
+    pl->renderAll(window);
 
     this->window->display();
 }
-
-void Game::renderPoints()
-{
-    for (Point* p : this->point) {
-        p->render(this->window);
-    }
-}
-
-void Game::projectObjects()
-{
-    for (Point* p : this->point) {
-        /*(*(p->getProjMatrix())).x0 = (*(p->getMatrix())).x0 * z0 / (z0 + (*(p->getMatrix())).z0);
-        (*(p->getProjMatrix())).y0 = (*(p->getMatrix())).y0 * z0 / (z0 + (*(p->getMatrix())).z0);
-        (*(p->getProjMatrix())).z0 = (*(p->getMatrix())).z0;*/
-
-        (*(p->getProjMatrix())).x0 = (*(p->getMatrix())).x0 / (DISTANCE - (*(p->getMatrix())).z0);
-        (*(p->getProjMatrix())).y0 = (*(p->getMatrix())).y0 / (DISTANCE - (*(p->getMatrix())).z0);
-        (*(p->getProjMatrix())).z0 = (*(p->getMatrix())).z0;
-    }
-}
-
-void Game::rotateObjects()
-{
-    for (Point* p : this->point) {
-        // Rotate
-        *(p->getMatrix()) = maop::matMul(this->rotationY, *(p->getMatrix()));
-        *(p->getMatrix()) = maop::matMul(this->rotationX, *(p->getMatrix()));
-        *(p->getMatrix()) = maop::matMul(this->rotationZ, *(p->getMatrix()));
-
-        /*projection.x0 = 1.f;
-        projection.y1 = 1.f;
-        projection.z2 = 1.f;*/
-
-        // Project
-        //*(p->getMatrix()) = maop::matMul(projection, *(p->getMatrix()));
-        projectObjects();
-    }
-}
-

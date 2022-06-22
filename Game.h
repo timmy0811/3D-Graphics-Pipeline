@@ -13,6 +13,8 @@
 #include "MatrixOperations.h"
 
 #include "Point.h"
+#include "Cube.h"
+#include "Pipeline.h"
 
 #define DISTANCE 2.f
 #define FOV 80.f
@@ -39,6 +41,7 @@ private:
 	// Private functions
 	void initVariables();
 	void initWindow();
+	void initObjects();
 
 	void setTitle();
 
@@ -46,11 +49,10 @@ private:
 	float dt;
 
 	// Game objects
-	std::vector<Point*> point;
+	Pipeline* pl;
 
-	
-
-	float z0;
+	std::vector<Cube*> cubes;
+	std::vector<Point*> points;
 
 public:
 	// Constructors
@@ -64,9 +66,5 @@ public:
 	void pollEvents();
 	void update();
 	void render();
-	void renderPoints();
-
-	void projectObjects();
-	void rotateObjects();
 };
 

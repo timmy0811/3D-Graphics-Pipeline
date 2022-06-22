@@ -15,6 +15,13 @@ void Point::render(sf::RenderTarget* target)
 	target->draw(shape);
 }
 
+void Point::applyPerspective(float distance)
+{
+	projectedPositon.x0 = position.x0 / (distance - position.z0);
+	projectedPositon.y0 = position.y0 / (distance - position.z0);
+	projectedPositon.z0 = position.z0;
+}
+
 void Point::setMatrix(Matrix3X1 mat)
 {
 	this->position = mat;
@@ -51,4 +58,11 @@ void Point::rotateZ(float angle)
 {
 	Matrix3X3* mat = new Matrix3X3(angle, MATRIX_TYPE::ROTATION_Z);
 	position = maop::matMul(*mat, position);
+}
+
+std::vector<Point*>* Point::getPoints()
+{
+	std::vector<Point*> pList;
+	pList.push_back(this);
+	return &pList;
 }

@@ -12,8 +12,10 @@ private:
 	RenderQueue queue;
 	Matrix3X3 projection;
 
+	float distance;
+
 public:
-	Pipeline();
+	Pipeline(float distance);
 
 	void renderAll(sf::RenderTarget* target);
 	void renderByAdress(Renderable* obj, sf::RenderTarget* target);

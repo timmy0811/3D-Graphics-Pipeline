@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <vector>
+
 #include "Matrix3X1.h"
 #include "MatrixOperations.h"
 
@@ -18,6 +20,7 @@ public:
 	Point(sf::Vector3f position);
 
 	void render(sf::RenderTarget* target);
+	void applyPerspective(float distance);
 
 	void setMatrix(Matrix3X1 mat);
 	void setProjMatrix(Matrix3X1 mat);
@@ -29,5 +32,6 @@ public:
 	void rotateY(float angle);
 	void rotateZ(float angle);
 
+	std::vector<Point*>* getPoints();
 };
 

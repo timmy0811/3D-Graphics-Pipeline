@@ -5,6 +5,13 @@ RenderQueue::RenderQueue()
 	
 }
 
+void RenderQueue::applyPerspective(float distance)
+{
+	for (Renderable* renderObj : renderQueue) {
+		renderObj->applyPerspective(distance);
+	}
+}
+
 void RenderQueue::renderAll(sf::RenderTarget* target)
 {
 	for (Renderable* renderObj : renderQueue) {
@@ -27,6 +34,11 @@ void RenderQueue::addObject(Renderable* obj)
 bool RenderQueue::removeObject(Renderable* obj)
 {
 	for (int i = 0; i < renderQueue.size(); i++) {
-		if (renderQueue[i] == obj) renderQueue.erase(renderQueue.begin() + i);
+		if (renderQueue[i] == obj)
+		{
+			renderQueue.erase(renderQueue.begin() + i);
+			return true;
+		}
 	}
+	return false;
 }
