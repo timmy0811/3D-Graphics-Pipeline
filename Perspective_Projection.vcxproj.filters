@@ -31,6 +31,12 @@
     <Filter Include="Quelldateien\RenderPipeline\Renderable">
       <UniqueIdentifier>{86c3f57e-9194-4128-beb2-fe75ef63f964}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\RenderPipeline\Renderable\Mesh">
+      <UniqueIdentifier>{5d856e2b-9c26-45b0-9312-afc3fb70ba39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\RenderPipeline\Renderable\Mesh">
+      <UniqueIdentifier>{d54cdd50-6ec1-4831-9bef-f4543c25dd54}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -60,11 +66,17 @@
     <ClCompile Include="Pipeline.cpp">
       <Filter>Quelldateien\RenderPipeline</Filter>
     </ClCompile>
-    <ClCompile Include="Cube.cpp">
-      <Filter>Quelldateien\RenderPipeline\Renderable</Filter>
-    </ClCompile>
     <ClCompile Include="Point.cpp">
       <Filter>Quelldateien\RenderPipeline\Renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Quelldateien\RenderPipeline\Renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Quelldateien\RenderPipeline\Renderable\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Quelldateien\RenderPipeline\Renderable\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -98,8 +110,14 @@
     <ClInclude Include="Point.h">
       <Filter>Headerdateien\RenderPipeline\Renderable</Filter>
     </ClInclude>
-    <ClInclude Include="Cube.h">
+    <ClInclude Include="Triangle.h">
       <Filter>Headerdateien\RenderPipeline\Renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Headerdateien\RenderPipeline\Renderable\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Headerdateien\RenderPipeline\Renderable\Mesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

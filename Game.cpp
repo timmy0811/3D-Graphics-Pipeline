@@ -11,6 +11,7 @@ Game::Game()
 // Destructors
 Game::~Game() {
     delete this->window;
+    delete pl;
 }
 
 // Private functions
@@ -27,16 +28,26 @@ void Game::initWindow() {
 
     this->window = new sf::RenderWindow(this->videoMode, this->windowTitle, sf::Style::Titlebar | sf::Style::Close);
     this->window->setFramerateLimit(60);
-
-    //z0 = (window->getSize().x / 2.f) / tan((FOV / 2.f) * M_PI / 180.f);
 }
 
 void Game::initObjects()
 {
     pl = new Pipeline(DISTANCE);
 
-    cubes.push_back(new Cube(sf::Vector2f(0, 0), 0.5f));
+    cubes.push_back(new Cube(sf::Vector3f(0.2f, -1.f, 0.f), 0.5f, sf::Color::White, false));
     pl->addObjectToQueue(cubes[cubes.size() - 1]);
+
+    /*cubes.push_back(new Cube(sf::Vector3f(0.2f, -0.5f, 0.f), 0.5f));
+    pl->addObjectToQueue(cubes[cubes.size() - 1]);
+
+    cubes.push_back(new Cube(sf::Vector3f(0.2f, -0.f, 0.f), 0.5f));
+    pl->addObjectToQueue(cubes[cubes.size() - 1]);
+
+    cubes.push_back(new Cube(sf::Vector3f(0.2f, 0.5f, 0.f), 0.5f));
+    pl->addObjectToQueue(cubes[cubes.size() - 1]);*/
+
+    //polys.push_back(new Triangle(sf::Vector3f(-0.3f, 0.5f, 0.f), sf::Vector3f(0.3f, 0.5f, 0.f), sf::Vector3f(0.0f, -0.5f, 0.f), sf::Color::Magenta));
+    //pl->addObjectToQueue(polys[polys.size() - 1]);
 }
 
 void Game::setTitle()
@@ -80,6 +91,17 @@ void Game::update() {
 
     this->pollEvents();
 
+    //cubes[0]->rotateX(0.01f);
+    /*cubes[0]->rotateY(0.01f);
+
+    cubes[1]->rotateY(0.02f);
+
+    cubes[2]->rotateY(0.03f);
+
+    cubes[3]->rotateY(0.04f);*/
+
+    /*polys[0]->rotateY(0.02f);
+    polys[0]->rotateZ(0.03f);*/
 }
 
 // main render method

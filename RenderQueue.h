@@ -11,6 +11,7 @@ private:
 
 public:
 	RenderQueue();
+	~RenderQueue();
 
 	void applyPerspective(float distance);
 	void renderAll(sf::RenderTarget* target);

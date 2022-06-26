@@ -9,13 +9,14 @@
 class Pipeline
 {
 private:
-	RenderQueue queue;
+	RenderQueue* queue;
 	Matrix3X3 projection;
 
 	float distance;
 
 public:
 	Pipeline(float distance);
+	~Pipeline();
 
 	void renderAll(sf::RenderTarget* target);
 	void renderByAdress(Renderable* obj, sf::RenderTarget* target);

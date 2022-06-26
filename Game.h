@@ -15,6 +15,7 @@
 #include "Point.h"
 #include "Cube.h"
 #include "Pipeline.h"
+#include "Triangle.h"
 
 #define DISTANCE 2.f
 #define FOV 80.f
@@ -53,6 +54,7 @@ private:
 
 	std::vector<Cube*> cubes;
 	std::vector<Point*> points;
+	std::vector<Triangle*> polys;
 
 public:
 	// Constructors

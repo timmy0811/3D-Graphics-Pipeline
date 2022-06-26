@@ -42,22 +42,35 @@ Matrix3X1* Point::getProjMatrix()
 	return &(this->projectedPositon);
 }
 
+sf::Vector3f Point::getPosition()
+{
+	return sf::Vector3f(position.x0, position.y0, position.z0);
+}
+
+sf::Vector3f Point::getProjPosition()
+{
+	return sf::Vector3f(projectedPositon.x0, projectedPositon.y0, projectedPositon.z0);
+}
+
 void Point::rotateX(float angle)
 {
 	Matrix3X3* mat = new Matrix3X3(angle, MATRIX_TYPE::ROTATION_X);
 	position = maop::matMul(*mat, position);
+	delete mat;
 }
 
 void Point::rotateY(float angle)
 {
 	Matrix3X3* mat = new Matrix3X3(angle, MATRIX_TYPE::ROTATION_Y);
 	position = maop::matMul(*mat, position);
+	delete mat;
 }
 
 void Point::rotateZ(float angle)
 {
 	Matrix3X3* mat = new Matrix3X3(angle, MATRIX_TYPE::ROTATION_Z);
 	position = maop::matMul(*mat, position);
+	delete mat;
 }
 
 std::vector<Point*>* Point::getPoints()

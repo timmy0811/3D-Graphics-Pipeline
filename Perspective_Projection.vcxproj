@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -152,10 +152,12 @@
     <ClCompile Include="Matrix3X3.cpp" />
     <ClCompile Include="Matrix3X1.cpp" />
     <ClCompile Include="MatrixOperations.cpp" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Pipeline.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Renderable.cpp" />
     <ClCompile Include="RenderQueue.cpp" />
+    <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cube.h" />
@@ -164,11 +166,13 @@
     <ClInclude Include="Matrix3X3.h" />
     <ClInclude Include="Matrix3X1.h" />
     <ClInclude Include="MatrixOperations.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="Pipeline.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Renderable.h" />
     <ClInclude Include="RenderQueue.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Triangle.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Perspective_Projection.rc" />

@@ -4,25 +4,28 @@
 
 #include "Renderable.h"
 #include "Point.h"
+#include "Mesh.h"
 
 #include "MatrixOperations.h"
 
-class Cube : public Renderable
+class Cube : public Mesh
 {
 private:
 	std::vector<Point*> points;
 
 	void createVert(int p1, int p2, sf::RenderTarget* target);
+	bool wireFrame;
 
 public:
-	Cube(sf::Vector2f position, float size);
+	Cube(sf::Vector3f position, float size, sf::Color color, bool wireFrame = true);
+	~Cube();
 
-	void render(sf::RenderTarget* target);
-	void applyPerspective(float distance);
+	void render(sf::RenderTarget* target) override;
+	void applyPerspective(float distance) override;
 
-	void rotateX(float angle);
-	void rotateY(float angle);
-	void rotateZ(float angle);
+	void rotateX(float angle) override;
+	void rotateY(float angle) override;
+	void rotateZ(float angle) override;
 
 	void connect(sf::RenderTarget* target);
 

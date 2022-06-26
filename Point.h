@@ -19,8 +19,8 @@ private:
 public:
 	Point(sf::Vector3f position);
 
-	void render(sf::RenderTarget* target);
-	void applyPerspective(float distance);
+	void render(sf::RenderTarget* target) override;
+	void applyPerspective(float distance) override;
 
 	void setMatrix(Matrix3X1 mat);
 	void setProjMatrix(Matrix3X1 mat);
@@ -28,9 +28,12 @@ public:
 	Matrix3X1* getMatrix();
 	Matrix3X1* getProjMatrix();
 
-	void rotateX(float angle);
-	void rotateY(float angle);
-	void rotateZ(float angle);
+	sf::Vector3f getPosition();
+	sf::Vector3f getProjPosition();
+
+	void rotateX(float angle) override;
+	void rotateY(float angle) override;
+	void rotateZ(float angle) override;
 
 	std::vector<Point*>* getPoints();
 };

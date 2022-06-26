@@ -11,6 +11,7 @@ protected:
 	Renderable();
 
 	std::vector<sf::VertexArray> vertices;
+	sf::Color color;
 
 public:
 	virtual void render(sf::RenderTarget* target) = 0;

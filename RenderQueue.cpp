@@ -5,6 +5,13 @@ RenderQueue::RenderQueue()
 	
 }
 
+RenderQueue::~RenderQueue()
+{
+	for (Renderable* r : renderQueue) {
+		delete r;
+	}
+}
+
 void RenderQueue::applyPerspective(float distance)
 {
 	for (Renderable* renderObj : renderQueue) {
