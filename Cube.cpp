@@ -1,20 +1,8 @@
 #include "Cube.h"
 
-void Cube::createVert(int p1, int p2, sf::RenderTarget* target)
-{
-	sf::VertexArray line(sf::Lines, 2);
-	line[0].position = translateToRel(sf::Vector2f(points[p1]->getProjMatrix()->x0, points[p1]->getProjMatrix()->y0), target->getSize().x);
-	line[1].position = translateToRel(sf::Vector2f(points[p2]->getProjMatrix()->x0, points[p2]->getProjMatrix()->y0), target->getSize().x);
-
-	line[0].color = sf::Color::White;
-	line[1].color = sf::Color::White;
-
-	vertices.push_back(line);
-}
-
 Cube::Cube(sf::Vector3f position, float size, sf::Color color, sf::RenderTarget* target, bool wireFrame)
-	:wireFrame(wireFrame)
 {
+	this->wireFrame = wireFrame;
 	this->color = color;
 	this->target = target;
 
@@ -31,59 +19,7 @@ Cube::Cube(sf::Vector3f position, float size, sf::Color color, sf::RenderTarget*
 
 Cube::~Cube()
 {
-	for (Point* p : points) {
-		delete p;
-	}
-}
-
-void Cube::render(sf::RenderTarget* target)
-{
-	for (Point* p : points) {
-		//p->render(target);
-	}
-
-	for (int i = 0; i < vertices.size(); i++) {
-		target->draw(vertices[i]);
-	}
-
-	sortPolys();
-	Mesh::render(target);
-}
-
-void Cube::applyPerspective(float distance)
-{	
-	for (Point* p : points) {
-		p->applyPerspective(distance);
-	}
-
-	connect(target);
-
-	if (!wireFrame) {
-		for (Triangle* poly : polys) {
-			poly->applyPerspective(distance);
-		}
-	}
-}
-
-void Cube::rotateX(float angle)
-{
-	for (Point* p : points) {
-		p->rotateX(angle);
-	}
-}
-
-void Cube::rotateY(float angle)
-{
-	for (Point* p : points) {
-		p->rotateY(angle);
-	}
-}
-
-void Cube::rotateZ(float angle)
-{
-	for (Point* p : points) {
-		p->rotateZ(angle);
-	}
+	Mesh::~Mesh();
 }
 
 void Cube::connect(sf::RenderTarget* target)
@@ -127,9 +63,4 @@ void Cube::connect(sf::RenderTarget* target)
 		createTriangle(points[0], points[4], points[6], sf::Color::White);
 		createTriangle(points[2], points[0], points[6], sf::Color::White);
 	}
-}
-
-std::vector<Point*>* Cube::getPoints()
-{
-	return &points;
 }

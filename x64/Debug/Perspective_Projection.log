@@ -1,2 +1,16 @@
-﻿  Game.cpp
+﻿  Cube.cpp
+  Game.cpp
+  main.cpp
+  Matrix.cpp
+  Matrix3X3.cpp
+  Matrix3X1.cpp
+  MatrixOperations.cpp
+  Mesh.cpp
+  Pipeline.cpp
+  Point.cpp
+  Renderable.cpp
+  RenderQueue.cpp
+  Triangle.cpp
+  Generating Code...
+C:\Git\Perspective_Projection\Perspective_Projection\Point.cpp(80): warning C4172: returning address of local variable or temporary: pList
   Perspective_Projection.vcxproj -> C:\Git\Perspective_Projection\x64\Debug\Perspective_Projection.exe
