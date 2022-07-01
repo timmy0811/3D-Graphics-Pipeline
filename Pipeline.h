@@ -13,6 +13,7 @@ private:
 	Matrix3X3 projection;
 
 	float distance;
+	sf::Vector3f globalOffset;
 
 public:
 	Pipeline(float distance);
@@ -23,5 +24,8 @@ public:
 
 	void addObjectToQueue(Renderable* obj);
 	bool removeObjectFromQueue(Renderable* obj);
+
+	void moveCamera(sf::Vector3f dirVec);
+	void moveCameraOnAngle(sf::Vector2f dirVec);
 };
 

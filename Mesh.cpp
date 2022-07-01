@@ -15,6 +15,7 @@ void Mesh::createVert(int p1, int p2, sf::RenderTarget* target)
 void Mesh::createTriangle(Point* p1, Point* p2, Point* p3, sf::Color color)
 {
 	Triangle* poly = new Triangle(p1->getPosition(), p2->getPosition(), p3->getPosition(), color);
+	poly->setGlobalOffset(globalOffset);
 	polys.push_back(poly);
 }
 

@@ -2,7 +2,7 @@
 
 Pipeline::Pipeline(float distance)
 {
-	queue = new RenderQueue();
+	queue = new RenderQueue(&globalOffset);
 	this->distance = distance;
 	projection = Matrix3X3(0.f, MATRIX_TYPE::PROJECTION);
 }
@@ -31,4 +31,10 @@ void Pipeline::addObjectToQueue(Renderable* obj)
 bool Pipeline::removeObjectFromQueue(Renderable* obj)
 {
 	return queue->removeObject(obj);
+}
+
+void Pipeline::moveCamera(sf::Vector3f dirVec)
+{
+	queue->moveCamera(dirVec);
+	globalOffset += dirVec;
 }

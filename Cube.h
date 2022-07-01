@@ -1,9 +1,5 @@
 #pragma once
 
-#include <vector>
-
-#include "Renderable.h"
-#include "Point.h"
 #include "Mesh.h"
 
 #include "MatrixOperations.h"

@@ -6,6 +6,10 @@ Triangle::Triangle(sf::Vector3f pos1, sf::Vector3f pos2, sf::Vector3f pos3, sf::
 	p2 = new Point(pos2);
 	p3 = new Point(pos3);
 
+	p1->setGlobalOffset(globalOffset);
+	p2->setGlobalOffset(globalOffset);
+	p3->setGlobalOffset(globalOffset);
+
 	this->color = color;
 }
 

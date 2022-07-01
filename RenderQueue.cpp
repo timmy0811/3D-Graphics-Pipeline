@@ -1,8 +1,8 @@
 #include "RenderQueue.h"
 
-RenderQueue::RenderQueue()
+RenderQueue::RenderQueue(sf::Vector3f* globalOffset)
 {
-	
+	this->globalOffset = globalOffset;
 }
 
 RenderQueue::~RenderQueue()
@@ -36,6 +36,7 @@ void RenderQueue::renderByAdress(Renderable* obj, sf::RenderTarget* target)
 void RenderQueue::addObject(Renderable* obj)
 {
 	renderQueue.push_back(obj);
+	obj->setGlobalOffset(globalOffset);
 }
 
 bool RenderQueue::removeObject(Renderable* obj)
@@ -48,4 +49,9 @@ bool RenderQueue::removeObject(Renderable* obj)
 		}
 	}
 	return false;
+}
+
+void RenderQueue::moveCamera(sf::Vector3f dirVec)
+{
+
 }

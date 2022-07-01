@@ -34,20 +34,8 @@ void Game::initObjects()
 {
     pl = new Pipeline(DISTANCE);
 
-    cubes.push_back(new Cube(sf::Vector3f(0.2f, -0.6f, 0.f), 0.5f, sf::Color::White, window, false));
+    cubes.push_back(new Cube(sf::Vector3f(-0.4f, -0.4f, -0.4f), 0.8f, sf::Color::White, window, false));
     pl->addObjectToQueue(cubes[cubes.size() - 1]);
-
-    cubes.push_back(new Cube(sf::Vector3f(0.2f, -0.f, 0.f), 0.5f, sf::Color::White, window, false));
-    pl->addObjectToQueue(cubes[cubes.size() - 1]);
-
-    cubes.push_back(new Cube(sf::Vector3f(0.2f, 0.6f, 0.f), 0.5f, sf::Color::White, window, false));
-    pl->addObjectToQueue(cubes[cubes.size() - 1]);
-
-    /*polys.push_back(new Triangle(sf::Vector3f(-0.2f, 0.4f, 0.8f), sf::Vector3f(0.2f, 0.4f, 0.8f), sf::Vector3f(0.0f, -0.4f, 0.8f), sf::Color::Magenta));
-    pl->addObjectToQueue(polys[polys.size() - 1]);
-
-    polys.push_back(new Triangle(sf::Vector3f(-0.2f, 0.4f, 0.1f), sf::Vector3f(0.2f, 0.4f, 0.1f), sf::Vector3f(0.0f, -0.4f, 0.1f), sf::Color::Yellow));
-    pl->addObjectToQueue(polys[polys.size() - 1]);*/
 }
 
 void Game::setTitle()
@@ -82,6 +70,19 @@ void Game::pollEvents() {
             break;
         }
     }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+        pl->moveCamera(sf::Vector3f(0.05f, 0.f, 0.f));
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+        pl->moveCamera(sf::Vector3f(-0.05f, 0.f, 0.f));
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+        pl->moveCamera(sf::Vector3f(0.f, 0.05f, 0.f));
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+        pl->moveCamera(sf::Vector3f(0.0f, -0.05f, 0.f));
+    }
 }
 
 // main update method
@@ -91,14 +92,7 @@ void Game::update() {
 
     this->pollEvents();
 
-    //cubes[0]->rotateX(0.01f);
     cubes[0]->rotateY(0.01f);
-    cubes[1]->rotateY(0.02f);
-    cubes[2]->rotateY(0.03f);
-    //cubes[0]->rotateZ(0.03f);
-
-    /*polys[0]->rotateY(0.05f);
-    polys[1]->rotateY(0.05f);*/
 }
 
 // main render method

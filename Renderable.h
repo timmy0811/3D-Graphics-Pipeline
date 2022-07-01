@@ -15,6 +15,8 @@ protected:
 	std::vector<sf::VertexArray> vertices;
 	sf::Color color;
 
+	sf::Vector3f* globalOffset;
+
 public:
 	virtual void render(sf::RenderTarget* target) = 0;
 	virtual void applyPerspective(float distance) = 0;
@@ -24,6 +26,7 @@ public:
 	virtual void rotateZ(float angle) = 0;
 
 	std::vector<sf::VertexArray>* getVertices();
+	void setGlobalOffset(sf::Vector3f* vec);
 
 	sf::Vector2f translateToRel(sf::Vector2f pos, int windowSize);
 };
