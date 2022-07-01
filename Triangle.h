@@ -20,6 +20,11 @@ public:
 	void rotateY(float angle) override;
 	void rotateZ(float angle) override;
 
+	double averageZ();
+	double calculateProjectedZ();
+
+	void translateToRelative(sf::RenderTarget* target);
+
 	void createPoly(sf::RenderTarget* target);
 };
 

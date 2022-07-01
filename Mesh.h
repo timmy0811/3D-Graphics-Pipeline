@@ -12,8 +12,11 @@ protected:
 	std::vector<Triangle*> polys;
 
 	void createTriangle(Point* p1, Point* p2, Point* p3, sf::Color color);
+	void sortPolys();
 
 public:
 	~Mesh();
+
+	virtual void render(sf::RenderTarget* target);
 };
 

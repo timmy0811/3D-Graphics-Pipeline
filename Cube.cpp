@@ -12,10 +12,11 @@ void Cube::createVert(int p1, int p2, sf::RenderTarget* target)
 	vertices.push_back(line);
 }
 
-Cube::Cube(sf::Vector3f position, float size, sf::Color color, bool wireFrame)
+Cube::Cube(sf::Vector3f position, float size, sf::Color color, sf::RenderTarget* target, bool wireFrame)
 	:wireFrame(wireFrame)
 {
 	this->color = color;
+	this->target = target;
 
 	points.push_back(new Point(sf::Vector3f(size	+ position.x, 0.f	+ position.y, 0.f	+ position.z)));
 	points.push_back(new Point(sf::Vector3f(0.f		+ position.x, size	+ position.y, 0.f	+ position.z)));
@@ -37,8 +38,6 @@ Cube::~Cube()
 
 void Cube::render(sf::RenderTarget* target)
 {
-	connect(target);
-
 	for (Point* p : points) {
 		//p->render(target);
 	}
@@ -47,15 +46,22 @@ void Cube::render(sf::RenderTarget* target)
 		target->draw(vertices[i]);
 	}
 
-	for (Triangle* poly : polys) {
-		poly->render(target);
-	}
+	sortPolys();
+	Mesh::render(target);
 }
 
 void Cube::applyPerspective(float distance)
-{
+{	
 	for (Point* p : points) {
 		p->applyPerspective(distance);
+	}
+
+	connect(target);
+
+	if (!wireFrame) {
+		for (Triangle* poly : polys) {
+			poly->applyPerspective(distance);
+		}
 	}
 }
 
@@ -103,25 +109,24 @@ void Cube::connect(sf::RenderTarget* target)
 	else {
 		polys.clear();
 
-		createTriangle(points[1], points[3], points[2], color);
-		createTriangle(points[0], points[2], points[3], color);
+		createTriangle(points[3], points[2], points[1], sf::Color::Blue);
+		createTriangle(points[0], points[2], points[3], sf::Color::Blue);
 
-		createTriangle(points[7], points[5], points[6], color);
-		createTriangle(points[7], points[4], points[6], color);
+		createTriangle(points[7], points[5], points[6], sf::Color::Red);
+		createTriangle(points[4], points[7], points[6], sf::Color::Red);
 
-		createTriangle(points[3], points[7], points[4], color);
-		createTriangle(points[3], points[0], points[4], color);
+		createTriangle(points[3], points[7], points[4], sf::Color::Yellow);
+		createTriangle(points[0], points[3], points[4], sf::Color::Yellow);
 
-		createTriangle(points[3], points[1], points[5], color);
-		createTriangle(points[3], points[7], points[5], color);
+		createTriangle(points[5], points[3], points[1], sf::Color::Green);
+		createTriangle(points[7], points[3], points[5], sf::Color::Green);
 
-		createTriangle(points[1], points[5], points[6], color);
-		createTriangle(points[1], points[2], points[6], color);
+		createTriangle(points[5], points[1], points[6], sf::Color::Magenta);
+		createTriangle(points[1], points[2], points[6], sf::Color::Magenta);
 
-		createTriangle(points[0], points[4], points[6], color);
-		createTriangle(points[0], points[2], points[6], color);
+		createTriangle(points[0], points[4], points[6], sf::Color::White);
+		createTriangle(points[2], points[0], points[6], sf::Color::White);
 	}
-	
 }
 
 std::vector<Point*>* Cube::getPoints()

@@ -17,7 +17,7 @@ private:
 	bool wireFrame;
 
 public:
-	Cube(sf::Vector3f position, float size, sf::Color color, bool wireFrame = true);
+	Cube(sf::Vector3f position, float size, sf::Color color, sf::RenderTarget* target, bool wireFrame = true);
 	~Cube();
 
 	void render(sf::RenderTarget* target) override;

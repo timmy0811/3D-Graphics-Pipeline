@@ -10,6 +10,8 @@ class Renderable
 protected:
 	Renderable();
 
+	sf::RenderTarget* target;
+
 	std::vector<sf::VertexArray> vertices;
 	sf::Color color;
 

@@ -19,8 +19,8 @@ void Triangle::applyPerspective(float distance)
 void Triangle::render(sf::RenderTarget* target)
 {
 	createPoly(target);
-
-	target->draw(vertices[0]);
+	
+	if(calculateProjectedZ() < 0.f) target->draw(vertices[0]);
 }
 
 void Triangle::rotateX(float angle)
@@ -44,6 +44,26 @@ void Triangle::rotateZ(float angle)
 	p3->rotateZ(angle);
 }
 
+double Triangle::averageZ()
+{
+	return (p1->getPosition().z + p2->getPosition().z + p3->getPosition().z) / 3.f;
+}
+
+double Triangle::calculateProjectedZ()
+{
+	sf::Vector3f p1p2 = (p2->getProjPosition() - p1->getProjPosition());
+	sf::Vector3f p1p3 = (p3->getProjPosition() - p1->getProjPosition());
+
+	p1p2.z = 0.f;
+	p1p3.z = 0.f;
+
+	return p1p2.x * p1p3.y - p1p2.y * p1p3.x;
+}
+
+void Triangle::translateToRelative(sf::RenderTarget* target)
+{
+}
+
 void Triangle::createPoly(sf::RenderTarget* target)
 {
 	vertices.clear();
@@ -52,7 +72,6 @@ void Triangle::createPoly(sf::RenderTarget* target)
 	poly[0].position = translateToRel(sf::Vector2f(p1->getProjMatrix()->x0, p1->getProjMatrix()->y0), target->getSize().x);
 	poly[1].position = translateToRel(sf::Vector2f(p2->getProjMatrix()->x0, p2->getProjMatrix()->y0), target->getSize().x);
 	poly[2].position = translateToRel(sf::Vector2f(p3->getProjMatrix()->x0, p3->getProjMatrix()->y0), target->getSize().x);
-
 
 	poly[0].color = color;
 	poly[1].color = color;
