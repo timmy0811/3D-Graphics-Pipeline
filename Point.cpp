@@ -1,6 +1,6 @@
 #include "Point.h"
 
-Point::Point(sf::Vector3f position)
+Point::Point(sf::Vector3f position, Matrix3X1* parentPos)
 {
 	this->position = Matrix3X1(0.f, MATRIX_TYPE::PROJECTION, position.x, position.y, position.z);
 
@@ -54,22 +54,51 @@ sf::Vector3f Point::getProjPosition()
 
 void Point::rotateX(float angle)
 {
-	Matrix3X3* mat = new Matrix3X3(angle, MATRIX_TYPE::ROTATION_X);
-	position = maop::matMul(*mat, position);
-	delete mat;
+	return;
 }
 
 void Point::rotateY(float angle)
 {
-	Matrix3X3* mat = new Matrix3X3(angle, MATRIX_TYPE::ROTATION_Y);
-	position = maop::matMul(*mat, position);
-	delete mat;
+	return;
 }
 
 void Point::rotateZ(float angle)
 {
-	Matrix3X3* mat = new Matrix3X3(angle, MATRIX_TYPE::ROTATION_Z);
-	position = maop::matMul(*mat, position);
+	return;
+}
+
+void Point::rotateX(float angle, sf::Vector3f refPosition)
+{
+	rotateByEnum(angle, refPosition, MATRIX_TYPE::ROTATION_X);
+}
+
+void Point::rotateY(float angle, sf::Vector3f refPosition)
+{
+	rotateByEnum(angle, refPosition, MATRIX_TYPE::ROTATION_Y);
+}
+
+void Point::rotateZ(float angle, sf::Vector3f refPosition)
+{
+	rotateByEnum(angle, refPosition, MATRIX_TYPE::ROTATION_Z);
+}
+
+void Point::rotateByEnum(float angle, sf::Vector3f refPosition, MATRIX_TYPE type)
+{
+	Matrix3X1* relPos = new Matrix3X1();
+	relPos->x0 = refPosition.x - position.x0;
+	relPos->y0 = refPosition.y - position.y0;
+	relPos->z0 = refPosition.z - position.z0;
+
+	Matrix3X3* mat = new Matrix3X3(angle, type);
+	Matrix3X1 deltaPos = maop::matMul(*mat, *relPos);
+
+	position.x0 += relPos->x0 - deltaPos.x0;
+	position.y0 += relPos->y0 - deltaPos.y0;
+	position.z0 += relPos->z0 - deltaPos.z0;
+
+	//Matrix3X1* ptrPos = &deltaPos;
+	//delete ptrPos;
+	delete relPos;
 	delete mat;
 }
 

@@ -48,6 +48,27 @@ void Triangle::rotateZ(float angle)
 	p3->rotateZ(angle);
 }
 
+void Triangle::rotateX(float angle, sf::Vector3f refPosition)
+{
+	p1->rotateX(angle, refPosition);
+	p2->rotateX(angle, refPosition);
+	p3->rotateX(angle, refPosition);
+}
+
+void Triangle::rotateY(float angle, sf::Vector3f refPosition)
+{
+	p1->rotateY(angle, refPosition);
+	p2->rotateY(angle, refPosition);
+	p3->rotateY(angle, refPosition);
+}
+
+void Triangle::rotateZ(float angle, sf::Vector3f refPosition)
+{
+	p1->rotateZ(angle, refPosition);
+	p2->rotateZ(angle, refPosition);
+	p3->rotateZ(angle, refPosition);
+}
+
 double Triangle::averageZ()
 {
 	return (p1->getPosition().z + p2->getPosition().z + p3->getPosition().z) / 3.f;

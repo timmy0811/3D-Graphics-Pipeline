@@ -32,23 +32,47 @@ Mesh::~Mesh()
 
 void Mesh::rotateX(float angle)
 {
-	for (Point* p : points) {
-		p->rotateX(angle);
+	sf::Vector3f pos = maop::matToVec(&meshCenter);
+	for (Point* point : points) {
+		point->rotateX(angle, pos);
 	}
+	/*sf::Vector3f* ptrPos = &pos;
+	delete ptrPos;*/
 }
 
 void Mesh::rotateY(float angle)
 {
-	for (Point* p : points) {
-		p->rotateY(angle);
+	sf::Vector3f pos = maop::matToVec(&meshCenter);
+	for (Point* point : points) {
+		point->rotateY(angle, pos);
 	}
+	/*sf::Vector3f* ptrPos = &pos;
+	delete ptrPos;*/
 }
 
 void Mesh::rotateZ(float angle)
 {
-	for (Point* p : points) {
-		p->rotateZ(angle);
+	sf::Vector3f pos = maop::matToVec(&meshCenter);
+	for (Point* point : points) {
+		point->rotateZ(angle, pos);
 	}
+	/*sf::Vector3f* ptrPos = &pos;
+	delete ptrPos;*/
+}
+
+void Mesh::rotateX(float angle, sf::Vector3f refPosition)
+{
+	
+}
+
+void Mesh::rotateY(float angle, sf::Vector3f refPosition)
+{
+	
+}
+
+void Mesh::rotateZ(float angle, sf::Vector3f refPosition)
+{
+	
 }
 
 void Mesh::applyPerspective(float distance)

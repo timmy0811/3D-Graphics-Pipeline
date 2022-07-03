@@ -11,6 +11,7 @@ class Mesh : public Renderable
 protected:
 	std::vector<Triangle*> polys;
 	std::vector<Point*> points;
+	Matrix3X1 meshCenter;
 
 	bool wireFrame;
 
@@ -24,6 +25,10 @@ public:
 	void rotateX(float angle) override;
 	void rotateY(float angle) override;
 	void rotateZ(float angle) override;
+
+	void rotateX(float angle, sf::Vector3f refPosition) override;
+	void rotateY(float angle, sf::Vector3f refPosition) override;
+	void rotateZ(float angle, sf::Vector3f refPosition) override;
 
 	void applyPerspective(float distance) override;
 	void virtual connect(sf::RenderTarget* target) = 0;

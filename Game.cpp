@@ -34,8 +34,11 @@ void Game::initObjects()
 {
     pl = new Pipeline(DISTANCE);
 
-    cubes.push_back(new Cube(sf::Vector3f(-0.4f, -0.4f, -0.4f), 0.8f, sf::Color::White, window, false));
+    cubes.push_back(new Cube(sf::Vector3f(-0.1f, -0.15f, -0.15f), 0.3f, sf::Color::White, window, false));
     pl->addObjectToQueue(cubes[cubes.size() - 1]);
+
+    points.push_back(new Point(sf::Vector3f(0.4f, 0.f, 0.f)));
+    pl->addObjectToQueue(points[points.size() - 1]);
 }
 
 void Game::setTitle()
@@ -91,8 +94,7 @@ void Game::update() {
     this->setTitle();
 
     this->pollEvents();
-
-    cubes[0]->rotateY(0.01f);
+    cubes[0]->rotateX(0.03f);
 }
 
 // main render method

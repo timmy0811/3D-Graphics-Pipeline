@@ -51,7 +51,7 @@ Matrix3X3 maop::matAdd(Matrix3X3 m1, Matrix3X3 m2)
 
 Matrix3X1 maop::matAdd(Matrix3X1 m1, Matrix3X1 m2)
 {
-	Matrix3X3 matRet = Matrix3X3();
+	Matrix3X1 matRet = Matrix3X3();
 
 	matRet.x0 = m1.x0 + m2.x0;
 	matRet.y0 = m1.y0 + m2.y0;
@@ -81,11 +81,21 @@ Matrix3X3 maop::matSub(Matrix3X3 m1, Matrix3X3 m2)
 
 Matrix3X1 maop::matSub(Matrix3X1 m1, Matrix3X1 m2)
 {
-	Matrix3X3 matRet = Matrix3X3();
+	Matrix3X1 matRet = Matrix3X1();
 
 	matRet.x0 = m1.x0 - m2.x0;
 	matRet.y0 = m1.y0 - m2.y0;
 	matRet.z0 = m1.z0 - m2.z0;
 
 	return matRet;
+}
+
+sf::Vector3f maop::matToVec(Matrix3X1* mat)
+{
+	sf::Vector3f vec;
+	vec.x = mat->x0;
+	vec.y = mat->y0;
+	vec.z = mat->z0;
+
+	return vec;
 }

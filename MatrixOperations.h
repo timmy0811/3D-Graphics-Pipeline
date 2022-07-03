@@ -14,5 +14,7 @@ namespace maop
 
 	Matrix3X3 matSub(Matrix3X3 m1, Matrix3X3 m2);
 	Matrix3X1 matSub(Matrix3X1 m1, Matrix3X1 m2);
+
+	sf::Vector3f matToVec(Matrix3X1* mat);
 };
 

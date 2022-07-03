@@ -25,6 +25,10 @@ public:
 	virtual void rotateY(float angle) = 0;
 	virtual void rotateZ(float angle) = 0;
 
+	virtual void rotateX(float angle, sf::Vector3f refPosition) = 0;
+	virtual void rotateY(float angle, sf::Vector3f refPosition) = 0;
+	virtual void rotateZ(float angle, sf::Vector3f refPosition) = 0;
+
 	std::vector<sf::VertexArray>* getVertices();
 	void setGlobalOffset(sf::Vector3f* vec);
 

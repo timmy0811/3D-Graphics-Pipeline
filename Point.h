@@ -16,8 +16,10 @@ private:
 	Matrix3X1 projectedPositon;
 	sf::CircleShape shape;
 
+	void rotateByEnum(float angle, sf::Vector3f refPosition, MATRIX_TYPE type);
+
 public:
-	Point(sf::Vector3f position);
+	Point(sf::Vector3f position, Matrix3X1* parentPos = nullptr);
 
 	void render(sf::RenderTarget* target) override;
 	void applyPerspective(float distance) override;
@@ -34,6 +36,10 @@ public:
 	void rotateX(float angle) override;
 	void rotateY(float angle) override;
 	void rotateZ(float angle) override;
+
+	void rotateX(float angle, sf::Vector3f refPosition) override;
+	void rotateY(float angle, sf::Vector3f refPosition) override;
+	void rotateZ(float angle, sf::Vector3f refPosition) override;
 
 	std::vector<Point*>* getPoints();
 };

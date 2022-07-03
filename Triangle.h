@@ -20,6 +20,10 @@ public:
 	void rotateY(float angle) override;
 	void rotateZ(float angle) override;
 
+	void rotateX(float angle, sf::Vector3f refPosition) override;
+	void rotateY(float angle, sf::Vector3f refPosition) override;
+	void rotateZ(float angle, sf::Vector3f refPosition) override;
+
 	double averageZ();
 	double calculateProjectedZ();
 
