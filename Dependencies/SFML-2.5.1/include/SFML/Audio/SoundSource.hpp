@@ -158,7 +158,7 @@ public:
     /// \see getMinDistance, setAttenuation
     ///
     ////////////////////////////////////////////////////////////
-    void setMinDistance(float distance);
+    void setMinDistance(float distance_);
 
     ////////////////////////////////////////////////////////////
     /// \brief Set the attenuation factor of the sound

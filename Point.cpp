@@ -15,11 +15,11 @@ void Point::render(sf::RenderTarget* target)
 	target->draw(shape);
 }
 
-void Point::applyPerspective(float distance)
+void Point::applyPerspective(float distance_)
 {
-	projectedPositon.x0 = (position.x0 + globalOffset->x) / (distance - (position.z0 + globalOffset->z));
-	projectedPositon.y0 = (position.y0 + globalOffset->y) / (distance - (position.z0+ globalOffset->z));
-	projectedPositon.z0 = position.z0 + globalOffset->z;
+	projectedPositon.x0 = (position.x0 + globalOffset_->x) / (distance_ - (position.z0 + globalOffset_->z));
+	projectedPositon.y0 = (position.y0 + globalOffset_->y) / (distance_ - (position.z0+ globalOffset_->z));
+	projectedPositon.z0 = position.z0 + globalOffset_->z;
 }
 
 void Point::moveByValue(sf::Vector3f dir)

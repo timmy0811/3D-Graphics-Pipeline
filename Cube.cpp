@@ -1,8 +1,8 @@
 #include "Cube.h"
 
-Cube::Cube(sf::Vector3f position, float size, sf::Color color, sf::RenderTarget* target, bool wireFrame)
+Cube::Cube(sf::Vector3f position, float size, sf::Color color, sf::RenderTarget* target, bool wireFrame_)
 {
-	this->wireFrame = wireFrame;
+	this->wireFrame_ = wireFrame_;
 	this->color = color;
 	this->target = target;
 
@@ -28,7 +28,7 @@ Cube::~Cube()
 
 void Cube::connect(sf::RenderTarget* target)
 {
-	if (wireFrame) {
+	if (wireFrame_) {
 		vertices.clear();
 
 		createVert(1, 3, target);

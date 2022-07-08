@@ -15,7 +15,7 @@ void Mesh::createVert(int p1, int p2, sf::RenderTarget* target)
 void Mesh::createTriangle(Point* p1, Point* p2, Point* p3, sf::Color color)
 {
 	Triangle* poly = new Triangle(p1, p2, p3, color);
-	poly->setGlobalOffset(globalOffset);
+	poly->setGlobalOffset(globalOffset_);
 	polys.push_back(poly);
 }
 
@@ -93,17 +93,17 @@ void Mesh::setGlobalOffset(sf::Vector3f* vec)
 	}
 }
 
-void Mesh::applyPerspective(float distance)
+void Mesh::applyPerspective(float distance_)
 {
 	for (Point* p : points) {
-		p->applyPerspective(distance);
+		p->applyPerspective(distance_);
 	}
 
 	connect(target);
 
-	if (!wireFrame) {
+	if (!wireFrame_) {
 		for (Triangle* poly : polys) {
-			poly->applyPerspective(distance);
+			poly->applyPerspective(distance_);
 		}
 	}
 }

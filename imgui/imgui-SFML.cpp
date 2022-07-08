@@ -645,11 +645,11 @@ void ProcessEvent(const sf::Event& event) {
     }
 }
 
-void Update(sf::RenderWindow& window, sf::Time dt) {
-    Update(window, window, dt);
+void Update(sf::RenderWindow& window, sf::Time dt_) {
+    Update(window, window, dt_);
 }
 
-void Update(sf::Window& window, sf::RenderTarget& target, sf::Time dt) {
+void Update(sf::Window& window, sf::RenderTarget& target, sf::Time dt_) {
     SetCurrentWindow(window);
     assert(s_currWindowCtx);
 
@@ -664,18 +664,18 @@ void Update(sf::Window& window, sf::RenderTarget& target, sf::Time dt) {
     if (!s_currWindowCtx->mouseMoved) {
         if (sf::Touch::isDown(0)) s_currWindowCtx->touchPos = sf::Touch::getPosition(0, window);
 
-        Update(s_currWindowCtx->touchPos, static_cast<sf::Vector2f>(target.getSize()), dt);
+        Update(s_currWindowCtx->touchPos, static_cast<sf::Vector2f>(target.getSize()), dt_);
     } else {
-        Update(sf::Mouse::getPosition(window), static_cast<sf::Vector2f>(target.getSize()), dt);
+        Update(sf::Mouse::getPosition(window), static_cast<sf::Vector2f>(target.getSize()), dt_);
     }
 }
 
-void Update(const sf::Vector2i& mousePos, const sf::Vector2f& displaySize, sf::Time dt) {
+void Update(const sf::Vector2i& mousePos, const sf::Vector2f& displaySize, sf::Time dt_) {
     assert(s_currWindowCtx && "No current window is set - forgot to call ImGui::SFML::Init?");
 
     ImGuiIO& io = ImGui::GetIO();
     io.DisplaySize = ImVec2(displaySize.x, displaySize.y);
-    io.DeltaTime = dt.asSeconds();
+    io.DeltaTime = dt_.asSeconds();
 
     if (s_currWindowCtx->windowHasFocus) {
         if (io.WantSetMousePos) {

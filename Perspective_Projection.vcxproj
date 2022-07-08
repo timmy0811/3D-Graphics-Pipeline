@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="config.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="imgui\imgui-SFML.cpp" />
@@ -167,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="config.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="imgui\imconfig-SFML.h" />

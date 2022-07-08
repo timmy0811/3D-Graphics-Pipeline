@@ -13,11 +13,11 @@ private:
 	RenderQueue* queue;
 	Matrix3X3 projection;
 
-	float distance;
+	float distance_;
 	Camera* camera;
 
 public:
-	Pipeline(float distance);
+	Pipeline(float distance_);
 	~Pipeline();
 
 	void setCamera(Camera* camera);

@@ -11,7 +11,7 @@ std::vector<sf::VertexArray>* Renderable::getVertices()
 
 void Renderable::setGlobalOffset(sf::Vector3f* vec)
 {
-	globalOffset = vec;
+	globalOffset_ = vec;
 }
 
 sf::Vector2f Renderable::translateToRel(sf::Vector2f pos, int windowSize)

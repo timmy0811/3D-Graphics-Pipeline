@@ -3,65 +3,70 @@
 // Constructors
 Game::Game() 
 {
-    this->initVariables();
-    this->initWindow();
-    this->initObjects();
+    initVariables();
+    initWindow();
+    initPipeline();
+
+    initGameObjects();
 }
 
 // Destructors
 Game::~Game() {
+    // ImGui shutdown
     ImGui::SFML::Shutdown();
 
-    delete this->window;
+    // Game objects
+    delete window;
     delete pl;
     delete camera;
 }
-
-// Private functions
 
 // Init game important variables
 void Game::initVariables() {
     this->window = nullptr;
 
-    drawAll = false;
+    drawAll_ = false;
 }
 
 // Init game window
 void Game::initWindow() {
-    this->videoMode.height = 800;
-    this->videoMode.width = 800;
+    this->videoMode.height = c_winHeight;
+    this->videoMode.width = c_winWidth;
 
     this->window = new sf::RenderWindow(this->videoMode, this->windowTitle, sf::Style::Titlebar | sf::Style::Close);
-    this->window->setFramerateLimit(60);
+    this->window->setFramerateLimit(c_framerate);
 
+    // ImGui window init
     ImGui::SFML::Init(*window);
 }
 
-void Game::initObjects()
+// Init game objects - soon obsolete
+void Game::initGameObjects()
 {
-    pl = new Pipeline(DISTANCE);
-    camera = new Camera();
-    pl->setCamera(camera);
-
-    cubes.push_back(new Cube(sf::Vector3f(-0.1f, -0.15f, -0.15f), 0.5f, sf::Color::White, window, false));
+    cubes.push_back(new Cube(sf::Vector3f(-0.1f, -0.6f, -0.15f), 0.4f, sf::Color::White, window, false));
     pl->addObjectToQueue(cubes[cubes.size() - 1]);
 }
 
-void Game::setTitle()
+// Init render pipeline
+void Game::initPipeline()
 {
-    float fps = 1.f / this->dt;
-
-    this->window->setTitle(windowTitle + " " + std::to_string(static_cast<int>(fps)));
+    // Pipeline setup
+    pl = new Pipeline(c_viewPortDistance);
+    camera = new Camera();
+    pl->setCamera(camera);
 }
 
-// Accessors
+// Update window title
+void Game::setTitle()
+{
+    // Title shows the current framerate
+    this->window->setTitle(windowTitle + " " + std::to_string(static_cast<int>(1.f / this->dt_)));
+}
 
 // Check if game is still running
 const bool Game::getWindowIsOpen() const {
     return this->window->isOpen();
 }
-
-// Functions
 
 // Check for events
 void Game::pollEvents() {
@@ -82,6 +87,7 @@ void Game::pollEvents() {
         ImGui::SFML::ProcessEvent(ev);
     }
 
+    // Movement on XZ plane
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
         camera->move(sf::Vector3f(0.f, 0.f, -0.05f));
     }
@@ -95,6 +101,7 @@ void Game::pollEvents() {
         camera->move(sf::Vector3f(-0.05f, 0.0f, 0.f));
     }
 
+    // Movement on Y axes
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         camera->move(sf::Vector3f(0.f, 0.05f, 0.f));
     }
@@ -102,6 +109,7 @@ void Game::pollEvents() {
         camera->move(sf::Vector3f(0.0f, -0.05f, 0.f));
     }
 
+    // Camera rotation - WIP
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
         camera->rotate(sf::Vector2f(0.05f, 0.f));
     }
@@ -116,34 +124,39 @@ void Game::pollEvents() {
     }
 }
 
+
+void Game::updateGameObjects()
+{
+    cubes[0]->rotateX(0.015f);
+    cubes[0]->rotateY(0.015f);
+}
+
 // main update method
 void Game::update() {
+    // ImGui update
     sf::Time delta = clock.restart();
     ImGui::SFML::Update(*window, delta);
 
     ImGui::Begin("Object Browser");
     ImGui::Text("Enable Camera Render: ");
-    ImGui::Checkbox("Circle", &drawAll);
+    ImGui::Checkbox("Circle", &drawAll_);
     ImGui::End();
 
-    this->dt = delta.asSeconds();
+    this->dt_ = delta.asSeconds();
 
-    this->setTitle();
+    setTitle();
+    pollEvents();
 
-    this->pollEvents();
-
-    cubes[0]->rotateX(0.015f);
+    updateGameObjects();
 }
 
 // main render method
 void  Game::render() {
-    /*
-        Renders game objects to screen
-    */
 
     this->window->clear(sf::Color(0, 0, 0, 255));
 
-    if(drawAll) pl->renderAll(window);
+    // Main window render
+    if(drawAll_) pl->renderAll(window);
 
     ImGui::SFML::Render(*window);
 

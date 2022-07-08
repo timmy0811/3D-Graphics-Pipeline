@@ -9,11 +9,11 @@ Triangle::Triangle(Point* p1, Point* p2, Point* p3, sf::Color color)
 	this->color = color;
 }
 
-void Triangle::applyPerspective(float distance)
+void Triangle::applyPerspective(float distance_)
 {
-	p1->applyPerspective(distance);
-	p2->applyPerspective(distance);
-	p3->applyPerspective(distance);
+	p1->applyPerspective(distance_);
+	p2->applyPerspective(distance_);
+	p3->applyPerspective(distance_);
 }
 
 void Triangle::render(sf::RenderTarget* target)
@@ -81,7 +81,7 @@ void Triangle::rotateZ(float angle, sf::Vector3f refPosition)
 
 void Triangle::setGlobalOffset(sf::Vector3f* vec)
 {
-	this->globalOffset = vec;
+	this->globalOffset_ = vec;
 }
 
 double Triangle::averageZ()

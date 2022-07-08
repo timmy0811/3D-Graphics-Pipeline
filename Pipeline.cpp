@@ -1,9 +1,9 @@
 #include "Pipeline.h"
 
-Pipeline::Pipeline(float distance)
+Pipeline::Pipeline(float distance_)
 {
 	queue = new RenderQueue();
-	this->distance = distance;
+	this->distance_ = distance_;
 	projection = Matrix3X3(0.f, MATRIX_TYPE::PROJECTION);
 }
 
@@ -20,7 +20,7 @@ void Pipeline::setCamera(Camera* camera)
 
 void Pipeline::renderAll(sf::RenderTarget* target)
 {
-	queue->applyPerspective(distance);
+	queue->applyPerspective(distance_);
 	queue->renderAll(target);
 }
 

@@ -3224,8 +3224,8 @@ void ImGui::RenderNavHighlight(const ImRect& bb, ImGuiID id, ImGuiNavHighlightFl
     if (flags & ImGuiNavHighlightFlags_TypeDefault)
     {
         const float THICKNESS = 2.0f;
-        const float DISTANCE = 3.0f + THICKNESS * 0.5f;
-        display_rect.Expand(ImVec2(DISTANCE, DISTANCE));
+        const float c_viewPortDistance = 3.0f + THICKNESS * 0.5f;
+        display_rect.Expand(ImVec2(c_viewPortDistance, c_viewPortDistance));
         bool fully_visible = window->ClipRect.Contains(display_rect);
         if (!fully_visible)
             window->DrawList->PushClipRect(display_rect.Min, display_rect.Max);
@@ -4854,11 +4854,11 @@ static void ImGui::RenderDimmedBackgrounds()
         // Draw border around CTRL+Tab target window
         ImGuiWindow* window = g.NavWindowingTargetAnim;
         ImGuiViewport* viewport = GetMainViewport();
-        float distance = g.FontSize;
+        float distance_ = g.FontSize;
         ImRect bb = window->Rect();
-        bb.Expand(distance);
+        bb.Expand(distance_);
         if (bb.GetWidth() >= viewport->Size.x && bb.GetHeight() >= viewport->Size.y)
-            bb.Expand(-distance - 1.0f); // If a window fits the entire viewport, adjust its highlight inward
+            bb.Expand(-distance_ - 1.0f); // If a window fits the entire viewport, adjust its highlight inward
         if (window->DrawList->CmdBuffer.Size == 0)
             window->DrawList->AddDrawCmd();
         window->DrawList->PushClipRect(viewport->Pos, viewport->Pos + viewport->Size);

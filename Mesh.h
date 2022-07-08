@@ -13,7 +13,7 @@ protected:
 	std::vector<Point*> points;
 	Matrix3X1 meshCenter;
 
-	bool wireFrame;
+	bool wireFrame_;
 
 	void createVert(int p1, int p2, sf::RenderTarget* target);
 	void createTriangle(Point* p1, Point* p2, Point* p3, sf::Color color);
@@ -35,7 +35,7 @@ public:
 
 	void setGlobalOffset(sf::Vector3f* vec) override;
 
-	void applyPerspective(float distance) override;
+	void applyPerspective(float distance_) override;
 	void virtual connect(sf::RenderTarget* target) = 0;
 
 	virtual void render(sf::RenderTarget* target);

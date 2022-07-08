@@ -1,8 +1,10 @@
 #pragma once
 
+// ImGui Frontend
 #include "imgui.h"
 #include "imgui-SFML.h"
 
+// SFML Graphics Framework
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/System.hpp>
@@ -10,49 +12,41 @@
 
 #include <vector>
 
-#include "Matrix.h"
-#include "Matrix3X1.h"
-#include "Matrix3X3.h"
-#include "MatrixOperations.h"
-
+// Engine Components
 #include "Point.h"
 #include "Cube.h"
 #include "Pipeline.h"
 #include "Triangle.h"
 #include "Camera.h"
 
-#define DISTANCE 2.f
-#define FOV 80.f
-
-#define M_PI 3.14159265f
-
-/*
-	Game depending functions
-*/
+// Config file
+#include "config.h"
 
 class Game
 {
 private:
 	// Variables
 	std::string windowTitle = "Window";
-	bool drawAll;
+	bool drawAll_;
 
 	// Window
 	sf::RenderWindow* window;
 	sf::Event ev;
 	sf::VideoMode videoMode;
 
+	float dt_;
+
 	sf::Clock clock;
 
 	// Private functions
 	void initVariables();
 	void initWindow();
-	void initObjects();
+	void initGameObjects();
+	void initPipeline();
+
+	void updateGameObjects();
 
 	void setTitle();
-
-	// Game Logic
-	float dt;
 
 	// Game objects
 	Pipeline* pl;

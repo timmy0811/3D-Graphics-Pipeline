@@ -22,7 +22,7 @@ public:
 	Point(sf::Vector3f position, Matrix3X1* parentPos = nullptr);
 
 	void render(sf::RenderTarget* target) override;
-	void applyPerspective(float distance) override;
+	void applyPerspective(float distance_) override;
 
 	void moveByValue(sf::Vector3f dir) override;
 	void moveToPos(sf::Vector3f pos) override;

@@ -15,11 +15,11 @@ protected:
 	std::vector<sf::VertexArray> vertices;
 	sf::Color color;
 
-	sf::Vector3f* globalOffset;
+	sf::Vector3f* globalOffset_;
 
 public:
 	virtual void render(sf::RenderTarget* target) = 0;
-	virtual void applyPerspective(float distance) = 0;
+	virtual void applyPerspective(float distance_) = 0;
 
 	virtual void rotateX(float angle) = 0;
 	virtual void rotateY(float angle) = 0;

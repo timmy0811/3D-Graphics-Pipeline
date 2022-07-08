@@ -1,8 +1,8 @@
 #include "RenderQueue.h"
 
-RenderQueue::RenderQueue(sf::Vector3f* globalOffset)
+RenderQueue::RenderQueue(sf::Vector3f* globalOffset_)
 {
-	this->globalOffset = globalOffset;
+	this->globalOffset_ = globalOffset_;
 }
 
 RenderQueue::~RenderQueue()
@@ -15,13 +15,13 @@ RenderQueue::~RenderQueue()
 void RenderQueue::setCamera(Camera* camera)
 {
 	this->camera = camera;
-	globalOffset = camera->getOffset();
+	globalOffset_ = camera->getOffset();
 }
 
-void RenderQueue::applyPerspective(float distance)
+void RenderQueue::applyPerspective(float distance_)
 {
 	for (Renderable* renderObj : renderQueue) {
-		renderObj->applyPerspective(distance);
+		renderObj->applyPerspective(distance_);
 	}
 }
 
@@ -46,7 +46,7 @@ void RenderQueue::renderByAdress(Renderable* obj, sf::RenderTarget* target)
 void RenderQueue::addObject(Renderable* obj)
 {
 	renderQueue.push_back(obj);
-	obj->setGlobalOffset(globalOffset);
+	obj->setGlobalOffset(globalOffset_);
 }
 
 bool RenderQueue::removeObject(Renderable* obj)

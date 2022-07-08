@@ -13,7 +13,7 @@ private:
 public:
 	Triangle(Point* p1, Point* p2, Point* p3, sf::Color color);
 
-	void applyPerspective(float distance) override;
+	void applyPerspective(float distance_) override;
 	void render(sf::RenderTarget* target) override;
 
 	void moveByValue(sf::Vector3f dir) override;
