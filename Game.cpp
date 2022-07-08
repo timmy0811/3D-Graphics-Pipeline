@@ -10,6 +10,8 @@ Game::Game()
 
 // Destructors
 Game::~Game() {
+    ImGui::SFML::Shutdown();
+
     delete this->window;
     delete pl;
     delete camera;
@@ -20,6 +22,8 @@ Game::~Game() {
 // Init game important variables
 void Game::initVariables() {
     this->window = nullptr;
+
+    drawAll = false;
 }
 
 // Init game window
@@ -29,6 +33,8 @@ void Game::initWindow() {
 
     this->window = new sf::RenderWindow(this->videoMode, this->windowTitle, sf::Style::Titlebar | sf::Style::Close);
     this->window->setFramerateLimit(60);
+
+    ImGui::SFML::Init(*window);
 }
 
 void Game::initObjects()
@@ -72,6 +78,8 @@ void Game::pollEvents() {
                 this->window->close();
             break;
         }
+
+        ImGui::SFML::ProcessEvent(ev);
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
@@ -110,7 +118,16 @@ void Game::pollEvents() {
 
 // main update method
 void Game::update() {
-    this->dt = clock.restart().asSeconds();
+    sf::Time delta = clock.restart();
+    ImGui::SFML::Update(*window, delta);
+
+    ImGui::Begin("Object Browser");
+    ImGui::Text("Enable Camera Render: ");
+    ImGui::Checkbox("Circle", &drawAll);
+    ImGui::End();
+
+    this->dt = delta.asSeconds();
+
     this->setTitle();
 
     this->pollEvents();
@@ -126,7 +143,9 @@ void  Game::render() {
 
     this->window->clear(sf::Color(0, 0, 0, 255));
 
-    pl->renderAll(window);
+    if(drawAll) pl->renderAll(window);
+
+    ImGui::SFML::Render(*window);
 
     this->window->display();
 }

@@ -1,5 +1,8 @@
 #pragma once
 
+#include "imgui.h"
+#include "imgui-SFML.h"
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/System.hpp>
@@ -32,6 +35,7 @@ class Game
 private:
 	// Variables
 	std::string windowTitle = "Window";
+	bool drawAll;
 
 	// Window
 	sf::RenderWindow* window;
