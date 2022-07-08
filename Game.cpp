@@ -12,6 +12,7 @@ Game::Game()
 Game::~Game() {
     delete this->window;
     delete pl;
+    delete camera;
 }
 
 // Private functions
@@ -33,12 +34,11 @@ void Game::initWindow() {
 void Game::initObjects()
 {
     pl = new Pipeline(DISTANCE);
+    camera = new Camera();
+    pl->setCamera(camera);
 
-    cubes.push_back(new Cube(sf::Vector3f(-0.1f, -0.15f, -0.15f), 0.3f, sf::Color::White, window, false));
+    cubes.push_back(new Cube(sf::Vector3f(-0.1f, -0.15f, -0.15f), 0.5f, sf::Color::White, window, false));
     pl->addObjectToQueue(cubes[cubes.size() - 1]);
-
-    points.push_back(new Point(sf::Vector3f(0.4f, 0.f, 0.f)));
-    pl->addObjectToQueue(points[points.size() - 1]);
 }
 
 void Game::setTitle()
@@ -74,17 +74,37 @@ void Game::pollEvents() {
         }
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        pl->moveCamera(sf::Vector3f(0.05f, 0.f, 0.f));
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        pl->moveCamera(sf::Vector3f(-0.05f, 0.f, 0.f));
-    }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        pl->moveCamera(sf::Vector3f(0.f, 0.05f, 0.f));
+        camera->move(sf::Vector3f(0.f, 0.f, -0.05f));
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        pl->moveCamera(sf::Vector3f(0.0f, -0.05f, 0.f));
+        camera->move(sf::Vector3f(0.f, 0.f, 0.05f));
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+        camera->move(sf::Vector3f(0.05f, 0.f, 0.f));
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+        camera->move(sf::Vector3f(-0.05f, 0.0f, 0.f));
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        camera->move(sf::Vector3f(0.f, 0.05f, 0.f));
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
+        camera->move(sf::Vector3f(0.0f, -0.05f, 0.f));
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+        camera->rotate(sf::Vector2f(0.05f, 0.f));
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+        camera->rotate(sf::Vector2f(-0.05f, 0.f));
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+        camera->rotate(sf::Vector2f(0.f, -0.05f));
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+        camera->rotate(sf::Vector2f(0.f, 0.05f));
     }
 }
 
@@ -94,7 +114,8 @@ void Game::update() {
     this->setTitle();
 
     this->pollEvents();
-    cubes[0]->rotateX(0.03f);
+
+    cubes[0]->rotateX(0.015f);
 }
 
 // main render method

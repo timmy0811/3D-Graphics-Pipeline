@@ -5,6 +5,7 @@
 
 #include "Renderable.h"
 #include "RenderQueue.h"
+#include "Camera.h"
 
 class Pipeline
 {
@@ -13,19 +14,18 @@ private:
 	Matrix3X3 projection;
 
 	float distance;
-	sf::Vector3f globalOffset;
+	Camera* camera;
 
 public:
 	Pipeline(float distance);
 	~Pipeline();
+
+	void setCamera(Camera* camera);
 
 	void renderAll(sf::RenderTarget* target);
 	void renderByAdress(Renderable* obj, sf::RenderTarget* target);
 
 	void addObjectToQueue(Renderable* obj);
 	bool removeObjectFromQueue(Renderable* obj);
-
-	void moveCamera(sf::Vector3f dirVec);
-	void moveCameraOnAngle(sf::Vector2f dirVec);
 };
 

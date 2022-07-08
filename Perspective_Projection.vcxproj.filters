@@ -37,6 +37,12 @@
     <Filter Include="Quelldateien\RenderPipeline\Renderable\Mesh">
       <UniqueIdentifier>{d54cdd50-6ec1-4831-9bef-f4543c25dd54}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\RenderPipeline\Camera">
+      <UniqueIdentifier>{40bb632f-1ca7-4114-b634-1639bbd758d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\RenderPipeline\Camera">
+      <UniqueIdentifier>{cd570e5d-5695-442d-94dc-23681772aabc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -78,6 +84,9 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>Quelldateien\RenderPipeline\Renderable\Mesh</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Quelldateien\RenderPipeline\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -118,6 +127,9 @@
     </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>Headerdateien\RenderPipeline\Renderable\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Headerdateien\RenderPipeline\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

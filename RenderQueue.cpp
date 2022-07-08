@@ -12,6 +12,12 @@ RenderQueue::~RenderQueue()
 	}
 }
 
+void RenderQueue::setCamera(Camera* camera)
+{
+	this->camera = camera;
+	globalOffset = camera->getOffset();
+}
+
 void RenderQueue::applyPerspective(float distance)
 {
 	for (Renderable* renderObj : renderQueue) {
@@ -21,15 +27,19 @@ void RenderQueue::applyPerspective(float distance)
 
 void RenderQueue::renderAll(sf::RenderTarget* target)
 {
-	for (Renderable* renderObj : renderQueue) {
-		renderObj->render(target);
+	if (camera) {
+		for (Renderable* renderObj : renderQueue) {
+			renderObj->render(target);
+		}
 	}
 }
 
 void RenderQueue::renderByAdress(Renderable* obj, sf::RenderTarget* target)
 {
-	for (Renderable* renderObj : renderQueue) {
-		if (renderObj = obj) renderObj->render(target);
+	if (camera) {
+		for (Renderable* renderObj : renderQueue) {
+			if (renderObj = obj) renderObj->render(target);
+		}
 	}
 }
 
@@ -49,9 +59,4 @@ bool RenderQueue::removeObject(Renderable* obj)
 		}
 	}
 	return false;
-}
-
-void RenderQueue::moveCamera(sf::Vector3f dirVec)
-{
-
 }

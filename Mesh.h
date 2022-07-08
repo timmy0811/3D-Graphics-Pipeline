@@ -30,6 +30,11 @@ public:
 	void rotateY(float angle, sf::Vector3f refPosition) override;
 	void rotateZ(float angle, sf::Vector3f refPosition) override;
 
+	void moveByValue(sf::Vector3f dir) override;
+	void moveToPos(sf::Vector3f pos) override;
+
+	void setGlobalOffset(sf::Vector3f* vec) override;
+
 	void applyPerspective(float distance) override;
 	void virtual connect(sf::RenderTarget* target) = 0;
 

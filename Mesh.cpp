@@ -14,7 +14,7 @@ void Mesh::createVert(int p1, int p2, sf::RenderTarget* target)
 
 void Mesh::createTriangle(Point* p1, Point* p2, Point* p3, sf::Color color)
 {
-	Triangle* poly = new Triangle(p1->getPosition(), p2->getPosition(), p3->getPosition(), color);
+	Triangle* poly = new Triangle(p1, p2, p3, color);
 	poly->setGlobalOffset(globalOffset);
 	polys.push_back(poly);
 }
@@ -36,8 +36,6 @@ void Mesh::rotateX(float angle)
 	for (Point* point : points) {
 		point->rotateX(angle, pos);
 	}
-	/*sf::Vector3f* ptrPos = &pos;
-	delete ptrPos;*/
 }
 
 void Mesh::rotateY(float angle)
@@ -46,8 +44,6 @@ void Mesh::rotateY(float angle)
 	for (Point* point : points) {
 		point->rotateY(angle, pos);
 	}
-	/*sf::Vector3f* ptrPos = &pos;
-	delete ptrPos;*/
 }
 
 void Mesh::rotateZ(float angle)
@@ -56,23 +52,45 @@ void Mesh::rotateZ(float angle)
 	for (Point* point : points) {
 		point->rotateZ(angle, pos);
 	}
-	/*sf::Vector3f* ptrPos = &pos;
-	delete ptrPos;*/
 }
 
 void Mesh::rotateX(float angle, sf::Vector3f refPosition)
 {
-	
+	return;
 }
 
 void Mesh::rotateY(float angle, sf::Vector3f refPosition)
 {
-	
+	return;
 }
 
 void Mesh::rotateZ(float angle, sf::Vector3f refPosition)
 {
-	
+	return;
+}
+
+void Mesh::moveByValue(sf::Vector3f dir)
+{
+	for (Point* point : points) {
+		point->moveByValue(dir);
+	}
+}
+
+void Mesh::moveToPos(sf::Vector3f pos)
+{
+	for (Point* point : points) {
+		point->moveToPos(pos);
+	}
+}
+
+void Mesh::setGlobalOffset(sf::Vector3f* vec)
+{
+	for (Point* point : points) {
+		point->setGlobalOffset(vec);
+	}
+	for (Triangle* poly : polys) {
+		poly->setGlobalOffset(vec);
+	}
 }
 
 void Mesh::applyPerspective(float distance)

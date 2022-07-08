@@ -24,6 +24,9 @@ public:
 	void render(sf::RenderTarget* target) override;
 	void applyPerspective(float distance) override;
 
+	void moveByValue(sf::Vector3f dir) override;
+	void moveToPos(sf::Vector3f pos) override;
+
 	void setMatrix(Matrix3X1 mat);
 	void setProjMatrix(Matrix3X1 mat);
 

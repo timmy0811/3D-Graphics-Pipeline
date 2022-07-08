@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "Renderable.h"
+#include "Camera.h"
 
 class RenderQueue
 {
@@ -10,9 +11,13 @@ private:
 	std::vector<Renderable*> renderQueue;
 	sf::Vector3f* globalOffset;
 
+	Camera* camera;
+
 public:
-	RenderQueue(sf::Vector3f* globalOffset);
+	RenderQueue(sf::Vector3f* globalOffset = new sf::Vector3f());
 	~RenderQueue();
+
+	void setCamera(Camera* camera);
 
 	void applyPerspective(float distance);
 	void renderAll(sf::RenderTarget* target);
@@ -20,8 +25,5 @@ public:
 
 	void addObject(Renderable* obj);
 	bool removeObject(Renderable* obj);
-
-	void moveCamera(sf::Vector3f dirVec);
-	void moveCameraOnAngle(sf::Vector2f dirVec);
 };
 

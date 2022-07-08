@@ -17,9 +17,23 @@ void Point::render(sf::RenderTarget* target)
 
 void Point::applyPerspective(float distance)
 {
-	projectedPositon.x0 = position.x0 / (distance - position.z0);
-	projectedPositon.y0 = position.y0 / (distance - position.z0);
-	projectedPositon.z0 = position.z0;
+	projectedPositon.x0 = (position.x0 + globalOffset->x) / (distance - (position.z0 + globalOffset->z));
+	projectedPositon.y0 = (position.y0 + globalOffset->y) / (distance - (position.z0+ globalOffset->z));
+	projectedPositon.z0 = position.z0 + globalOffset->z;
+}
+
+void Point::moveByValue(sf::Vector3f dir)
+{
+	position.x0 += dir.x;
+	position.y0 += dir.y;
+	position.z0 += dir.z;
+}
+
+void Point::moveToPos(sf::Vector3f pos)
+{
+	position.x0 = pos.x;
+	position.y0 = pos.y;
+	position.z0 = pos.z;
 }
 
 void Point::setMatrix(Matrix3X1 mat)

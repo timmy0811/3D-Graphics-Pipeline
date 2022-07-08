@@ -16,6 +16,7 @@
 #include "Cube.h"
 #include "Pipeline.h"
 #include "Triangle.h"
+#include "Camera.h"
 
 #define DISTANCE 2.f
 #define FOV 80.f
@@ -51,6 +52,7 @@ private:
 
 	// Game objects
 	Pipeline* pl;
+	Camera* camera;
 
 	std::vector<Cube*> cubes;
 	std::vector<Point*> points;

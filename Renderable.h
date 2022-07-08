@@ -29,8 +29,11 @@ public:
 	virtual void rotateY(float angle, sf::Vector3f refPosition) = 0;
 	virtual void rotateZ(float angle, sf::Vector3f refPosition) = 0;
 
+	virtual void moveByValue(sf::Vector3f dir) = 0;
+	virtual void moveToPos(sf::Vector3f pos) = 0;
+
 	std::vector<sf::VertexArray>* getVertices();
-	void setGlobalOffset(sf::Vector3f* vec);
+	virtual void setGlobalOffset(sf::Vector3f* vec);
 
 	sf::Vector2f translateToRel(sf::Vector2f pos, int windowSize);
 };

@@ -1,14 +1,10 @@
 #include "Triangle.h"
 
-Triangle::Triangle(sf::Vector3f pos1, sf::Vector3f pos2, sf::Vector3f pos3, sf::Color color)
+Triangle::Triangle(Point* p1, Point* p2, Point* p3, sf::Color color)
 {
-	p1 = new Point(pos1);
-	p2 = new Point(pos2);
-	p3 = new Point(pos3);
-
-	p1->setGlobalOffset(globalOffset);
-	p2->setGlobalOffset(globalOffset);
-	p3->setGlobalOffset(globalOffset);
+	this->p1 = p1;
+	this->p2 = p2;
+	this->p3 = p3;
 
 	this->color = color;
 }
@@ -25,6 +21,20 @@ void Triangle::render(sf::RenderTarget* target)
 	createPoly(target);
 	
 	if(calculateProjectedZ() < 0.f) target->draw(vertices[0]);
+}
+
+void Triangle::moveByValue(sf::Vector3f dir)
+{
+	p1->moveByValue(dir);
+	p2->moveByValue(dir);
+	p3->moveByValue(dir);
+}
+
+void Triangle::moveToPos(sf::Vector3f pos)
+{
+	p1->moveToPos(pos);
+	p2->moveToPos(pos);
+	p3->moveToPos(pos);
 }
 
 void Triangle::rotateX(float angle)
@@ -69,6 +79,11 @@ void Triangle::rotateZ(float angle, sf::Vector3f refPosition)
 	p3->rotateZ(angle, refPosition);
 }
 
+void Triangle::setGlobalOffset(sf::Vector3f* vec)
+{
+	this->globalOffset = vec;
+}
+
 double Triangle::averageZ()
 {
 	return (p1->getPosition().z + p2->getPosition().z + p3->getPosition().z) / 3.f;
@@ -83,10 +98,6 @@ double Triangle::calculateProjectedZ()
 	p1p3.z = 0.f;
 
 	return p1p2.x * p1p3.y - p1p2.y * p1p3.x;
-}
-
-void Triangle::translateToRelative(sf::RenderTarget* target)
-{
 }
 
 void Triangle::createPoly(sf::RenderTarget* target)

@@ -19,10 +19,6 @@ Cube::Cube(sf::Vector3f position, float size, sf::Color color, sf::RenderTarget*
 	points.push_back(new Point(sf::Vector3f(0.f		+ position.x, size	+ position.y, size	+ position.z)));
 	points.push_back(new Point(sf::Vector3f(size	+ position.x, size	+ position.y, size	+ position.z)));
 	points.push_back(new Point(sf::Vector3f(0.f		+ position.x, 0.f	+ position.y, size	+ position.z)));
-
-	for (Point* point : points) {
-		point->setGlobalOffset(globalOffset);
-	}
 }
 
 Cube::~Cube()
