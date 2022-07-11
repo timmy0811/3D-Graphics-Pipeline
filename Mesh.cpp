@@ -3,8 +3,8 @@
 void Mesh::createVert(int p1, int p2, sf::RenderTarget* target)
 {
 	sf::VertexArray line(sf::Lines, 2);
-	line[0].position = translateToRel(sf::Vector2f(points[p1]->getProjMatrix()->x0, points[p1]->getProjMatrix()->y0), target->getSize().x);
-	line[1].position = translateToRel(sf::Vector2f(points[p2]->getProjMatrix()->x0, points[p2]->getProjMatrix()->y0), target->getSize().x);
+	line[0].position = translateToRel(sf::Vector2f(points[p1]->getProjMatrix()->x0, points[p1]->getProjMatrix()->y0), target->getSize());
+	line[1].position = translateToRel(sf::Vector2f(points[p2]->getProjMatrix()->x0, points[p2]->getProjMatrix()->y0), target->getSize());
 
 	line[0].color = sf::Color::White;
 	line[1].color = sf::Color::White;
@@ -14,7 +14,7 @@ void Mesh::createVert(int p1, int p2, sf::RenderTarget* target)
 
 void Mesh::createTriangle(Point* p1, Point* p2, Point* p3, sf::Color color)
 {
-	Triangle* poly = new Triangle(p1, p2, p3, color);
+	Triangle* poly = new Triangle(p1, p2, p3, color, "Triangle");
 	poly->setGlobalOffset(globalOffset_);
 	polys.push_back(poly);
 }
@@ -123,6 +123,15 @@ void Mesh::render(sf::RenderTarget* target)
 	for (Triangle* poly : polys) {
 		poly->render(target);
 	}
+}
+
+std::vector<AbstractObject*> Mesh::getChildren()
+{
+	std::vector<AbstractObject*> outVec;
+	for (Point* p : points) {
+		outVec.push_back(p);
+	}
+	return outVec;
 }
 
 std::vector<Point*>* Mesh::getPoints()

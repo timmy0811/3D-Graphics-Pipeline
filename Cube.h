@@ -7,7 +7,7 @@
 class Cube : public Mesh
 {
 public:
-	Cube(sf::Vector3f position, float size, sf::Color color, sf::RenderTarget* target, bool wireFrame_ = true);
+	Cube(sf::Vector3f position, float size, sf::Color color, sf::RenderTarget* target, std::string name, bool wireFrame_ = false);
 	~Cube();
 
 	void connect(sf::RenderTarget* target) override;

@@ -1,7 +1,9 @@
 #include "Triangle.h"
 
-Triangle::Triangle(Point* p1, Point* p2, Point* p3, sf::Color color)
+Triangle::Triangle(Point* p1, Point* p2, Point* p3, sf::Color color, std::string name)
 {
+	name_ = name;
+
 	this->p1 = p1;
 	this->p2 = p2;
 	this->p3 = p3;
@@ -84,6 +86,15 @@ void Triangle::setGlobalOffset(sf::Vector3f* vec)
 	this->globalOffset_ = vec;
 }
 
+std::vector<AbstractObject*> Triangle::getChildren()
+{
+	std::vector<AbstractObject*> outVec;
+	outVec.push_back(p1);
+	outVec.push_back(p2);
+	outVec.push_back(p3);
+	return outVec;
+}
+
 double Triangle::averageZ()
 {
 	return (p1->getPosition().z + p2->getPosition().z + p3->getPosition().z) / 3.f;
@@ -105,9 +116,9 @@ void Triangle::createPoly(sf::RenderTarget* target)
 	vertices.clear();
 
 	sf::VertexArray poly(sf::Triangles, 3);
-	poly[0].position = translateToRel(sf::Vector2f(p1->getProjMatrix()->x0, p1->getProjMatrix()->y0), target->getSize().x);
-	poly[1].position = translateToRel(sf::Vector2f(p2->getProjMatrix()->x0, p2->getProjMatrix()->y0), target->getSize().x);
-	poly[2].position = translateToRel(sf::Vector2f(p3->getProjMatrix()->x0, p3->getProjMatrix()->y0), target->getSize().x);
+	poly[0].position = translateToRel(sf::Vector2f(p1->getProjMatrix()->x0, p1->getProjMatrix()->y0), target->getSize());
+	poly[1].position = translateToRel(sf::Vector2f(p2->getProjMatrix()->x0, p2->getProjMatrix()->y0), target->getSize());
+	poly[2].position = translateToRel(sf::Vector2f(p3->getProjMatrix()->x0, p3->getProjMatrix()->y0), target->getSize());
 
 	poly[0].color = color;
 	poly[1].color = color;

@@ -25,7 +25,7 @@ Game::~Game() {
 void Game::initVariables() {
     this->window = nullptr;
 
-    drawAll_ = false;
+    drawAll_ = true;
 }
 
 // Init game window
@@ -40,13 +40,6 @@ void Game::initWindow() {
     ImGui::SFML::Init(*window);
 }
 
-// Init game objects - soon obsolete
-void Game::initGameObjects()
-{
-    cubes.push_back(new Cube(sf::Vector3f(-0.1f, -0.6f, -0.15f), 0.4f, sf::Color::White, window, false));
-    pl->addObjectToQueue(cubes[cubes.size() - 1]);
-}
-
 // Init render pipeline
 void Game::initPipeline()
 {
@@ -54,6 +47,8 @@ void Game::initPipeline()
     pl = new Pipeline(c_viewPortDistance);
     camera = new Camera();
     pl->setCamera(camera);
+
+    objHandler = new ObjectHandler(pl, camera, window);
 }
 
 // Update window title
@@ -89,46 +84,60 @@ void Game::pollEvents() {
 
     // Movement on XZ plane
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        camera->move(sf::Vector3f(0.f, 0.f, -0.05f));
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
         camera->move(sf::Vector3f(0.f, 0.f, 0.05f));
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+        camera->move(sf::Vector3f(0.f, 0.f, -0.05f));
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
         camera->move(sf::Vector3f(0.05f, 0.f, 0.f));
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
         camera->move(sf::Vector3f(-0.05f, 0.0f, 0.f));
     }
 
     // Movement on Y axes
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
         camera->move(sf::Vector3f(0.f, 0.05f, 0.f));
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
         camera->move(sf::Vector3f(0.0f, -0.05f, 0.f));
     }
 
     // Camera rotation - WIP
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         camera->rotate(sf::Vector2f(0.05f, 0.f));
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         camera->rotate(sf::Vector2f(-0.05f, 0.f));
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
         camera->rotate(sf::Vector2f(0.f, -0.05f));
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         camera->rotate(sf::Vector2f(0.f, 0.05f));
     }
 }
 
+// Init game objects - soon obsolete
+void Game::initGameObjects()
+{
+    /*for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            objHandler->createCube(sf::Vector3f(i * 0.3f, j * 0.3f, 0.f));
+        }
+    }*/
+
+    objHandler->createCube(sf::Vector3f(0.2f, 0.154f, -0.05f));
+    //objHandler->createPoint();
+
+    //objHandler->createPoly();
+}
 
 void Game::updateGameObjects()
-{
+{/*
     cubes[0]->rotateX(0.015f);
-    cubes[0]->rotateY(0.015f);
+    cubes[0]->rotateY(0.015f);*/
 }
 
 // main update method
@@ -137,21 +146,21 @@ void Game::update() {
     sf::Time delta = clock.restart();
     ImGui::SFML::Update(*window, delta);
 
-    ImGui::Begin("Object Browser");
-    ImGui::Text("Enable Camera Render: ");
-    ImGui::Checkbox("Circle", &drawAll_);
-    ImGui::End();
-
     this->dt_ = delta.asSeconds();
 
     setTitle();
     pollEvents();
 
     updateGameObjects();
+
+    GUI::menuBar();
+    GUI::objectBrowser(objHandler->getObjects());
+    GUI::objectAttributes(objHandler->getActiveObj());
+    GUI::diagnosticsWindow(camera->getOffset(), static_cast<int>(1.f / this->dt_));
 }
 
 // main render method
-void  Game::render() {
+void Game::render() {
 
     this->window->clear(sf::Color(0, 0, 0, 255));
 
@@ -162,3 +171,4 @@ void  Game::render() {
 
     this->window->display();
 }
+

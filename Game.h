@@ -1,8 +1,8 @@
 #pragma once
 
-// ImGui Frontend
-#include "imgui.h"
-#include "imgui-SFML.h"
+// Frontend
+#include "GUI.h"
+#include <corecrt_memory.h>
 
 // SFML Graphics Framework
 #include <SFML/Graphics.hpp>
@@ -18,6 +18,8 @@
 #include "Pipeline.h"
 #include "Triangle.h"
 #include "Camera.h"
+
+#include "ObjectHandler.h"
 
 // Config file
 #include "config.h"
@@ -52,9 +54,7 @@ private:
 	Pipeline* pl;
 	Camera* camera;
 
-	std::vector<Cube*> cubes;
-	std::vector<Point*> points;
-	std::vector<Triangle*> polys;
+	ObjectHandler* objHandler;
 
 public:
 	// Constructors

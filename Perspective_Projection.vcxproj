@@ -145,10 +145,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractObject.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="config.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GUI.cpp" />
     <ClCompile Include="imgui\imgui-SFML.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_draw.cpp" />
@@ -160,6 +162,7 @@
     <ClCompile Include="Matrix3X1.cpp" />
     <ClCompile Include="MatrixOperations.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="ObjectHandler.cpp" />
     <ClCompile Include="Pipeline.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Renderable.cpp" />
@@ -167,10 +170,12 @@
     <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractObject.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="config.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GUI.h" />
     <ClInclude Include="imgui\imconfig-SFML.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui-SFML.h" />
@@ -185,6 +190,7 @@
     <ClInclude Include="Matrix3X1.h" />
     <ClInclude Include="MatrixOperations.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="ObjectHandler.h" />
     <ClInclude Include="Pipeline.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Renderable.h" />

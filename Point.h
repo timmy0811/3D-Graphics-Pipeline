@@ -19,7 +19,7 @@ private:
 	void rotateByEnum(float angle, sf::Vector3f refPosition, MATRIX_TYPE type);
 
 public:
-	Point(sf::Vector3f position, Matrix3X1* parentPos = nullptr);
+	Point(sf::Vector3f position, std::string name, Matrix3X1* parentPos = nullptr);
 
 	void render(sf::RenderTarget* target) override;
 	void applyPerspective(float distance_) override;

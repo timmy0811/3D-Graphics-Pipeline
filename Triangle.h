@@ -11,7 +11,7 @@ private:
 	Point* p3;
 
 public:
-	Triangle(Point* p1, Point* p2, Point* p3, sf::Color color);
+	Triangle(Point* p1, Point* p2, Point* p3, sf::Color color, std::string name);
 
 	void applyPerspective(float distance_) override;
 	void render(sf::RenderTarget* target) override;
@@ -28,6 +28,8 @@ public:
 	void rotateZ(float angle, sf::Vector3f refPosition) override;
 
 	void setGlobalOffset(sf::Vector3f* vec) override;
+
+	std::vector<AbstractObject*> getChildren() override;
 
 	double averageZ();
 	double calculateProjectedZ();

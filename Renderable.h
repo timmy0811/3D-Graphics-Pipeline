@@ -4,8 +4,9 @@
 
 #include "Matrix3X1.h"
 #include "Matrix3X3.h"
+#include "AbstractObject.h"
 
-class Renderable
+class Renderable : public AbstractObject
 {
 protected:
 	Renderable();
@@ -29,12 +30,14 @@ public:
 	virtual void rotateY(float angle, sf::Vector3f refPosition) = 0;
 	virtual void rotateZ(float angle, sf::Vector3f refPosition) = 0;
 
+	virtual std::vector<AbstractObject*> getChildren() override;
+
 	virtual void moveByValue(sf::Vector3f dir) = 0;
 	virtual void moveToPos(sf::Vector3f pos) = 0;
 
 	std::vector<sf::VertexArray>* getVertices();
 	virtual void setGlobalOffset(sf::Vector3f* vec);
 
-	sf::Vector2f translateToRel(sf::Vector2f pos, int windowSize);
+	sf::Vector2f translateToRel(sf::Vector2f pos, sf::Vector2u windowSize);
 };
 

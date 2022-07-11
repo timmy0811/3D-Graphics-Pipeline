@@ -1,7 +1,9 @@
 #include "Cube.h"
 
-Cube::Cube(sf::Vector3f position, float size, sf::Color color, sf::RenderTarget* target, bool wireFrame_)
+Cube::Cube(sf::Vector3f position, float size, sf::Color color, sf::RenderTarget* target, std::string name, bool wireFrame_)
 {
+	name_ = name;
+
 	this->wireFrame_ = wireFrame_;
 	this->color = color;
 	this->target = target;
@@ -10,15 +12,15 @@ Cube::Cube(sf::Vector3f position, float size, sf::Color color, sf::RenderTarget*
 	meshCenter.y0 = position.y + size / 2.f;
 	meshCenter.z0 = position.z + size / 2.f;
 
-	points.push_back(new Point(sf::Vector3f(size	+ position.x, 0.f	+ position.y, 0.f	+ position.z)));
-	points.push_back(new Point(sf::Vector3f(0.f		+ position.x, size	+ position.y, 0.f	+ position.z)));
-	points.push_back(new Point(sf::Vector3f(size	+ position.x, size	+ position.y, 0.f	+ position.z)));
-	points.push_back(new Point(sf::Vector3f(0.f		+ position.x, 0.f	+ position.y, 0.f	+ position.z)));
+	points.push_back(new Point(sf::Vector3f(size	+ position.x, 0.f	+ position.y, 0.f	+ position.z), "point_0"));
+	points.push_back(new Point(sf::Vector3f(0.f		+ position.x, size	+ position.y, 0.f	+ position.z), "point_1"));
+	points.push_back(new Point(sf::Vector3f(size	+ position.x, size	+ position.y, 0.f	+ position.z), "point_2"));
+	points.push_back(new Point(sf::Vector3f(0.f		+ position.x, 0.f	+ position.y, 0.f	+ position.z), "point_3"));
 
-	points.push_back(new Point(sf::Vector3f(size	+ position.x, 0.f	+ position.y, size	+ position.z)));
-	points.push_back(new Point(sf::Vector3f(0.f		+ position.x, size	+ position.y, size	+ position.z)));
-	points.push_back(new Point(sf::Vector3f(size	+ position.x, size	+ position.y, size	+ position.z)));
-	points.push_back(new Point(sf::Vector3f(0.f		+ position.x, 0.f	+ position.y, size	+ position.z)));
+	points.push_back(new Point(sf::Vector3f(size	+ position.x, 0.f	+ position.y, size	+ position.z), "point_4"));
+	points.push_back(new Point(sf::Vector3f(0.f		+ position.x, size	+ position.y, size	+ position.z), "point_5"));
+	points.push_back(new Point(sf::Vector3f(size	+ position.x, size	+ position.y, size	+ position.z), "point_6"));
+	points.push_back(new Point(sf::Vector3f(0.f		+ position.x, 0.f	+ position.y, size	+ position.z), "point_7"));
 }
 
 Cube::~Cube()
@@ -47,6 +49,10 @@ void Cube::connect(sf::RenderTarget* target)
 		createVert(6, 4, target);
 	}
 	else {
+		for (Triangle* poly : polys) {
+			delete poly;
+		}
+
 		polys.clear();
 
 		createTriangle(points[3], points[2], points[1], sf::Color::Blue);

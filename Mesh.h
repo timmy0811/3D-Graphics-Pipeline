@@ -40,6 +40,8 @@ public:
 
 	virtual void render(sf::RenderTarget* target);
 
+	std::vector<AbstractObject*> getChildren() override;
+	
 	std::vector<Point*>* getPoints();
 };
 

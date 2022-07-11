@@ -1,7 +1,8 @@
 #include "Point.h"
 
-Point::Point(sf::Vector3f position, Matrix3X1* parentPos)
+Point::Point(sf::Vector3f position, std::string name, Matrix3X1* parentPos)
 {
+	name_ = name;
 	this->position = Matrix3X1(0.f, MATRIX_TYPE::PROJECTION, position.x, position.y, position.z);
 
 	this->shape = sf::CircleShape(5.f);
@@ -10,7 +11,7 @@ Point::Point(sf::Vector3f position, Matrix3X1* parentPos)
 
 void Point::render(sf::RenderTarget* target)
 {
-	sf::Vector2f pos = translateToRel(sf::Vector2f(projectedPositon.x0, projectedPositon.y0), target->getSize().x);
+	sf::Vector2f pos = translateToRel(sf::Vector2f(projectedPositon.x0, projectedPositon.y0), target->getSize());
 	shape.setPosition(sf::Vector2f(pos.x - 2.5f, pos.y - 2.5f));
 	target->draw(shape);
 }
