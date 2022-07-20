@@ -61,6 +61,12 @@
     <Filter Include="Headerdateien\ImGuiFramework">
       <UniqueIdentifier>{3063e23a-d996-4097-bfd0-944763d602eb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\RenderPipeline\Ressources">
+      <UniqueIdentifier>{f8b2c18d-a0fb-465a-a384-830c76333b4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\RenderPipeline\Ressources">
+      <UniqueIdentifier>{8176b674-8750-437b-ab7d-f0516b4fe5b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -131,6 +137,15 @@
     </ClCompile>
     <ClCompile Include="AbstractObject.cpp">
       <Filter>Quelldateien\Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Ressources.cpp">
+      <Filter>Quelldateien\RenderPipeline\Ressources</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Quelldateien\RenderPipeline\Ressources</Filter>
+    </ClCompile>
+    <ClCompile Include="Textured.cpp">
+      <Filter>Quelldateien\RenderPipeline\Renderable</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +229,15 @@
     </ClInclude>
     <ClInclude Include="ObjectHandler.h">
       <Filter>Headerdateien\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Headerdateien\RenderPipeline\Ressources</Filter>
+    </ClInclude>
+    <ClInclude Include="Textured.h">
+      <Filter>Headerdateien\RenderPipeline\Renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="Ressources.h">
+      <Filter>Headerdateien\RenderPipeline\Ressources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

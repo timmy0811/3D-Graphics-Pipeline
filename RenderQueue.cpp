@@ -25,12 +25,20 @@ void RenderQueue::applyPerspective(float distance_)
 	}
 }
 
-void RenderQueue::renderAll(sf::RenderTarget* target)
+void RenderQueue::renderAll(sf::RenderTarget* target, sf::Texture* textureBuffer, sf::Sprite* sprtBuffer, sf::Uint8* buffer)
 {
+	memset(buffer, 0, c_winHeight * c_winWidth * 4);
 	if (camera) {
+		// Clear screen buffer
+		memset(buffer, 0, c_winHeight * c_winWidth * 4);
+
 		for (Renderable* renderObj : renderQueue) {
-			renderObj->render(target);
+			renderObj->render(target, buffer);
 		}
+
+		// Display buffer
+		textureBuffer->update(buffer);
+		target->draw(*sprtBuffer);
 	}
 }
 

@@ -5,6 +5,7 @@
 #include "Matrix3X1.h"
 #include "Matrix3X3.h"
 #include "AbstractObject.h"
+#include "config.h"
 
 class Renderable : public AbstractObject
 {
@@ -19,7 +20,9 @@ protected:
 	sf::Vector3f* globalOffset_;
 
 public:
-	virtual void render(sf::RenderTarget* target) = 0;
+	bool isTextured;
+
+	virtual void render(sf::RenderTarget* target, sf::Uint8* buffer = nullptr) = 0;
 	virtual void applyPerspective(float distance_) = 0;
 
 	virtual void rotateX(float angle) = 0;
@@ -38,6 +41,15 @@ public:
 	std::vector<sf::VertexArray>* getVertices();
 	virtual void setGlobalOffset(sf::Vector3f* vec);
 
+	template
+		<typename T> void clamp(T min, T* value, T max);
+
 	sf::Vector2f translateToRel(sf::Vector2f pos, sf::Vector2u windowSize);
 };
 
+template<typename T>
+inline void Renderable::clamp(T min, T* value, T max)
+{
+	if (*value > max) *value = max;
+	else if (*value < min) *value = min;
+}

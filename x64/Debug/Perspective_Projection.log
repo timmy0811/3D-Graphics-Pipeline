@@ -1,4 +1,13 @@
-﻿  GUI.cpp
+﻿  Cube.cpp
+  GUI.cpp
   Game.cpp
-  Generating Code...
+  Mesh.cpp
+  ObjectHandler.cpp
+  Pipeline.cpp
+  Point.cpp
+  RenderQueue.cpp
+  Triangle.cpp
+  main.cpp
+  Code wird generiert...
+C:\Git\Perspective_Projection\Perspective_Projection\Point.cpp(141): warning C4172: Adresse einer lokalen Variablen oder eines temporären Werts ": pList" wird zurückgegeben
   Perspective_Projection.vcxproj -> C:\Git\Perspective_Projection\x64\Debug\Perspective_Projection.exe

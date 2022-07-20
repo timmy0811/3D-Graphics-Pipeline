@@ -19,6 +19,7 @@ Game::~Game() {
     delete window;
     delete pl;
     delete camera;
+    delete objHandler;
 }
 
 // Init game important variables
@@ -30,11 +31,12 @@ void Game::initVariables() {
 
 // Init game window
 void Game::initWindow() {
+    // Main window setup
     this->videoMode.height = c_winHeight;
     this->videoMode.width = c_winWidth;
 
     this->window = new sf::RenderWindow(this->videoMode, this->windowTitle, sf::Style::Titlebar | sf::Style::Close);
-    this->window->setFramerateLimit(c_framerate);
+    //this->window->setFramerateLimit(c_framerate);
 
     // ImGui window init
     ImGui::SFML::Init(*window);
@@ -83,39 +85,42 @@ void Game::pollEvents() {
     }
 
     // Movement on XZ plane
+    movementCamera_ = 2.f;
+    movementCamera_ *= dt_;
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        camera->move(sf::Vector3f(0.f, 0.f, 0.05f));
+        camera->move(sf::Vector3f(0.f, 0.f, movementCamera_));
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        camera->move(sf::Vector3f(0.f, 0.f, -0.05f));
+        camera->move(sf::Vector3f(0.f, 0.f, -movementCamera_));
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        camera->move(sf::Vector3f(0.05f, 0.f, 0.f));
+        camera->move(sf::Vector3f(movementCamera_, 0.f, 0.f));
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        camera->move(sf::Vector3f(-0.05f, 0.0f, 0.f));
+        camera->move(sf::Vector3f(-movementCamera_, 0.0f, 0.f));
     }
 
     // Movement on Y axes
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        camera->move(sf::Vector3f(0.f, 0.05f, 0.f));
+        camera->move(sf::Vector3f(0.f, movementCamera_, 0.f));
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        camera->move(sf::Vector3f(0.0f, -0.05f, 0.f));
+        camera->move(sf::Vector3f(0.0f, -movementCamera_, 0.f));
     }
 
     // Camera rotation - WIP
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        camera->rotate(sf::Vector2f(0.05f, 0.f));
+        camera->rotate(sf::Vector2f(movementCamera_, 0.f));
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        camera->rotate(sf::Vector2f(-0.05f, 0.f));
+        camera->rotate(sf::Vector2f(-movementCamera_, 0.f));
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
-        camera->rotate(sf::Vector2f(0.f, -0.05f));
+        camera->rotate(sf::Vector2f(0.f, -movementCamera_));
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        camera->rotate(sf::Vector2f(0.f, 0.05f));
+        camera->rotate(sf::Vector2f(0.f, movementCamera_));
     }
 }
 
@@ -127,8 +132,10 @@ void Game::initGameObjects()
             objHandler->createCube(sf::Vector3f(i * 0.3f, j * 0.3f, 0.f));
         }
     }*/
+    objHandler->createTexture(TexType::BRICKS);
+    objHandler->createCube(nullptr, sf::Vector3f(0.f, 0.f, 1.f));
+    //objHandler->createPoint();
 
-    objHandler->createCube(sf::Vector3f(0.2f, 0.154f, -0.05f));
     //objHandler->createPoint();
 
     //objHandler->createPoly();
@@ -138,6 +145,15 @@ void Game::updateGameObjects()
 {/*
     cubes[0]->rotateX(0.015f);
     cubes[0]->rotateY(0.015f);*/
+    objHandler->test_rotate(dt_);
+}
+
+void Game::updateGUI()
+{
+    GUI::menuBar();
+    GUI::objectBrowser(objHandler->getObjects());
+    GUI::objectAttributes(objHandler->getActiveObj());
+    GUI::diagnosticsWindow(camera->getOffset(), static_cast<int>(1.f / this->dt_));
 }
 
 // main update method
@@ -152,11 +168,7 @@ void Game::update() {
     pollEvents();
 
     updateGameObjects();
-
-    GUI::menuBar();
-    GUI::objectBrowser(objHandler->getObjects());
-    GUI::objectAttributes(objHandler->getActiveObj());
-    GUI::diagnosticsWindow(camera->getOffset(), static_cast<int>(1.f / this->dt_));
+    updateGUI();
 }
 
 // main render method
@@ -164,10 +176,18 @@ void Game::render() {
 
     this->window->clear(sf::Color(0, 0, 0, 255));
 
-    // Main window render
-    if(drawAll_) pl->renderAll(window);
+    // Draw queue
+    if (drawAll_) pl->renderAll(window);
 
+    // Render GUI frontend
     ImGui::SFML::Render(*window);
+
+    /*for (register int i = 0; i < c_winHeight * c_winWidth; i += 4) {
+        buffer[i] = 0 % 255;
+        buffer[i + 1] = ( 100) % 255;
+        buffer[i + 2] = ( 200) % 255;
+        buffer[i + 3] = 255;
+    }*/
 
     this->window->display();
 }

@@ -7,11 +7,42 @@ ObjectHandler::ObjectHandler(Pipeline* pipeLine, Camera* camera, sf::RenderTarge
 	this->target = target;
 
 	activeObj = nullptr;
+
+	// Ressources
+	ressources = new Ressources();
 }
 
-Cube* ObjectHandler::createCube(sf::Vector3f position, float size, sf::Color color)
+ObjectHandler::~ObjectHandler()
 {
-	Cube* c = new Cube(position, size, color, target, "cube_" + std::to_string(cubes.size()));
+	for (Texture* tex : textures) {
+		delete tex;
+	}
+}
+
+Cube* ObjectHandler::createCube(sf::Vector3f position, float size)
+{
+	Cube* c = new Cube(position, size, target, "cube_" + std::to_string(cubes.size()));
+	c->setGlobalOffset(camera->getOffset());
+	cubes.push_back(c);
+	pipeline->addObjectToQueue(c);
+
+	return c;
+}
+
+Cube* ObjectHandler::createCube(sf::Color color, sf::Vector3f position, float size)
+{
+	Cube* c = new Cube(position, size, target, "cube_" + std::to_string(cubes.size()), color);
+	c->setGlobalOffset(camera->getOffset());
+	cubes.push_back(c);
+	pipeline->addObjectToQueue(c);
+
+	return c;
+}
+
+Cube* ObjectHandler::createCube(Texture* texture, sf::Vector3f position, float size)
+{
+	//Cube* c = new Cube(position, size, target, "cube_" + std::to_string(cubes.size()), texture);
+	Cube* c = new Cube(position, size, target, "cube_" + std::to_string(cubes.size()), textures[0]);
 	c->setGlobalOffset(camera->getOffset());
 	cubes.push_back(c);
 	pipeline->addObjectToQueue(c);
@@ -48,6 +79,14 @@ Triangle* ObjectHandler::createPoly(sf::Vector3f position1, sf::Vector3f positio
 	return t;
 }
 
+Texture* ObjectHandler::createTexture(TexType texture)
+{
+	Texture* tex = new Texture(ressources);
+	tex->setTexture(texture);
+	this->textures.push_back(tex);
+	return tex;
+}
+
 std::vector<AbstractObject*> ObjectHandler::getObjects()
 {
 	std::vector<AbstractObject*> combList;
@@ -63,4 +102,10 @@ AbstractObject* ObjectHandler::getActiveObj()
 	activeObj = cubes[0];
 	// --
 	return activeObj;
+}
+
+void ObjectHandler::test_rotate(float dt)
+{
+	cubes[0]->rotateY(0.5f * dt);
+	cubes[0]->rotateX(0.4f * dt);
 }

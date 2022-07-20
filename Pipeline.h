@@ -6,6 +6,8 @@
 #include "Renderable.h"
 #include "RenderQueue.h"
 #include "Camera.h"
+#include "Ressources.h"
+#include "Texture.h"
 
 class Pipeline
 {
@@ -15,6 +17,12 @@ private:
 
 	float distance_;
 	Camera* camera;
+
+	// Screen-Buffer
+	sf::Texture textureBuffer;
+	sf::Sprite sprtBuffer;
+
+	sf::Uint8* buffer;
 
 public:
 	Pipeline(float distance_);

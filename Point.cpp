@@ -2,6 +2,8 @@
 
 Point::Point(sf::Vector3f position, std::string name, Matrix3X1* parentPos)
 {
+	//this->texCord = *texCord;
+
 	name_ = name;
 	this->position = Matrix3X1(0.f, MATRIX_TYPE::PROJECTION, position.x, position.y, position.z);
 
@@ -9,7 +11,7 @@ Point::Point(sf::Vector3f position, std::string name, Matrix3X1* parentPos)
 	shape.setFillColor(sf::Color::White);
 }
 
-void Point::render(sf::RenderTarget* target)
+void Point::render(sf::RenderTarget* target, sf::Uint8* buffer)
 {
 	sf::Vector2f pos = translateToRel(sf::Vector2f(projectedPositon.x0, projectedPositon.y0), target->getSize());
 	shape.setPosition(sf::Vector2f(pos.x - 2.5f, pos.y - 2.5f));
@@ -67,6 +69,11 @@ sf::Vector3f Point::getProjPosition()
 	return sf::Vector3f(projectedPositon.x0, projectedPositon.y0, projectedPositon.z0);
 }
 
+sf::Vector2f Point::getScreenPosition(sf::RenderTarget* target)
+{
+	return translateToRel(sf::Vector2f(projectedPositon.x0, projectedPositon.y0), target->getSize());
+}
+
 void Point::rotateX(float angle)
 {
 	return;
@@ -96,6 +103,16 @@ void Point::rotateZ(float angle, sf::Vector3f refPosition)
 {
 	rotateByEnum(angle, refPosition, MATRIX_TYPE::ROTATION_Z);
 }
+
+//void Point::setTexCord(sf::Vector2u cord)
+//{
+//	this->texCord = cord;
+//}
+//
+//sf::Vector2u Point::getTexCord()
+//{
+//	return texCord;
+//}
 
 void Point::rotateByEnum(float angle, sf::Vector3f refPosition, MATRIX_TYPE type)
 {

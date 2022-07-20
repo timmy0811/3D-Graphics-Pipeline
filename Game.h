@@ -37,6 +37,7 @@ private:
 	sf::VideoMode videoMode;
 
 	float dt_;
+	float movementCamera_;
 
 	sf::Clock clock;
 
@@ -47,6 +48,7 @@ private:
 	void initPipeline();
 
 	void updateGameObjects();
+	void updateGUI();
 
 	void setTitle();
 

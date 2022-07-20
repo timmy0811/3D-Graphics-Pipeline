@@ -5,8 +5,9 @@
 #include "Renderable.h"
 #include "Triangle.h"
 #include "Point.h"
+#include "Textured.h"
 
-class Mesh : public Renderable
+class Mesh : public Textured
 {
 protected:
 	std::vector<Triangle*> polys;
@@ -17,6 +18,7 @@ protected:
 
 	void createVert(int p1, int p2, sf::RenderTarget* target);
 	void createTriangle(Point* p1, Point* p2, Point* p3, sf::Color color);
+	void createTriangle(Point* p1, Point* p2, Point* p3, sf::Vector2f texCord1_, sf::Vector2f texCord2_, sf::Vector2f texCord3_);
 	void sortPolys();
 
 public:
@@ -38,7 +40,7 @@ public:
 	void applyPerspective(float distance_) override;
 	void virtual connect(sf::RenderTarget* target) = 0;
 
-	virtual void render(sf::RenderTarget* target);
+	virtual void render(sf::RenderTarget* target, sf::Uint8* buffer = nullptr);
 
 	std::vector<AbstractObject*> getChildren() override;
 	

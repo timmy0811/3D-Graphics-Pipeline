@@ -5,6 +5,13 @@ Pipeline::Pipeline(float distance_)
 	queue = new RenderQueue();
 	this->distance_ = distance_;
 	projection = Matrix3X3(0.f, MATRIX_TYPE::PROJECTION);
+
+	// Screen Buffer init
+	buffer = new sf::Uint8[c_winHeight * c_winWidth * 4];
+	memset(buffer, 0, c_winHeight * c_winWidth * 4);
+
+	textureBuffer.create(c_winWidth, c_winHeight);
+	sprtBuffer.setTexture(textureBuffer, true);
 }
 
 Pipeline::~Pipeline()
@@ -21,7 +28,7 @@ void Pipeline::setCamera(Camera* camera)
 void Pipeline::renderAll(sf::RenderTarget* target)
 {
 	queue->applyPerspective(distance_);
-	queue->renderAll(target);
+	queue->renderAll(target,&textureBuffer, &sprtBuffer, buffer);
 }
 
 void Pipeline::renderByAdress(Renderable* obj, sf::RenderTarget* target)

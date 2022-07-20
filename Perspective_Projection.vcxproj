@@ -167,6 +167,9 @@
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Renderable.cpp" />
     <ClCompile Include="RenderQueue.cpp" />
+    <ClCompile Include="Ressources.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Textured.cpp" />
     <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +199,9 @@
     <ClInclude Include="Renderable.h" />
     <ClInclude Include="RenderQueue.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Ressources.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="Textured.h" />
     <ClInclude Include="Triangle.h" />
   </ItemGroup>
   <ItemGroup>

@@ -19,6 +19,13 @@ void Mesh::createTriangle(Point* p1, Point* p2, Point* p3, sf::Color color)
 	polys.push_back(poly);
 }
 
+void Mesh::createTriangle(Point* p1, Point* p2, Point* p3, sf::Vector2f texCord1_, sf::Vector2f texCord2_, sf::Vector2f texCord3_)
+{
+	Triangle* poly = new Triangle(p1, p2, p3, texture, "Triangle", texCord1_, texCord2_, texCord3_);
+	poly->setGlobalOffset(globalOffset_);
+	polys.push_back(poly);
+}
+
 Mesh::~Mesh()
 {
 	for (Triangle* poly : polys) {
@@ -108,7 +115,7 @@ void Mesh::applyPerspective(float distance_)
 	}
 }
 
-void Mesh::render(sf::RenderTarget* target)
+void Mesh::render(sf::RenderTarget* target, sf::Uint8* buffer)
 {
 	for (Point* p : points) {
 		//p->render(target);
@@ -121,7 +128,7 @@ void Mesh::render(sf::RenderTarget* target)
 	sortPolys();
 
 	for (Triangle* poly : polys) {
-		poly->render(target);
+		poly->render(target, buffer);
 	}
 }
 

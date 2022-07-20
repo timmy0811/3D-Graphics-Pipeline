@@ -16,12 +16,14 @@ private:
 	Matrix3X1 projectedPositon;
 	sf::CircleShape shape;
 
+	sf::Vector2u texCord;
+
 	void rotateByEnum(float angle, sf::Vector3f refPosition, MATRIX_TYPE type);
 
 public:
 	Point(sf::Vector3f position, std::string name, Matrix3X1* parentPos = nullptr);
 
-	void render(sf::RenderTarget* target) override;
+	void render(sf::RenderTarget* target, sf::Uint8* buffer = nullptr) override;
 	void applyPerspective(float distance_) override;
 
 	void moveByValue(sf::Vector3f dir) override;
@@ -35,6 +37,8 @@ public:
 
 	sf::Vector3f getPosition();
 	sf::Vector3f getProjPosition();
+
+	sf::Vector2f getScreenPosition(sf::RenderTarget* target);
 
 	void rotateX(float angle) override;
 	void rotateY(float angle) override;
