@@ -1,7 +1,10 @@
 #pragma once
 
+// FOV - not used yet
+#define c_FOV 80.f
+
 // Distance from Camera to projection plane
-#define c_viewPortDistance 2.f
+#define c_viewPortDistance (-1 / tan((c_FOV / 2.0) * 3.14159265 / 180.0))
 
 // Window options
 #define c_winWidth 2140
@@ -23,6 +26,3 @@
 
 // PI
 #define c_PI 3.14159265f
-
-// FOV - not used yet
-#define c_FOV 80.f

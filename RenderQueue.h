@@ -21,7 +21,7 @@ public:
 
 	void setCamera(Camera* camera);
 
-	void applyPerspective(float distance_);
+	void applyPerspective();
 	void renderAll(sf::RenderTarget* target, sf::Texture* textureBuffer, sf::Sprite* sprtBuffer, sf::Uint8* buffer = nullptr);
 	void renderByAdress(Renderable* obj, sf::RenderTarget* target);
 

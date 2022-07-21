@@ -100,17 +100,17 @@ void Mesh::setGlobalOffset(sf::Vector3f* vec)
 	}
 }
 
-void Mesh::applyPerspective(float distance_)
+void Mesh::applyPerspective()
 {
 	for (Point* p : points) {
-		p->applyPerspective(distance_);
+		p->applyPerspective();
 	}
 
 	connect(target);
 
 	if (!wireFrame_) {
 		for (Triangle* poly : polys) {
-			poly->applyPerspective(distance_);
+			poly->applyPerspective();
 		}
 	}
 }

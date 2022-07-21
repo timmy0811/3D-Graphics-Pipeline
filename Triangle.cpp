@@ -33,11 +33,11 @@ Triangle::Triangle(Point* p1, Point* p2, Point* p3, Texture* texture, std::strin
 	this->color = color;
 }
 
-void Triangle::applyPerspective(float distance_)
+void Triangle::applyPerspective()
 {
-	p1->applyPerspective(distance_);
-	p2->applyPerspective(distance_);
-	p3->applyPerspective(distance_);
+	p1->applyPerspective();
+	p2->applyPerspective();
+	p3->applyPerspective();
 }
 
 void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
@@ -48,6 +48,15 @@ void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 			// Sort points in y order
 			Point* tempPoint;
 			sf::Vector2f tempCord;
+
+			/*texCord1_.x = p1->applyPerspCorr(texCord1_.x);
+			texCord1_.y = p1->applyPerspCorr(texCord1_.y);
+
+			texCord2_.x = p1->applyPerspCorr(texCord2_.x);
+			texCord2_.y = p1->applyPerspCorr(texCord2_.y);
+
+			texCord3_.x = p1->applyPerspCorr(texCord3_.x);
+			texCord3_.y = p1->applyPerspCorr(texCord3_.y);*/
 
 			if (p1->getScreenPosition(target).y > p2->getScreenPosition(target).y) {
 				tempPoint = p1;
@@ -76,10 +85,14 @@ void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 				texCord2_ = texCord3_;
 				texCord3_ = tempCord;
 			}
-
+			
 			sf::Vector2f pos1 = p1->getScreenPosition(target);
 			sf::Vector2f pos2 = p2->getScreenPosition(target);
 			sf::Vector2f pos3 = p3->getScreenPosition(target);
+
+			float w1 = p1->getW();
+			float w2 = p2->getW();
+			float w3 = p3->getW();
 
 			int texWidth = texture->getSize().x;
 			int texHeight = texture->getSize().y;
@@ -99,9 +112,11 @@ void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 
 					float us = texCord1_.x + ((float)y - pos1.y) / (pos2.y - pos1.y) * (texCord2_.x - texCord1_.x);
 					float vs = texCord1_.y + ((float)y - pos1.y) / (pos2.y - pos1.y) * (texCord2_.y - texCord1_.y);
+					float ws = w1 + ((float)y - pos1.y) / (pos2.y - pos1.y) * (w2 - w1);
 
 					float ue = texCord1_.x + ((float)y - pos1.y) / (pos3.y - pos1.y) * (texCord3_.x - texCord1_.x);
 					float ve = texCord1_.y + ((float)y - pos1.y) / (pos3.y - pos1.y) * (texCord3_.y - texCord1_.y);
+					float we = w1 + ((float)y - pos1.y) / (pos3.y - pos1.y) * (w3 - w1);
 
 					clamp<int>(0, &x1, c_winWidth);
 					clamp<int>(0, &x2, c_winWidth);
@@ -125,6 +140,10 @@ void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 						tempFloat = vs;
 						vs = ve;
 						ve = tempFloat;
+
+						tempFloat = ws;
+						ws = we;
+						we = tempFloat;
 					}
 
 					if (x2 > x1) {
@@ -133,6 +152,8 @@ void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 						float uStep = (ue - us) / (x2 - x1) * texWidth;
 						float v = vs * texHeight;
 						float vStep = (ve - vs) / (x2 - x1) * texHeight;
+						float w = ws;
+						float wStep = (we - ws) / (x2 - x1);
 
 						unsigned int uI;
 						unsigned int vI;
@@ -140,9 +161,10 @@ void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 						for (register int j = x1; j <= x2; j++) {
 							u += uStep;
 							v += vStep;
+							w += wStep;
 
-							uI = (unsigned int)u;
-							vI = (unsigned int)v;
+							uI = (unsigned int)(u / 1);
+							vI = (unsigned int)(v / 1);
 
 							buffer[(c_winWidth * y + j) * 4] = *(getPixelPtr(uI, vI));
 							buffer[(c_winWidth * y + j) * 4 + 1] = *(getPixelPtr(uI, vI) + 1);
@@ -174,9 +196,11 @@ void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 
 					float us = texCord2_.x + ((float)y - pos2.y) / (pos3.y - pos2.y) * (texCord3_.x - texCord2_.x);
 					float vs = texCord2_.y + ((float)y - pos2.y) / (pos3.y - pos2.y) * (texCord3_.y - texCord2_.y);
+					float ws = w2 + ((float)y - pos2.y) / (pos3.y - pos2.y) * (w3 - w2);
 
 					float ue = texCord1_.x + ((float)y - pos1.y) / (pos3.y - pos1.y) * (texCord3_.x - texCord1_.x);
 					float ve = texCord1_.y + ((float)y - pos1.y) / (pos3.y - pos1.y) * (texCord3_.y - texCord1_.y);
+					float we = w1 + ((float)y - pos1.y) / (pos3.y - pos1.y) * (w3 - w1);
 
 					clamp<int>(0, &x1, c_winWidth);
 					clamp<int>(0, &x2, c_winWidth);
@@ -200,6 +224,10 @@ void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 						tempFloat = vs;
 						vs = ve;
 						ve = tempFloat;
+
+						tempFloat = ws;
+						ws = we;
+						we = tempFloat;
 					}
 
 					if (x2 > x1) {
@@ -208,6 +236,8 @@ void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 						float uStep = (ue - us) / (x2 - x1) * texWidth;
 						float v = vs * texHeight;
 						float vStep = (ve - vs) / (x2 - x1) * texHeight;
+						float w = ws;
+						float wStep = (we - ws) / (x2 - x1);
 
 						unsigned int uI;
 						unsigned int vI;
@@ -215,9 +245,10 @@ void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 						for (register int j = x1; j <= x2; j++) {
 							u += uStep;
 							v += vStep;
+							w += wStep;
 
-							uI = (unsigned int)u;
-							vI = (unsigned int)v;
+							uI = (unsigned int)(u / 1);
+							vI = (unsigned int)(v / 1);
 
 							buffer[(c_winWidth * y + j) * 4] = *(getPixelPtr(uI, vI));
 							buffer[(c_winWidth * y + j) * 4 + 1] = *(getPixelPtr(uI, vI) + 1);

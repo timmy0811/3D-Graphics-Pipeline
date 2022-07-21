@@ -35,7 +35,7 @@ void Game::initWindow() {
     this->videoMode.height = c_winHeight;
     this->videoMode.width = c_winWidth;
 
-    this->window = new sf::RenderWindow(this->videoMode, this->windowTitle, sf::Style::Titlebar | sf::Style::Close);
+    this->window = new sf::RenderWindow(this->videoMode, this->windowTitle, sf::Style::Titlebar | sf::Style::Close, sf::ContextSettings(24, 8, 8));
     //this->window->setFramerateLimit(c_framerate);
 
     // ImGui window init
@@ -46,7 +46,7 @@ void Game::initWindow() {
 void Game::initPipeline()
 {
     // Pipeline setup
-    pl = new Pipeline(c_viewPortDistance);
+    pl = new Pipeline();
     camera = new Camera();
     pl->setCamera(camera);
 
@@ -133,7 +133,7 @@ void Game::initGameObjects()
         }
     }*/
     objHandler->createTexture(TexType::BRICKS);
-    objHandler->createCube(nullptr, sf::Vector3f(0.f, 0.f, 1.f));
+    objHandler->createCube(nullptr, sf::Vector3f(0.f, 0.f, 0.f));
     //objHandler->createPoint();
 
     //objHandler->createPoint();

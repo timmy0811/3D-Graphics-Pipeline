@@ -2,8 +2,7 @@
 
 Point::Point(sf::Vector3f position, std::string name, Matrix3X1* parentPos)
 {
-	//this->texCord = *texCord;
-
+	w = 1.f;
 	name_ = name;
 	this->position = Matrix3X1(0.f, MATRIX_TYPE::PROJECTION, position.x, position.y, position.z);
 
@@ -18,11 +17,18 @@ void Point::render(sf::RenderTarget* target, sf::Uint8* buffer)
 	target->draw(shape);
 }
 
-void Point::applyPerspective(float distance_)
+void Point::applyPerspective()
 {
-	projectedPositon.x0 = (position.x0 + globalOffset_->x) / (distance_ - (position.z0 + globalOffset_->z));
+	/*projectedPositon.x0 = (position.x0 + globalOffset_->x) / (distance_ - (position.z0 + globalOffset_->z));
 	projectedPositon.y0 = (position.y0 + globalOffset_->y) / (distance_ - (position.z0+ globalOffset_->z));
-	projectedPositon.z0 = position.z0 + globalOffset_->z;
+	projectedPositon.z0 = position.z0 + globalOffset_->z;*/
+
+	projectedPositon.x0 = (position.x0 + globalOffset_->x) * c_viewPortDistance / (c_viewPortDistance + position.z0 + globalOffset_->z);
+	projectedPositon.y0 = (position.y0 + globalOffset_->y) * c_viewPortDistance / (c_viewPortDistance + position.z0 + globalOffset_->z);
+	projectedPositon.z0 = (position.z0 + globalOffset_->z);
+
+	// offset?
+	wProj = w * c_viewPortDistance / (c_viewPortDistance + position.z0 + globalOffset_->z);
 }
 
 void Point::moveByValue(sf::Vector3f dir)
@@ -67,6 +73,11 @@ sf::Vector3f Point::getPosition()
 sf::Vector3f Point::getProjPosition()
 {
 	return sf::Vector3f(projectedPositon.x0, projectedPositon.y0, projectedPositon.z0);
+}
+
+float Point::getW()
+{
+	return wProj;
 }
 
 sf::Vector2f Point::getScreenPosition(sf::RenderTarget* target)
@@ -139,4 +150,9 @@ std::vector<Point*>* Point::getPoints()
 	std::vector<Point*> pList;
 	pList.push_back(this);
 	return &pList;
+}
+
+float Point::applyPerspCorr(float v)
+{
+	return v * c_viewPortDistance / (c_viewPortDistance + position.z0 + globalOffset_->z);
 }

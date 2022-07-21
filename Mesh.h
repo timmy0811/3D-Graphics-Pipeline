@@ -37,7 +37,7 @@ public:
 
 	void setGlobalOffset(sf::Vector3f* vec) override;
 
-	void applyPerspective(float distance_) override;
+	void applyPerspective() override;
 	void virtual connect(sf::RenderTarget* target) = 0;
 
 	virtual void render(sf::RenderTarget* target, sf::Uint8* buffer = nullptr);

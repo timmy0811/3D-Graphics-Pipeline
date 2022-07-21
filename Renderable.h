@@ -23,7 +23,7 @@ public:
 	bool isTextured;
 
 	virtual void render(sf::RenderTarget* target, sf::Uint8* buffer = nullptr) = 0;
-	virtual void applyPerspective(float distance_) = 0;
+	virtual void applyPerspective() = 0;
 
 	virtual void rotateX(float angle) = 0;
 	virtual void rotateY(float angle) = 0;

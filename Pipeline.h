@@ -15,7 +15,6 @@ private:
 	RenderQueue* queue;
 	Matrix3X3 projection;
 
-	float distance_;
 	Camera* camera;
 
 	// Screen-Buffer
@@ -25,7 +24,7 @@ private:
 	sf::Uint8* buffer;
 
 public:
-	Pipeline(float distance_);
+	Pipeline();
 	~Pipeline();
 
 	void setCamera(Camera* camera);

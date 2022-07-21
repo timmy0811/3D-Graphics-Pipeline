@@ -18,10 +18,10 @@ void RenderQueue::setCamera(Camera* camera)
 	globalOffset_ = camera->getOffset();
 }
 
-void RenderQueue::applyPerspective(float distance_)
+void RenderQueue::applyPerspective()
 {
 	for (Renderable* renderObj : renderQueue) {
-		renderObj->applyPerspective(distance_);
+		renderObj->applyPerspective();
 	}
 }
 
