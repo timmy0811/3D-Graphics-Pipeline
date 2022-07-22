@@ -112,11 +112,11 @@ void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 
 					float us = texCord1_.x + ((float)y - pos1.y) / (pos2.y - pos1.y) * (texCord2_.x - texCord1_.x);
 					float vs = texCord1_.y + ((float)y - pos1.y) / (pos2.y - pos1.y) * (texCord2_.y - texCord1_.y);
-					float ws = w1 + ((float)y - pos1.y) / (pos2.y - pos1.y) * (w2 - w1);
+					float ws = w1 +			 ((float)y - pos1.y) / (pos2.y - pos1.y) * (w2 - w1);
 
 					float ue = texCord1_.x + ((float)y - pos1.y) / (pos3.y - pos1.y) * (texCord3_.x - texCord1_.x);
 					float ve = texCord1_.y + ((float)y - pos1.y) / (pos3.y - pos1.y) * (texCord3_.y - texCord1_.y);
-					float we = w1 + ((float)y - pos1.y) / (pos3.y - pos1.y) * (w3 - w1);
+					float we = w1 +			 ((float)y - pos1.y) / (pos3.y - pos1.y) * (w3 - w1);
 
 					clamp<int>(0, &x1, c_winWidth);
 					clamp<int>(0, &x2, c_winWidth);
@@ -126,6 +126,9 @@ void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 
 					clamp<float>(0.f, &us, 1.f);
 					clamp<float>(0.f, &vs, 1.f);
+
+					clamp<float>(0.f, &ws, 1.f);
+					clamp<float>(0.f, &we, 1.f);
 
 					// Sort values
 					if (x1 > x2) {
@@ -163,8 +166,8 @@ void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 							v += vStep;
 							w += wStep;
 
-							uI = (unsigned int)(u / 1);
-							vI = (unsigned int)(v / 1);
+							uI = (unsigned int)(u / w);
+							vI = (unsigned int)(v / w);
 
 							buffer[(c_winWidth * y + j) * 4] = *(getPixelPtr(uI, vI));
 							buffer[(c_winWidth * y + j) * 4 + 1] = *(getPixelPtr(uI, vI) + 1);
@@ -211,6 +214,9 @@ void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 					clamp<float>(0.f, &us, 1.f);
 					clamp<float>(0.f, &vs, 1.f);
 
+					clamp<float>(0.f, &ws, 1.f);
+					clamp<float>(0.f, &we, 1.f);
+
 					// Sort values
 					if (x1 > x2) {
 						int tempInt = x1;
@@ -247,8 +253,8 @@ void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 							v += vStep;
 							w += wStep;
 
-							uI = (unsigned int)(u / 1);
-							vI = (unsigned int)(v / 1);
+							uI = (unsigned int)(u / w);
+							vI = (unsigned int)(v / w);
 
 							buffer[(c_winWidth * y + j) * 4] = *(getPixelPtr(uI, vI));
 							buffer[(c_winWidth * y + j) * 4 + 1] = *(getPixelPtr(uI, vI) + 1);
