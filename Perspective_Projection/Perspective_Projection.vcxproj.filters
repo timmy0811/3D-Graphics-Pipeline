@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Ressourcendateien">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien\Matrix">
+      <UniqueIdentifier>{90b50933-f579-4113-8201-c11303929629}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\RenderPipeline">
+      <UniqueIdentifier>{0d7bc9f0-e7bf-4264-9fc3-38da83cda57b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\RenderPipeline\Renderable">
+      <UniqueIdentifier>{a30495a6-d4a7-4d07-90a0-79b575fe758d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Matrix">
+      <UniqueIdentifier>{d239a70e-7d92-44e4-9c1d-86a2ba668a38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\RenderPipeline">
+      <UniqueIdentifier>{b6e1aab5-3821-4e64-891f-7fa179eeceb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\RenderPipeline\Renderable">
+      <UniqueIdentifier>{86c3f57e-9194-4128-beb2-fe75ef63f964}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\RenderPipeline\Renderable\Mesh">
+      <UniqueIdentifier>{5d856e2b-9c26-45b0-9312-afc3fb70ba39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\RenderPipeline\Renderable\Mesh">
+      <UniqueIdentifier>{d54cdd50-6ec1-4831-9bef-f4543c25dd54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\RenderPipeline\Camera">
+      <UniqueIdentifier>{40bb632f-1ca7-4114-b634-1639bbd758d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\RenderPipeline\Camera">
+      <UniqueIdentifier>{cd570e5d-5695-442d-94dc-23681772aabc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\ImGuiFramework">
+      <UniqueIdentifier>{41180446-a083-479e-a56b-7c5ab0e67e46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\GUI">
+      <UniqueIdentifier>{44482f9d-b650-4641-ba68-5f847479008d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\GUI">
+      <UniqueIdentifier>{d1e263e7-da92-4b47-bb90-c8c27077baff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Management">
+      <UniqueIdentifier>{264ef154-e4c6-47e6-813d-0742f8618c59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Management">
+      <UniqueIdentifier>{d5904007-af15-4719-b629-c267632639c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\ImGuiFramework">
+      <UniqueIdentifier>{3063e23a-d996-4097-bfd0-944763d602eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\RenderPipeline\Ressources">
+      <UniqueIdentifier>{f8b2c18d-a0fb-465a-a384-830c76333b4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\RenderPipeline\Ressources">
+      <UniqueIdentifier>{8176b674-8750-437b-ab7d-f0516b4fe5b0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix.cpp">
+      <Filter>Quelldateien\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix3X1.cpp">
+      <Filter>Quelldateien\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix3X3.cpp">
+      <Filter>Quelldateien\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="MatrixOperations.cpp">
+      <Filter>Quelldateien\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderable.cpp">
+      <Filter>Quelldateien\RenderPipeline\Renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderQueue.cpp">
+      <Filter>Quelldateien\RenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="Pipeline.cpp">
+      <Filter>Quelldateien\RenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>Quelldateien\RenderPipeline\Renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Quelldateien\RenderPipeline\Renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Quelldateien\RenderPipeline\Renderable\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Quelldateien\RenderPipeline\Renderable\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Quelldateien\RenderPipeline\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui-SFML.cpp">
+      <Filter>Quelldateien\ImGuiFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>Quelldateien\ImGuiFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>Quelldateien\ImGuiFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_tables.cpp">
+      <Filter>Quelldateien\ImGuiFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_widgets.cpp">
+      <Filter>Quelldateien\ImGuiFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="config.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI.cpp">
+      <Filter>Quelldateien\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectHandler.cpp">
+      <Filter>Quelldateien\Management</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractObject.cpp">
+      <Filter>Quelldateien\Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Ressources.cpp">
+      <Filter>Quelldateien\RenderPipeline\Ressources</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Quelldateien\RenderPipeline\Ressources</Filter>
+    </ClCompile>
+    <ClCompile Include="Textured.cpp">
+      <Filter>Quelldateien\RenderPipeline\Renderable</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix3X3.h">
+      <Filter>Headerdateien\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix3X1.h">
+      <Filter>Headerdateien\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>Headerdateien\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="MatrixOperations.h">
+      <Filter>Headerdateien\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderable.h">
+      <Filter>Headerdateien\RenderPipeline\Renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderQueue.h">
+      <Filter>Headerdateien\RenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="Pipeline.h">
+      <Filter>Headerdateien\RenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Headerdateien\RenderPipeline\Renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Headerdateien\RenderPipeline\Renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Headerdateien\RenderPipeline\Renderable\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Headerdateien\RenderPipeline\Renderable\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Headerdateien\RenderPipeline\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Headerdateien\ImGuiFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imconfig.h">
+      <Filter>Headerdateien\ImGuiFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imconfig-SFML.h">
+      <Filter>Headerdateien\ImGuiFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui.h">
+      <Filter>Headerdateien\ImGuiFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_internal.h">
+      <Filter>Headerdateien\ImGuiFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui-SFML.h">
+      <Filter>Headerdateien\ImGuiFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui-SFML_export.h">
+      <Filter>Headerdateien\ImGuiFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_rectpack.h">
+      <Filter>Headerdateien\ImGuiFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_textedit.h">
+      <Filter>Headerdateien\ImGuiFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_truetype.h">
+      <Filter>Headerdateien\ImGuiFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="config.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
+      <Filter>Headerdateien\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractObject.h">
+      <Filter>Headerdateien\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectHandler.h">
+      <Filter>Headerdateien\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Headerdateien\RenderPipeline\Ressources</Filter>
+    </ClInclude>
+    <ClInclude Include="Textured.h">
+      <Filter>Headerdateien\RenderPipeline\Renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="Ressources.h">
+      <Filter>Headerdateien\RenderPipeline\Ressources</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Perspective_Projection.rc">
+      <Filter>Ressourcendateien</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+  </ItemGroup>
+</Project>
