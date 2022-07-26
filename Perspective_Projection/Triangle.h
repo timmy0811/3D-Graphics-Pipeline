@@ -4,6 +4,8 @@
 #include "Point.h"
 #include "Textured.h"
 
+#include <iostream>
+
 class Triangle : public Textured
 {
 private:

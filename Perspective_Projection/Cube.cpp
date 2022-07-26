@@ -93,13 +93,13 @@ void Cube::connect(sf::RenderTarget* target)
 		createTriangle(points[0], points[2], points[3], sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 1.f), sf::Vector2f(1.f, 0.f));
 
 		createTriangle(points[7], points[5], points[6], sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 1.f), sf::Vector2f(1.f, 1.f));
-		createTriangle(points[4], points[7], points[6], sf::Vector2f(1.f, 0.f), sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
+		createTriangle(points[7], points[6], points[4], sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f));
 
 		createTriangle(points[3], points[7], points[4], sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 1.f), sf::Vector2f(1.f, 1.f));
-		createTriangle(points[0], points[3], points[4], sf::Vector2f(1.f, 0.f), sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
+		createTriangle(points[3], points[4], points[0], sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f));
 
 		createTriangle(points[5], points[3], points[1], sf::Vector2f(1.f, 1.f), sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 1.f));
-		createTriangle(points[7], points[3], points[5], sf::Vector2f(1.f, 0.f), sf::Vector2f(0.f, 0.f), sf::Vector2f(1.f, 1.f));
+		createTriangle(points[5], points[7], points[3], sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), sf::Vector2f(0.f, 0.f));
 
 		createTriangle(points[5], points[1], points[6], sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 1.f), sf::Vector2f(1.f, 0.f));
 		createTriangle(points[1], points[2], points[6], sf::Vector2f(0.f, 1.f), sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f));

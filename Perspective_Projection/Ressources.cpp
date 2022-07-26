@@ -3,7 +3,7 @@
 Ressources::Ressources()
 {
 	textures[TexType::BRICKS] = new sf::Image();
-	textures[TexType::BRICKS]->loadFromFile("Assets/texture/BRICKS.png");
+	textures[TexType::BRICKS]->loadFromFile("Assets/texture/DROPPER.png");
 }
 
 sf::Image* Ressources::getTexture(TexType type)

@@ -134,7 +134,7 @@ void Game::initGameObjects()
         }
     }*/
     objHandler->createTexture(TexType::BRICKS);
-    objHandler->createCube(nullptr, sf::Vector3f(0.f, 0.f, 0.f));
+    objHandler->createCube(nullptr, sf::Vector3f(0.3f, 0.f, -0.1f));
     //objHandler->createCube();
     //objHandler->createPoint();
 

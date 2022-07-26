@@ -111,6 +111,7 @@ AbstractObject* ObjectHandler::getActiveObj()
 
 void ObjectHandler::test_rotate(float dt)
 {
-	//cubes[0]->rotateY(0.5f * dt);
-	cubes[0]->rotateY(0.6f * dt);
+	cubes[0]->rotateX(0.4f * dt);
+	cubes[0]->rotateY(0.5f * dt);
+	cubes[0]->rotateZ(0.6f * dt);
 }
