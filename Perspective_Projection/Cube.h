@@ -2,8 +2,6 @@
 
 #include "Mesh.h"
 
-#include "MatrixOperations.h"
-
 class Cube : public Mesh
 {
 private:

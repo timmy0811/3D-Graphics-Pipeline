@@ -108,22 +108,22 @@ void Cube::connect(sf::RenderTarget* target)
 		createTriangle(points[2], points[0], points[6], sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), sf::Vector2f(0.f, 1.f));
 	}
 	else {
-		createTriangle(points[3], points[2], points[1], sf::Color::Blue);
-		createTriangle(points[0], points[2], points[3], sf::Color::Blue);
+		createTriangle(points[3], points[2], points[1], color);
+		createTriangle(points[0], points[2], points[3], color);
 
-		createTriangle(points[7], points[5], points[6], sf::Color::Red);
-		createTriangle(points[4], points[7], points[6], sf::Color::Red);
+		createTriangle(points[7], points[5], points[6], color);
+		createTriangle(points[4], points[7], points[6], color);
 
-		createTriangle(points[3], points[7], points[4], sf::Color::Yellow);
-		createTriangle(points[0], points[3], points[4], sf::Color::Yellow);
+		createTriangle(points[3], points[7], points[4], color);
+		createTriangle(points[0], points[3], points[4], color);
 
-		createTriangle(points[5], points[3], points[1], sf::Color::Green);
-		createTriangle(points[7], points[3], points[5], sf::Color::Green);
+		createTriangle(points[5], points[3], points[1], color);
+		createTriangle(points[7], points[3], points[5], color);
 
-		createTriangle(points[5], points[1], points[6], sf::Color::Magenta);
-		createTriangle(points[1], points[2], points[6], sf::Color::Magenta);
+		createTriangle(points[5], points[1], points[6], color);
+		createTriangle(points[1], points[2], points[6], color);
 
-		createTriangle(points[0], points[4], points[6], sf::Color::White);
-		createTriangle(points[2], points[0], points[6], sf::Color::White);
+		createTriangle(points[0], points[4], points[6], color);
+		createTriangle(points[2], points[0], points[6], color);
 	}
 }

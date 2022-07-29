@@ -63,17 +63,23 @@ void Mesh::rotateZ(float angle)
 
 void Mesh::rotateX(float angle, sf::Vector3f refPosition)
 {
-	return;
+	for (Triangle* poly : polys) {
+		poly->rotateX(angle, refPosition);
+	}
 }
 
 void Mesh::rotateY(float angle, sf::Vector3f refPosition)
 {
-	return;
+	for (Triangle* poly : polys) {
+		poly->rotateY(angle, refPosition);
+	}
 }
 
 void Mesh::rotateZ(float angle, sf::Vector3f refPosition)
 {
-	return;
+	for (Triangle* poly : polys) {
+		poly->rotateZ(angle, refPosition);
+	}
 }
 
 void Mesh::moveByValue(sf::Vector3f dir)

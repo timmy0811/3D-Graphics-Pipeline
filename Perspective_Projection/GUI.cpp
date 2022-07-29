@@ -262,3 +262,8 @@ void GUI::apply(AbstractObject* obj)
 
     obj->setScale(scale);
 }
+
+void GUI::updateBrowser()
+{
+    //objects = *Handler->getObjects();
+}

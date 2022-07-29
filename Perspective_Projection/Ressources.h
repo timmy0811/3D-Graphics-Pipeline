@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 // Texture enumerator
-enum class TexType { BRICKS = 0 };
+enum class TexType { BRICKS = 0 , DIAMOND, DROPPER, ANDESIT};
 
 class Ressources {
 private:

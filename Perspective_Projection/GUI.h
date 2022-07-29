@@ -38,6 +38,8 @@ private:
 	void update(AbstractObject* obj);
 	void apply(AbstractObject* obj);
 
+	void updateBrowser();
+
 	void treeChildren(ImGuiTreeNodeFlags node_flags, bool isOpen, AbstractObject* obj);
 
 public:

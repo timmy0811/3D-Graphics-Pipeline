@@ -6,6 +6,7 @@
 #include <iostream>
 
 #include "Cube.h"
+#include "Plane.h"
 #include "Pipeline.h"
 
 class ObjectHandler
@@ -15,6 +16,7 @@ private:
 	std::vector<Cube*> cubes;
 	std::vector<Point*> points;
 	std::vector<Triangle*> polys;
+	std::vector<Plane*> planes;
 
 	// Textures
 	std::vector<Texture*> textures;
@@ -43,6 +45,9 @@ public:
 							sf::Color color = sf::Color::Magenta); 
 
 	Texture* createTexture(TexType texture);
+
+	Plane* createPlane(sf::Vector3f position = sf::Vector3f(0.f, 0.f, 0.f), sf::Vector2f scale = sf::Vector2f(1.f, 1.f), sf::Color color = sf::Color::White);
+	Plane* createPlane(Texture* texture, sf::Vector3f position = sf::Vector3f(0.f, 0.f, 0.f), sf::Vector2f scale = sf::Vector2f(1.f, 1.f));
 
 	std::vector<AbstractObject*>* getObjects();
 	std::vector<Texture*>* getTextures();

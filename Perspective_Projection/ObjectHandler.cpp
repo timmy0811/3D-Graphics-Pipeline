@@ -87,6 +87,26 @@ Texture* ObjectHandler::createTexture(TexType texture)
 	return tex;
 }
 
+Plane* ObjectHandler::createPlane(sf::Vector3f position, sf::Vector2f scale, sf::Color color)
+{
+	Plane* p = new Plane(position, scale, target, "plane_" + std::to_string(cubes.size()), color);
+	p->setGlobalOffset(camera->getOffset());
+	planes.push_back(p);
+	pipeline->addObjectToQueue(p);
+
+	return p;
+}
+
+Plane* ObjectHandler::createPlane(Texture* texture, sf::Vector3f position, sf::Vector2f scale)
+{
+	Plane* p = new Plane(position, scale, target, "plane_" + std::to_string(cubes.size()), textures[0]);
+	p->setGlobalOffset(camera->getOffset());
+	planes.push_back(p);
+	pipeline->addObjectToQueue(p);
+
+	return p;
+}
+
 std::vector<AbstractObject*>* ObjectHandler::getObjects()
 {
 	std::vector<AbstractObject*> combList;

@@ -147,6 +147,9 @@
     <ClCompile Include="Textured.cpp">
       <Filter>Quelldateien\RenderPipeline\Renderable</Filter>
     </ClCompile>
+    <ClCompile Include="Plane.cpp">
+      <Filter>Quelldateien\RenderPipeline\Renderable\Mesh</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -238,6 +241,9 @@
     </ClInclude>
     <ClInclude Include="Ressources.h">
       <Filter>Headerdateien\RenderPipeline\Ressources</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Headerdateien\RenderPipeline\Renderable\Mesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

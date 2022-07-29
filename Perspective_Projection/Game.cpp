@@ -128,13 +128,16 @@ void Game::pollEvents() {
 // Init game objects - soon obsolete
 void Game::initGameObjects()
 {
-    /*for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 8; j++) {
-            objHandler->createCube(sf::Vector3f(i * 0.3f, j * 0.3f, 0.f));
+    objHandler->createTexture(TexType::ANDESIT);
+
+    /*for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            objHandler->createCube(nullptr, sf::Vector3f(i * 0.3f, j * 0.3f, 0.f));
         }
     }*/
-    objHandler->createTexture(TexType::BRICKS);
-    objHandler->createCube(nullptr, sf::Vector3f(0.3f, 0.f, -0.1f));
+    objHandler->createCube(nullptr);
+    //objHandler->createPlane(nullptr);
+
     //objHandler->createCube();
     //objHandler->createPoint();
 
@@ -147,7 +150,7 @@ void Game::updateGameObjects()
 {/*
     cubes[0]->rotateX(0.015f);
     cubes[0]->rotateY(0.015f);*/
-    objHandler->test_rotate(dt_);
+    //objHandler->test_rotate(dt_);
 }
 
 void Game::updateGUI()

@@ -27,7 +27,6 @@ void RenderQueue::applyPerspective()
 
 void RenderQueue::renderAll(sf::RenderTarget* target, sf::Texture* textureBuffer, sf::Sprite* sprtBuffer, sf::Uint8* buffer)
 {
-	memset(buffer, 0, c_winHeight * c_winWidth * 4);
 	if (camera) {
 		// Clear screen buffer
 		memset(buffer, 0, c_winHeight * c_winWidth * 4);

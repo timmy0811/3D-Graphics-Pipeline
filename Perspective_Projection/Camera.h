@@ -1,6 +1,10 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "Matrix.h"
+#include "Matrix3X3.h"
+#include "Matrix3X1.h"
+#include "MatrixOperations.h"
 
 class Camera
 {
