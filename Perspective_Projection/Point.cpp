@@ -1,6 +1,7 @@
 #include "Point.h"
 
-Point::Point(sf::Vector3f position, std::string name, Matrix3X1* parentPos)
+Point::Point(sf::Vector3f position, std::string name, Matrix3X1* parentPos, bool screenDim)
+	:screenDim(screenDim)
 {
 	w = 1.f;
 	name_ = name;
@@ -16,7 +17,9 @@ Point::Point(sf::Vector3f position, std::string name, Matrix3X1* parentPos)
 
 void Point::render(sf::RenderTarget* target, sf::Uint8* buffer)
 {
-	sf::Vector2f pos = translateToRel(sf::Vector2f(projectedPositon.x0, projectedPositon.y0), target->getSize());
+	sf::Vector2f pos;
+	if (screenDim) pos = sf::Vector2f(position.x0, position.y0);
+	else pos = translateToRel(sf::Vector2f(projectedPositon.x0, projectedPositon.y0), target->getSize());
 	shape.setPosition(sf::Vector2f(pos.x - 2.5f, pos.y - 2.5f));
 	target->draw(shape);
 }
@@ -27,9 +30,8 @@ void Point::applyPerspective()
 	projectedPositon.y0 = (position.y0 + globalOffset_->y) / (distance_ - (position.z0+ globalOffset_->z));
 	projectedPositon.z0 = position.z0 + globalOffset_->z;*/
 
-	float a = c_viewPortDistance;
-	projectedPositon.x0 = (position.x0 + globalOffset_->x) * c_viewPortDistance / (c_viewPortDistance + position.z0 + globalOffset_->z);
-	projectedPositon.y0 = (position.y0 + globalOffset_->y) * c_viewPortDistance / (c_viewPortDistance + position.z0 + globalOffset_->z);
+	projectedPositon.x0 = (position.x0 + globalOffset_->x) * (float)c_viewPortDistance / ((float)c_viewPortDistance + position.z0 + globalOffset_->z);
+	projectedPositon.y0 = (position.y0 + globalOffset_->y) * (float)c_viewPortDistance / ((float)c_viewPortDistance + position.z0 + globalOffset_->z);
 	projectedPositon.z0 = (position.z0 + globalOffset_->z);
 
 	// offset?
@@ -48,6 +50,11 @@ void Point::moveToPos(sf::Vector3f pos)
 	position.x0 = pos.x;
 	position.y0 = pos.y;
 	position.z0 = pos.z;
+}
+
+sf::Vector3f Point::convertToScreenCoordinates(sf::RenderTarget* target)
+{
+	return sf::Vector3f(getScreenPosition(target).x, getScreenPosition(target).y, 0.f);
 }
 
 void Point::setMatrix(Matrix3X1 mat)
@@ -77,6 +84,7 @@ sf::Vector3f Point::getPosition()
 
 sf::Vector3f Point::getProjPosition()
 {
+	if(screenDim) return sf::Vector3f(position.x0, position.y0, position.z0);
 	return sf::Vector3f(projectedPositon.x0, projectedPositon.y0, projectedPositon.z0);
 }
 
@@ -87,7 +95,8 @@ float Point::getW()
 
 sf::Vector2f Point::getScreenPosition(sf::RenderTarget* target)
 {
-	return translateToRel(sf::Vector2f(projectedPositon.x0, projectedPositon.y0), target->getSize());
+	if (screenDim) return sf::Vector2f(position.x0, position.y0);
+	else return translateToRel(sf::Vector2f(projectedPositon.x0, projectedPositon.y0), target->getSize());
 }
 
 void Point::rotateX(float angle)
@@ -149,5 +158,5 @@ std::vector<Point*>* Point::getPoints()
 
 float Point::applyPerspCorr(float v)
 {
-	return v * c_viewPortDistance / (c_viewPortDistance + position.z0 + globalOffset_->z);
+	return v * (float)c_viewPortDistance / ((float)c_viewPortDistance + position.z0 + globalOffset_->z);
 }

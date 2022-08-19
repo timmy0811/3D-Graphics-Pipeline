@@ -18,8 +18,17 @@ private:
 	sf::Vector2f texCord3_;
 
 public:
-	Triangle(Point* p1, Point* p2, Point* p3, sf::Color color, std::string name);
-	Triangle(Point* p1, Point* p2, Point* p3, Texture* texture, std::string name, sf::Vector2f texCord1_, sf::Vector2f texCord2_, sf::Vector2f texCord3_);
+	Triangle(Point* p1, Point* p2, Point* p3, sf::Color color, std::string name, bool screenDim = false);
+	Triangle(Point* p1, Point* p2, Point* p3, Texture* texture, std::string name, sf::Vector2f texCord1_, sf::Vector2f texCord2_, sf::Vector2f texCord3_, bool screenDim = false);
+
+	Triangle(sf::Vector3f pos1, sf::Vector3f pos2, sf::Vector3f pos3, sf::Color color, std::string name, bool screenDim = false);
+	Triangle(sf::Vector3f pos1, sf::Vector3f pos2, sf::Vector3f pos3, Texture* texture, std::string name, sf::Vector2f texCord1_, sf::Vector2f texCord2_, sf::Vector2f texCord3_, bool screenDim = false);
+
+	~Triangle();
+
+	bool deletePointsOnDestruction;
+	const bool screenDim;
+	bool clipped;
 
 	void applyPerspective() override;
 	void render(sf::RenderTarget* target, sf::Uint8* buffer = nullptr) override;
@@ -38,6 +47,8 @@ public:
 	void setGlobalOffset(sf::Vector3f* vec) override;
 
 	std::vector<AbstractObject*> getChildren() override;
+	std::vector<Point*> getPoints();
+	sf::Color getColor();
 
 	double averageZ();
 	double calculateProjectedZ();

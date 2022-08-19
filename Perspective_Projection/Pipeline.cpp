@@ -24,10 +24,14 @@ void Pipeline::setCamera(Camera* camera)
 	queue->setCamera(camera);
 }
 
-void Pipeline::renderAll(sf::RenderTarget* target)
+void Pipeline::applyPerspective()
 {
 	queue->applyPerspective();
-	queue->renderAll(target,&textureBuffer, &sprtBuffer, buffer);
+}
+
+void Pipeline::renderAll(sf::RenderTarget* target)
+{
+	queue->renderAll(target, &textureBuffer, &sprtBuffer, buffer);
 }
 
 void Pipeline::renderByAdress(Renderable* obj, sf::RenderTarget* target)
@@ -38,6 +42,11 @@ void Pipeline::renderByAdress(Renderable* obj, sf::RenderTarget* target)
 void Pipeline::addObjectToQueue(Renderable* obj)
 {
 	queue->addObject(obj);
+}
+
+void Pipeline::addTempObjectToQueue(Renderable* obj)
+{
+	queue->addTempObject(obj);
 }
 
 bool Pipeline::removeObjectFromQueue(Renderable* obj)

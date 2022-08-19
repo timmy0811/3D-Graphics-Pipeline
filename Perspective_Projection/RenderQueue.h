@@ -11,6 +11,7 @@ class RenderQueue
 {
 private:
 	std::vector<Renderable*> renderQueue;
+	std::vector<Renderable*> tempQueue;
 	sf::Vector3f* globalOffset_;
 
 	Camera* camera;
@@ -26,6 +27,7 @@ public:
 	void renderByAdress(Renderable* obj, sf::RenderTarget* target);
 
 	void addObject(Renderable* obj);
+	void addTempObject(Renderable* obj);
 	bool removeObject(Renderable* obj);
 };
 

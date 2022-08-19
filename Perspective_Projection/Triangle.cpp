@@ -1,6 +1,7 @@
 #include "Triangle.h"
 
-Triangle::Triangle(Point* p1, Point* p2, Point* p3, sf::Color color, std::string name)
+Triangle::Triangle(Point* p1, Point* p2, Point* p3, sf::Color color, std::string name, bool screenDim)
+	:screenDim(screenDim)
 {
 	isTextured = false;
 	texture = nullptr;
@@ -13,7 +14,8 @@ Triangle::Triangle(Point* p1, Point* p2, Point* p3, sf::Color color, std::string
 	this->color = color;
 }
 
-Triangle::Triangle(Point* p1, Point* p2, Point* p3, Texture* texture, std::string name, sf::Vector2f texCord1_, sf::Vector2f texCord2_, sf::Vector2f texCord3_)
+Triangle::Triangle(Point* p1, Point* p2, Point* p3, Texture* texture, std::string name, sf::Vector2f texCord1_, sf::Vector2f texCord2_, sf::Vector2f texCord3_, bool screenDim)
+	:screenDim(screenDim)
 {
 	isTextured = true;
 	this->texture = texture;
@@ -33,6 +35,58 @@ Triangle::Triangle(Point* p1, Point* p2, Point* p3, Texture* texture, std::strin
 	this->color = color;
 }
 
+Triangle::Triangle(sf::Vector3f pos1, sf::Vector3f pos2, sf::Vector3f pos3, sf::Color color, std::string name, bool screenDim)
+	:screenDim(screenDim)
+{
+	deletePointsOnDestruction = true;
+
+	isTextured = false;
+	texture = nullptr;
+	name_ = name;
+
+	this->p1 = new Point(pos1, "point_0", nullptr, screenDim);
+	this->p2 = new Point(pos2, "point_1", nullptr, screenDim);
+	this->p3 = new Point(pos3, "point_2", nullptr, screenDim);
+
+	this->texCord1_ = texCord1_;
+	this->texCord2_ = texCord2_;
+	this->texCord3_ = texCord3_;
+
+	this->color = color;
+}
+
+Triangle::Triangle(sf::Vector3f pos1, sf::Vector3f pos2, sf::Vector3f pos3, Texture* texture, std::string name, sf::Vector2f texCord1_, sf::Vector2f texCord2_, sf::Vector2f texCord3_, bool screenDim)
+	:screenDim(screenDim)
+{
+	deletePointsOnDestruction = true;
+
+	isTextured = true;
+	this->texture = texture;
+	textureArr = texture->getPixelPtr();
+	dimRef = texture->getSize();
+
+	name_ = name;
+
+	this->p1 = new Point(pos1, "point_0", nullptr, screenDim);
+	this->p2 = new Point(pos2, "point_1", nullptr, screenDim);
+	this->p3 = new Point(pos3, "point_2", nullptr, screenDim);
+
+	this->texCord1_ = texCord1_;
+	this->texCord2_ = texCord2_;
+	this->texCord3_ = texCord3_;
+
+	this->color = color;
+}
+
+Triangle::~Triangle()
+{
+	if (deletePointsOnDestruction) {
+		delete p1;
+		delete p2;
+		delete p3;
+	}
+}
+
 void Triangle::applyPerspective()
 {
 	p1->applyPerspective();
@@ -42,7 +96,8 @@ void Triangle::applyPerspective()
 
 void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 {
-	if (calculateProjectedZ() < 0.f) {
+	float z = calculateProjectedZ();
+	if (z < 0.f && !clipped) {
 		if (isTextured) {
 			// Sort points in y order
 			Point* tempPoint;
@@ -240,6 +295,9 @@ void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 			}
 		}
 		else if (!isTextured) {
+			p1;
+			p2;
+			p3;
 			createPoly(target);
 			target->draw(vertices[0]);
 		}
@@ -316,6 +374,20 @@ std::vector<AbstractObject*> Triangle::getChildren()
 	return outVec;
 }
 
+std::vector<Point*> Triangle::getPoints()
+{
+	std::vector<Point*> outVec;
+	outVec.push_back(p1);
+	outVec.push_back(p2);
+	outVec.push_back(p3);
+	return outVec;
+}
+
+sf::Color Triangle::getColor()
+{
+	return this->color;
+}
+
 double Triangle::averageZ()
 {
 	return (p1->getPosition().z + p2->getPosition().z + p3->getPosition().z) / 3.f;
@@ -376,9 +448,17 @@ void Triangle::createPoly(sf::RenderTarget* target)
 	vertices.clear();
 
 	sf::VertexArray poly(sf::Triangles, 3);
-	poly[0].position = translateToRel(sf::Vector2f(p1->getProjMatrix()->x0, p1->getProjMatrix()->y0), target->getSize());
-	poly[1].position = translateToRel(sf::Vector2f(p2->getProjMatrix()->x0, p2->getProjMatrix()->y0), target->getSize());
-	poly[2].position = translateToRel(sf::Vector2f(p3->getProjMatrix()->x0, p3->getProjMatrix()->y0), target->getSize());
+
+	if (!screenDim) {
+		poly[0].position = translateToRel(sf::Vector2f(p1->getProjMatrix()->x0, p1->getProjMatrix()->y0), target->getSize());
+		poly[1].position = translateToRel(sf::Vector2f(p2->getProjMatrix()->x0, p2->getProjMatrix()->y0), target->getSize());
+		poly[2].position = translateToRel(sf::Vector2f(p3->getProjMatrix()->x0, p3->getProjMatrix()->y0), target->getSize());
+	}
+	else {
+		poly[0].position = sf::Vector2f(p1->getPosition().x, p1->getPosition().y), target->getSize();
+		poly[1].position = sf::Vector2f(p2->getPosition().x, p2->getPosition().y), target->getSize();
+		poly[2].position = sf::Vector2f(p3->getPosition().x, p3->getPosition().y), target->getSize();
+	}
 
 	poly[0].color = color;
 	poly[1].color = color;

@@ -164,6 +164,11 @@ std::vector<AbstractObject*> Mesh::getChildren()
 	return outVec;
 }
 
+std::vector<Triangle*>* Mesh::getPolys()
+{
+	return &polys;
+}
+
 std::vector<Point*>* Mesh::getPoints()
 {
 	return &points;

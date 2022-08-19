@@ -22,13 +22,18 @@ private:
 	void rotateByEnum(float angle, sf::Vector3f refPosition, MATRIX_TYPE type);
 
 public:
-	Point(sf::Vector3f position, std::string name, Matrix3X1* parentPos = nullptr);
+	Point(sf::Vector3f position, std::string name, Matrix3X1* parentPos = nullptr, bool screenDim = false);
+
+	// Defines wether the triangle is directly drawn to the screen or not
+	bool screenDim;
 
 	void render(sf::RenderTarget* target, sf::Uint8* buffer = nullptr) override;
 	void applyPerspective() override;
 
 	void moveByValue(sf::Vector3f dir) override;
 	void moveToPos(sf::Vector3f pos) override;
+
+	sf::Vector3f convertToScreenCoordinates(sf::RenderTarget* target);
 
 	void setMatrix(Matrix3X1 mat);
 	void setProjMatrix(Matrix3X1 mat);

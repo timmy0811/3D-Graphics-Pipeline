@@ -31,9 +31,17 @@ void RenderQueue::renderAll(sf::RenderTarget* target, sf::Texture* textureBuffer
 		// Clear screen buffer
 		memset(buffer, 0, c_winHeight * c_winWidth * 4);
 
+		// general render-queue
 		for (Renderable* renderObj : renderQueue) {
 			renderObj->render(target, buffer);
 		}
+
+		// temporary render queue
+		for (Renderable* renderObj : tempQueue) {
+			renderObj->render(target, buffer);
+		}
+		tempQueue.clear();
+		tempQueue.shrink_to_fit();
 
 		// Display buffer
 		textureBuffer->update(buffer);
@@ -53,6 +61,12 @@ void RenderQueue::renderByAdress(Renderable* obj, sf::RenderTarget* target)
 void RenderQueue::addObject(Renderable* obj)
 {
 	renderQueue.push_back(obj);
+	obj->setGlobalOffset(globalOffset_);
+}
+
+void RenderQueue::addTempObject(Renderable* obj)
+{
+	tempQueue.push_back(obj);
 	obj->setGlobalOffset(globalOffset_);
 }
 

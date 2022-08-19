@@ -43,6 +43,7 @@ public:
 	virtual void render(sf::RenderTarget* target, sf::Uint8* buffer = nullptr);
 
 	std::vector<AbstractObject*> getChildren() override;
+	std::vector<Triangle*>* getPolys();
 	
 	std::vector<Point*>* getPoints();
 };

@@ -128,22 +128,24 @@ void Game::pollEvents() {
 // Init game objects - soon obsolete
 void Game::initGameObjects()
 {
-    objHandler->createTexture(TexType::ANDESIT);
+    objHandler->createTexture(TexType::DROPPER);
+    objHandler->createTexture(TexType::BRICKS);
 
     /*for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
             objHandler->createCube(nullptr, sf::Vector3f(i * 0.3f, j * 0.3f, 0.f));
         }
     }*/
+    objHandler->createCube();
+
     objHandler->createCube(nullptr);
-    //objHandler->createPlane(nullptr);
-
-    //objHandler->createCube();
-    //objHandler->createPoint();
+    objHandler->createPlane(nullptr, sf::Vector3f(-0.5, 0.2, -0.5));
 
     //objHandler->createPoint();
 
-    //objHandler->createPoly();
+    //objHandler->createPoint();
+
+    //objHandler->createPoly(nullptr);
 }
 
 void Game::updateGameObjects()
@@ -174,6 +176,9 @@ void Game::update() {
 
     updateGameObjects();
     updateGUI();
+
+    pl->applyPerspective();
+    //objHandler->clipTriangles(camera->getOffset());
 }
 
 // main render method
