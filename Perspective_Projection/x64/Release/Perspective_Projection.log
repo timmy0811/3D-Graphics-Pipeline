@@ -1,0 +1,6 @@
+﻿  Code wird generiert.
+  Previous IPDB and IOBJ mismatch, fall back to full compilation.
+C:\Git\Perspective_Projection\Perspective_Projection\ObjectHandler.cpp(140): warning C4172: Adresse einer lokalen Variablen oder eines temporären Werts ": combList" wird zurückgegeben
+  All 2362 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Codegenerierung ist abgeschlossen.
+  Perspective_Projection.vcxproj -> C:\Git\Perspective_Projection\x64\Release\Perspective_Projection.exe

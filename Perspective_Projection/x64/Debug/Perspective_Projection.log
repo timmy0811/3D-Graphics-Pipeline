@@ -1,12 +1,1 @@
-﻿  Triangle.cpp
-C:\Git\Perspective_Projection\Perspective_Projection\Triangle.cpp(122,22): warning C4244: "Initialisierung": Konvertierung von "T" in "int", möglicher Datenverlust
-          with
-          [
-              T=float
-          ]
-C:\Git\Perspective_Projection\Perspective_Projection\Triangle.cpp(196,22): warning C4244: "Initialisierung": Konvertierung von "T" in "int", möglicher Datenverlust
-          with
-          [
-              T=float
-          ]
-  Perspective_Projection.vcxproj -> C:\Git\Perspective_Projection\x64\Debug\Perspective_Projection.exe
+﻿  Perspective_Projection.vcxproj -> C:\Git\Perspective_Projection\x64\Debug\Perspective_Projection.exe
