@@ -51,9 +51,11 @@ void Triangle::applyPerspective()
 
 void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 {
+	// Z Clipping
+	if(globalOffset_) if (p1->getPosition().z + globalOffset_->z > c_z_clipping || p2->getPosition().z + globalOffset_->z > c_z_clipping || p3->getPosition().z + globalOffset_->z > c_z_clipping) return;
+
 	// Catch if triangle is out of screen
-	bool temp = isOutsideScreen(target);
-	if (temp) return;
+	if (isOutsideScreen(target)) return;
 
 	if (calculateProjectedZ() < 0.f) {
 		if (isTextured) {

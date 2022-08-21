@@ -6,6 +6,9 @@
 // Distance from Camera to projection plane
 #define c_viewPortDistance (-1 / tan((c_FOV / 2.0) * 3.14159265 / 180.0))
 
+// Rendering options
+#define c_z_clipping 0.8f
+
 // Window options
 #define c_winWidth 2140
 #define c_winHeight 1200

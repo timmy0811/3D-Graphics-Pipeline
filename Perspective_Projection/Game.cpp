@@ -173,7 +173,7 @@ void Game::update() {
     pollEvents();
 
     updateGameObjects();
-    //updateGUI();
+    updateGUI();
 }
 
 // main render method

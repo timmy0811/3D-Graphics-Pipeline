@@ -121,6 +121,7 @@ void Mesh::setGlobalOffset(sf::Vector3f* vec)
 	for (Triangle* poly : polys) {
 		poly->setGlobalOffset(vec);
 	}
+	this->globalOffset_ = vec;
 }
 
 void Mesh::applyPerspective()
