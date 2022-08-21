@@ -86,7 +86,7 @@ void Game::pollEvents() {
     }
 
     // Movement on XZ plane
-    movementCamera_ = 2.f;
+    movementCamera_ = 1.f;
     movementCamera_ *= dt_;
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
@@ -128,29 +128,29 @@ void Game::pollEvents() {
 // Init game objects - soon obsolete
 void Game::initGameObjects()
 {
-    objHandler->createTexture(TexType::ANDESIT);
+    objHandler->createTexture(TexType::BRICKS);
 
     /*for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
             objHandler->createCube(nullptr, sf::Vector3f(i * 0.3f, j * 0.3f, 0.f));
         }
     }*/
-    objHandler->createCube(nullptr);
+    //objHandler->createCube(nullptr);
     //objHandler->createPlane(nullptr);
 
-    //objHandler->createCube();
+    objHandler->createCube(nullptr);
     //objHandler->createPoint();
 
     //objHandler->createPoint();
 
-    //objHandler->createPoly();
+    //objHandler->createPoly(nullptr);
 }
 
 void Game::updateGameObjects()
 {/*
     cubes[0]->rotateX(0.015f);
     cubes[0]->rotateY(0.015f);*/
-    //objHandler->test_rotate(dt_);
+    objHandler->test_rotate(dt_);
 }
 
 void Game::updateGUI()
@@ -173,13 +173,14 @@ void Game::update() {
     pollEvents();
 
     updateGameObjects();
-    updateGUI();
+    //updateGUI();
 }
 
 // main render method
 void Game::render() {
 
     this->window->clear(sf::Color(0, 0, 0, 255));
+    //this->window->draw(sf::RectangleShape({ (float)this->window->getSize().x - 500.f, (float)this->window->getSize().y - 500.f }));
 
     // Draw queue
     if (drawAll_) pl->renderAll(window);

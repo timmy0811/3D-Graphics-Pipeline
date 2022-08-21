@@ -6,9 +6,9 @@ Point::Point(sf::Vector3f position, std::string name, Matrix3X1* parentPos)
 	name_ = name;
 
 	this->position = Matrix3X1(0.f, MATRIX_TYPE::PROJECTION, position.x, position.y, position.z);
-	posX = &this->position.x0;
+	/*posX = &this->position.x0;
 	posY = &this->position.y0;
-	posZ = &this->position.z0;
+	posZ = &this->position.z0;*/
 
 	this->shape = sf::CircleShape(5.f);
 	shape.setFillColor(sf::Color::White);
@@ -23,11 +23,6 @@ void Point::render(sf::RenderTarget* target, sf::Uint8* buffer)
 
 void Point::applyPerspective()
 {
-	/*projectedPositon.x0 = (position.x0 + globalOffset_->x) / (distance_ - (position.z0 + globalOffset_->z));
-	projectedPositon.y0 = (position.y0 + globalOffset_->y) / (distance_ - (position.z0+ globalOffset_->z));
-	projectedPositon.z0 = position.z0 + globalOffset_->z;*/
-
-	float a = c_viewPortDistance;
 	projectedPositon.x0 = (position.x0 + globalOffset_->x) * c_viewPortDistance / (c_viewPortDistance + position.z0 + globalOffset_->z);
 	projectedPositon.y0 = (position.y0 + globalOffset_->y) * c_viewPortDistance / (c_viewPortDistance + position.z0 + globalOffset_->z);
 	projectedPositon.z0 = (position.z0 + globalOffset_->z);

@@ -33,6 +33,15 @@ Triangle::Triangle(Point* p1, Point* p2, Point* p3, Texture* texture, std::strin
 	this->color = color;
 }
 
+Triangle::~Triangle()
+{
+	if (deletePointsOnDestruction) {
+		delete p1;
+		delete p2;
+		delete p3;
+	}
+}
+
 void Triangle::applyPerspective()
 {
 	p1->applyPerspective();
@@ -42,20 +51,15 @@ void Triangle::applyPerspective()
 
 void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 {
+	// Catch if triangle is out of screen
+	bool temp = isOutsideScreen(target);
+	if (temp) return;
+
 	if (calculateProjectedZ() < 0.f) {
 		if (isTextured) {
 			// Sort points in y order
 			Point* tempPoint;
 			sf::Vector2f tempCord;
-
-			texCord1_.x = p1->applyPerspCorr(texCord1_.x);
-			texCord1_.y = p1->applyPerspCorr(texCord1_.y);
-
-			texCord2_.x = p2->applyPerspCorr(texCord2_.x);
-			texCord2_.y = p2->applyPerspCorr(texCord2_.y);
-
-			texCord3_.x = p3->applyPerspCorr(texCord3_.x);
-			texCord3_.y = p3->applyPerspCorr(texCord3_.y);
 
 			if (p1->getScreenPosition(target).y > p2->getScreenPosition(target).y) {
 				tempPoint = p1;
@@ -84,6 +88,19 @@ void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 				texCord2_ = texCord3_;
 				texCord3_ = tempCord;
 			}
+
+			sf::Vector2f texCord1{};
+			sf::Vector2f texCord2{};
+			sf::Vector2f texCord3{};
+
+			texCord1.x = p1->applyPerspCorr(texCord1_.x);
+			texCord1.y = p1->applyPerspCorr(texCord1_.y);
+
+			texCord2.x = p2->applyPerspCorr(texCord2_.x);
+			texCord2.y = p2->applyPerspCorr(texCord2_.y);
+
+			texCord3.x = p3->applyPerspCorr(texCord3_.x);
+			texCord3.y = p3->applyPerspCorr(texCord3_.y);
 			
 			sf::Vector2f pos1 = p1->getScreenPosition(target);
 			sf::Vector2f pos2 = p2->getScreenPosition(target);
@@ -100,22 +117,24 @@ void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 			if (pos1.y < pos2.y) {
 				float slope1 = (pos2.x - pos1.x) / (pos2.y - pos1.y);
 				float slope2 = (pos3.x - pos1.x) / (pos3.y - pos1.y);
+				int rowsRendered = pos2.y;
+				clamp<int>(0, &rowsRendered, c_winHeight);
 
-				for (int i = 0; i <= pos2.y - pos1.y; i++) {
+				for (int i = 0; i <= rowsRendered - pos1.y; i++) {
 					// Calculate start and end x-position
 					int x1 = (int)(pos1.x + i * slope1);
 					int x2 = (int)(pos1.x + i * slope2);
 					int y = (int)(pos1.y + i);
 
-					if (y < 0 || y >= c_winHeight ) continue;
+					if (y < 0 || y >= c_winHeight) continue;
 
-					float us = texCord1_.x + ((float)y - pos1.y) / (pos2.y - pos1.y) * (texCord2_.x - texCord1_.x);
-					float vs = texCord1_.y + ((float)y - pos1.y) / (pos2.y - pos1.y) * (texCord2_.y - texCord1_.y);
-					float ws = w1 +			 ((float)y - pos1.y) / (pos2.y - pos1.y) * (w2 - w1);
+					float us = texCord1.x + ((float)y - pos1.y) / (pos2.y - pos1.y) * (texCord2.x - texCord1.x);
+					float vs = texCord1.y + ((float)y - pos1.y) / (pos2.y - pos1.y) * (texCord2.y - texCord1.y);
+					float ws = w1 +			((float)y - pos1.y) / (pos2.y - pos1.y) * (w2 - w1);
 
-					float ue = texCord1_.x + ((float)y - pos1.y) / (pos3.y - pos1.y) * (texCord3_.x - texCord1_.x);
-					float ve = texCord1_.y + ((float)y - pos1.y) / (pos3.y - pos1.y) * (texCord3_.y - texCord1_.y);
-					float we = w1 +			 ((float)y - pos1.y) / (pos3.y - pos1.y) * (w3 - w1);
+					float ue = texCord1.x + ((float)y - pos1.y) / (pos3.y - pos1.y) * (texCord3.x - texCord1.x);
+					float ve = texCord1.y + ((float)y - pos1.y) / (pos3.y - pos1.y) * (texCord3.y - texCord1.y);
+					float we = w1 +		    ((float)y - pos1.y) / (pos3.y - pos1.y) * (w3 - w1);
 
 					// Sort values
 					if (x1 > x2) {
@@ -172,8 +191,10 @@ void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 				float slope1 = (pos3.x - pos2.x) / (pos3.y - pos2.y);
 				float slope2 = (pos3.x - pos1.x) / (pos3.y - pos1.y);
 				float sx = pos3.x - (pos3.y - pos2.y) * slope2;
+				int rowsRendered = pos3.y;
+				clamp<int>(0, &rowsRendered, c_winHeight);
 
-				for (int i = 0; i <= pos3.y - pos2.y; i++) {
+				for (int i = 0; i <= rowsRendered - pos2.y; i++) {
 					// Calculate start and end x-position
 					int x1 = (int)(pos2.x + i * slope1);
 					int x2 = (int)(sx + i * slope2);
@@ -181,12 +202,12 @@ void Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 
 					if (y < 0 || y >= c_winHeight) continue;
 
-					float us = texCord2_.x + ((float)y - pos2.y) / (pos3.y - pos2.y) * (texCord3_.x - texCord2_.x);
-					float vs = texCord2_.y + ((float)y - pos2.y) / (pos3.y - pos2.y) * (texCord3_.y - texCord2_.y);
+					float us = texCord2.x + ((float)y - pos2.y) / (pos3.y - pos2.y) * (texCord3.x - texCord2.x);
+					float vs = texCord2.y + ((float)y - pos2.y) / (pos3.y - pos2.y) * (texCord3.y - texCord2.y);
 					float ws = w2 + ((float)y - pos2.y) / (pos3.y - pos2.y) * (w3 - w2);
 
-					float ue = texCord1_.x + ((float)y - pos1.y) / (pos3.y - pos1.y) * (texCord3_.x - texCord1_.x);
-					float ve = texCord1_.y + ((float)y - pos1.y) / (pos3.y - pos1.y) * (texCord3_.y - texCord1_.y);
+					float ue = texCord1.x + ((float)y - pos1.y) / (pos3.y - pos1.y) * (texCord3.x - texCord1.x);
+					float ve = texCord1.y + ((float)y - pos1.y) / (pos3.y - pos1.y) * (texCord3.y - texCord1.y);
 					float we = w1 + ((float)y - pos1.y) / (pos3.y - pos1.y) * (w3 - w1);
 
 					// Sort values
@@ -307,6 +328,71 @@ void Triangle::setGlobalOffset(sf::Vector3f* vec)
 	this->globalOffset_ = vec;
 }
 
+const bool Triangle::isOutsideScreen(sf::RenderTarget* target) const
+{
+	std::vector<sf::Vector2f> points{ p1->getScreenPosition(target) , p2->getScreenPosition(target) , p3->getScreenPosition(target) };
+	sf::Vector2u scrSize{target->getSize().x, target->getSize().y};
+	
+	// Exit if one point is inside
+	if ((points[0].x >= 0 && points[0].x < scrSize.x && points[0].y >= 0 && points[0].y < scrSize.y) ||
+		(points[1].x >= 0 && points[1].x < scrSize.x && points[1].y >= 0 && points[1].y < scrSize.y) ||
+		(points[2].x >= 0 && points[2].x < scrSize.x && points[2].y >= 0 && points[2].y < scrSize.y)) {
+		return false;
+	}
+
+	auto isOutside = [](sf::Vector2f p0, sf::Vector2f p1, sf::Vector2u scrSize) {
+		auto cutsEdge = [](float edge0) {
+			return edge0 >= 0.f && edge0 <= 1.f;
+		};
+
+		sf::Vector2f direction = p1 - p0;
+		/*if ((int)direction.x == 0) direction.x = 0.000001f;		// No check for 0 division, but float conversion results in small number
+		if ((int)direction.y == 0) direction.y = 0.000001f;*/		//
+
+		float Ty0 = -p0.y / direction.y;
+		float Tx0 = -p0.x / direction.x;
+		float TyS = (scrSize.y - p0.y) / direction.y;
+		float TxS = (scrSize.x - p0.x) / direction.x;
+
+		// Check if edge intersections are at important poisitions
+		if (cutsEdge(Ty0)) {
+			float xCut = p0.x + direction.x * Ty0;
+			if (xCut < 0.f || xCut > scrSize.x) Ty0 = -1.f;
+		}
+		if (cutsEdge(Tx0)) {
+			float yCut = p0.y + direction.y * Tx0;
+			if (yCut < 0.f || yCut > scrSize.y) Tx0 = -1.f;
+		}
+		if (cutsEdge(TyS)) {
+			float xCut = p0.x + direction.x * TyS;
+			if (xCut < 0.f || xCut > scrSize.x) TyS = -1.f;
+		}
+		if (cutsEdge(TxS)) {
+			float yCut = p0.y + direction.y * TxS;
+			if (yCut < 0.f || yCut > scrSize.y) TxS = -1.f;
+		}
+
+		// Check if screen cut is between points ( 0.f < t < 1.f )
+		// Check for each edge
+		if (cutsEdge(Tx0) && cutsEdge(Ty0) ||
+			cutsEdge(Tx0) && cutsEdge(TxS) ||
+			cutsEdge(Tx0) && cutsEdge(TyS) ||
+			cutsEdge(Ty0) && cutsEdge(TyS) ||
+			cutsEdge(Ty0) && cutsEdge(TxS) ||
+			cutsEdge(TxS) && cutsEdge(TyS)) {
+			return false;
+		}
+		return true;
+	};
+
+	bool v0 = isOutside(points[0], points[1], scrSize);
+	bool v1 = isOutside(points[0], points[2], scrSize);
+	bool v2 = isOutside(points[1], points[2], scrSize);
+	
+	if (v0 && v1 && v2) return true;
+	else return false;	
+}
+
 std::vector<AbstractObject*> Triangle::getChildren()
 {
 	std::vector<AbstractObject*> outVec;
@@ -323,6 +409,10 @@ double Triangle::averageZ()
 
 double Triangle::calculateProjectedZ()
 {
+	sf::Vector3f proj1 = p1->getProjPosition();
+	sf::Vector3f proj2 = p2->getProjPosition();
+	sf::Vector3f proj3 = p3->getProjPosition();
+
 	sf::Vector3f p1p2 = (p2->getProjPosition() - p1->getProjPosition());
 	sf::Vector3f p1p3 = (p3->getProjPosition() - p1->getProjPosition());
 

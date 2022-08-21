@@ -1,3 +1,5 @@
-﻿  ObjectHandler.cpp
-C:\Git\Perspective_Projection\Perspective_Projection\ObjectHandler.cpp(116): warning C4172: Adresse einer lokalen Variablen oder eines temporären Werts ": combList" wird zurückgegeben
+﻿  Game.cpp
+  ObjectHandler.cpp
+  Code wird generiert...
+C:\Git\Perspective_Projection\Perspective_Projection\ObjectHandler.cpp(140): warning C4172: Adresse einer lokalen Variablen oder eines temporären Werts ": combList" wird zurückgegeben
   Perspective_Projection.vcxproj -> C:\Git\Perspective_Projection\x64\Debug\Perspective_Projection.exe
