@@ -32,6 +32,8 @@ public:
 	void rotateY(float angle, sf::Vector3f refPosition) override;
 	void rotateZ(float angle, sf::Vector3f refPosition) override;
 
+	void rotateByCamera(float angle, sf::Vector3f refPosition) override;
+
 	void moveByValue(sf::Vector3f dir) override;
 	void moveToPos(sf::Vector3f pos) override;
 

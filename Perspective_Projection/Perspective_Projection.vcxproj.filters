@@ -150,6 +150,9 @@
     <ClCompile Include="Plane.cpp">
       <Filter>Quelldateien\RenderPipeline\Renderable\Mesh</Filter>
     </ClCompile>
+    <ClCompile Include="WavefrontObj.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -244,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="Plane.h">
       <Filter>Headerdateien\RenderPipeline\Renderable\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="WavefrontObj.h">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -18,6 +18,7 @@
 #include "Pipeline.h"
 #include "Triangle.h"
 #include "Camera.h"
+#include "WavefrontObj.h"
 
 #include "ObjectHandler.h"
 
@@ -59,6 +60,8 @@ private:
 	ObjectHandler* objHandler;
 
 	GUI* GUI_;
+
+	WavefrontObj* obj = new WavefrontObj();
 
 public:
 	// Constructors

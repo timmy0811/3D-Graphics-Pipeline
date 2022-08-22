@@ -38,6 +38,8 @@ public:
 	void rotateY(float angle, sf::Vector3f refPosition) override;
 	void rotateZ(float angle, sf::Vector3f refPosition) override;
 
+	void rotateByCamera(float angle, sf::Vector3f refPosition) override;
+
 	void setGlobalOffset(sf::Vector3f* vec) override;
 
 	const bool isOutsideScreen(sf::RenderTarget* target) const;

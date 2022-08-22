@@ -2,6 +2,7 @@
 
 void Mesh::createVert(int p1, int p2, sf::RenderTarget* target)
 {
+	if (points[p1]->getPosition().z + globalOffset_->z > c_z_clipping || points[p2]->getPosition().z + globalOffset_->z > c_z_clipping) return;
 	sf::VertexArray line(sf::Lines, 2);
 	line[0].position = translateToRel(sf::Vector2f(points[p1]->getProjMatrix()->x0, points[p1]->getProjMatrix()->y0), target->getSize());
 	line[1].position = translateToRel(sf::Vector2f(points[p2]->getProjMatrix()->x0, points[p2]->getProjMatrix()->y0), target->getSize());
@@ -82,6 +83,13 @@ void Mesh::rotateZ(float angle, sf::Vector3f refPosition)
 	}
 }
 
+void Mesh::rotateByCamera(float angle, sf::Vector3f refPosition)
+{
+	for (Point* p : points) {
+		p->rotateY(angle, refPosition);
+	}
+}
+
 void Mesh::moveByValue(sf::Vector3f dir)
 {
 	for (Point* point : points) {
@@ -142,10 +150,11 @@ void Mesh::applyPerspective()
 void Mesh::render(sf::RenderTarget* target, sf::Uint8* buffer)
 {
 	for (Point* p : points) {
-		//p->render(target);
+		p->render(target);
 	}
 
 	for (int i = 0; i < vertices.size(); i++) {
+		/*if(p1->getPosition().z + globalOffset_->z > c_z_clipping)*/
 		target->draw(vertices[i]);
 	}
 

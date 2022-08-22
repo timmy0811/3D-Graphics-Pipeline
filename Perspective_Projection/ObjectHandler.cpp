@@ -140,6 +140,15 @@ std::vector<AbstractObject*>* ObjectHandler::getObjects()
 	return &combList;
 }
 
+std::vector<Renderable*> ObjectHandler::getRenderObjects()
+{
+	std::vector<Renderable*> combList;
+	combList.insert(combList.end(), cubes.begin(), cubes.end());
+	combList.insert(combList.end(), points.begin(), points.end());
+	combList.insert(combList.end(), polys.begin(), polys.end());
+	return combList;
+}
+
 std::vector<Texture*>* ObjectHandler::getTextures()
 {
 	return &textures;

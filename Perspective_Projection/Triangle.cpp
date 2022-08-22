@@ -325,6 +325,13 @@ void Triangle::rotateZ(float angle, sf::Vector3f refPosition)
 	p3->rotateZ(angle, refPosition);
 }
 
+void Triangle::rotateByCamera(float angle, sf::Vector3f refPosition)
+{
+	p1->rotateByCamera(angle, refPosition);
+	p2->rotateByCamera(angle, refPosition);
+	p3->rotateByCamera(angle, refPosition);
+}
+
 void Triangle::setGlobalOffset(sf::Vector3f* vec)
 {
 	this->globalOffset_ = vec;

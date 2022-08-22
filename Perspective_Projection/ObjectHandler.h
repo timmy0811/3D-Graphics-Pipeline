@@ -8,6 +8,7 @@
 #include "Cube.h"
 #include "Plane.h"
 #include "Pipeline.h"
+#include "WavefrontObj.h"
 
 class ObjectHandler
 {
@@ -60,6 +61,7 @@ public:
 	Plane* createPlane(Texture* texture, sf::Vector3f position = sf::Vector3f(0.f, 0.f, 0.f), sf::Vector2f scale = sf::Vector2f(1.f, 1.f));
 
 	std::vector<AbstractObject*>* getObjects();
+	std::vector<Renderable*> getRenderObjects();
 	std::vector<Texture*>* getTextures();
 	AbstractObject* getActiveObj();
 

@@ -33,6 +33,8 @@ public:
 	virtual void rotateY(float angle, sf::Vector3f refPosition) = 0;
 	virtual void rotateZ(float angle, sf::Vector3f refPosition) = 0;
 
+	virtual void rotateByCamera(float angle, sf::Vector3f refPosition) = 0;
+
 	virtual std::vector<AbstractObject*> getChildren() override;
 
 	std::vector<sf::VertexArray>* getVertices();

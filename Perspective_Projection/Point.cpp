@@ -16,6 +16,7 @@ Point::Point(sf::Vector3f position, std::string name, Matrix3X1* parentPos)
 
 void Point::render(sf::RenderTarget* target, sf::Uint8* buffer)
 {
+	if (position.z0 + globalOffset_->z > c_z_clipping) return;
 	sf::Vector2f pos = translateToRel(sf::Vector2f(projectedPositon.x0, projectedPositon.y0), target->getSize());
 	shape.setPosition(sf::Vector2f(pos.x - 2.5f, pos.y - 2.5f));
 	target->draw(shape);
@@ -113,6 +114,11 @@ void Point::rotateY(float angle, sf::Vector3f refPosition)
 void Point::rotateZ(float angle, sf::Vector3f refPosition)
 {
 	rotateByEnum(angle, refPosition, MATRIX_TYPE::ROTATION_Z);
+}
+
+void Point::rotateByCamera(float angle, sf::Vector3f refPosition)
+{
+	rotateY(angle, refPosition);
 }
 
 void Point::rotateByEnum(float angle, sf::Vector3f refPosition, MATRIX_TYPE type)

@@ -8,6 +8,7 @@ Game::Game()
     initPipeline();
 
     initGameObjects();
+
 }
 
 // Destructors
@@ -86,7 +87,7 @@ void Game::pollEvents() {
     }
 
     // Movement on XZ plane
-    movementCamera_ = 1.f;
+    movementCamera_ = 2.f;
     movementCamera_ *= dt_;
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
@@ -112,17 +113,17 @@ void Game::pollEvents() {
 
     // Camera rotation - WIP
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        camera->rotate(sf::Vector2f(movementCamera_, 0.f));
+        camera->rotate(sf::Vector2f(0.01f, 0.f), objHandler->getRenderObjects());
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        camera->rotate(sf::Vector2f(-movementCamera_, 0.f));
+        camera->rotate(sf::Vector2f(-0.01f, 0.f), objHandler->getRenderObjects());
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
+    /*if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
         camera->rotate(sf::Vector2f(0.f, -movementCamera_));
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         camera->rotate(sf::Vector2f(0.f, movementCamera_));
-    }
+    }*/
 }
 
 // Init game objects - soon obsolete
@@ -135,10 +136,14 @@ void Game::initGameObjects()
             objHandler->createCube(nullptr, sf::Vector3f(i * 0.3f, j * 0.3f, 0.f));
         }
     }*/
+   
+    obj->loadFromFile((char*)"Assets/obj/cube.obj");
+    obj->setGlobalOffset(camera->getOffset());
+
     //objHandler->createCube(nullptr);
     //objHandler->createPlane(nullptr);
 
-    objHandler->createCube(nullptr);
+    //objHandler->createCube(nullptr);
     //objHandler->createPoint();
 
     //objHandler->createPoint();
@@ -150,7 +155,7 @@ void Game::updateGameObjects()
 {/*
     cubes[0]->rotateX(0.015f);
     cubes[0]->rotateY(0.015f);*/
-    objHandler->test_rotate(dt_);
+    //objHandler->test_rotate(dt_);
 }
 
 void Game::updateGUI()
@@ -182,6 +187,8 @@ void Game::render() {
     this->window->clear(sf::Color(0, 0, 0, 255));
     //this->window->draw(sf::RectangleShape({ (float)this->window->getSize().x - 500.f, (float)this->window->getSize().y - 500.f }));
 
+    obj->applyPerspective();
+    obj->render(window);
     // Draw queue
     if (drawAll_) pl->renderAll(window);
 

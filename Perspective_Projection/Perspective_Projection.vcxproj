@@ -172,6 +172,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Textured.cpp" />
     <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="WavefrontObj.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractObject.h" />
@@ -205,6 +206,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Textured.h" />
     <ClInclude Include="Triangle.h" />
+    <ClInclude Include="WavefrontObj.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Perspective_Projection.rc" />

@@ -51,6 +51,8 @@ public:
 	void rotateY(float angle, sf::Vector3f refPosition) override;
 	void rotateZ(float angle, sf::Vector3f refPosition) override;
 
+	void rotateByCamera(float angle, sf::Vector3f refPosition) override;
+
 	std::vector<Point*>* getPoints();
 
 	float applyPerspCorr(float v);
