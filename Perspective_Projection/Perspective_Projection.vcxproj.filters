@@ -151,7 +151,7 @@
       <Filter>Quelldateien\RenderPipeline\Renderable\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="WavefrontObj.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\RenderPipeline\Renderable\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -249,7 +249,7 @@
       <Filter>Headerdateien\RenderPipeline\Renderable\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="WavefrontObj.h">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\RenderPipeline\Renderable\Mesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

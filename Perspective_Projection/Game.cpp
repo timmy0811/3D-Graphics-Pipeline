@@ -137,7 +137,7 @@ void Game::initGameObjects()
         }
     }*/
    
-    obj->loadFromFile((char*)"Assets/obj/cube.obj");
+    obj->loadFromFile((char*)"Assets/obj/monkey.obj");
     obj->setGlobalOffset(camera->getOffset());
 
     //objHandler->createCube(nullptr);

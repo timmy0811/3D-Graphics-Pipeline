@@ -1,2 +1,5 @@
-﻿  Game.cpp
+﻿  WavefrontObj.cpp
+C:\Git\Perspective_Projection\Perspective_Projection\WavefrontObj.cpp(123,156): warning C4244: "Argument": Konvertierung von "float" in "sf::Uint8", möglicher Datenverlust
+C:\Git\Perspective_Projection\Perspective_Projection\WavefrontObj.cpp(126,156): warning C4244: "Argument": Konvertierung von "float" in "sf::Uint8", möglicher Datenverlust
+C:\Git\Perspective_Projection\Perspective_Projection\WavefrontObj.cpp(127,156): warning C4244: "Argument": Konvertierung von "float" in "sf::Uint8", möglicher Datenverlust
   Perspective_Projection.vcxproj -> C:\Git\Perspective_Projection\x64\Debug\Perspective_Projection.exe

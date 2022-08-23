@@ -1,5 +1,10 @@
 #include "WavefrontObj.h"
 
+WavefrontObj::~WavefrontObj()
+{
+    Mesh::~Mesh();
+}
+
 const bool WavefrontObj::loadFromFile(char* path)
 {
     std::ifstream objFile(path);
@@ -54,7 +59,7 @@ const bool WavefrontObj::loadFromFile(char* path)
                     float z = std::stof(val);
                     val.clear();
 
-                    points.push_back(new Point({ x, y, z }, "point_" + points.size()));
+                    points.push_back(new Point({ x, -y, z }, "point_" + points.size()));
                     break;
                 }
                 // Texture points
@@ -87,6 +92,41 @@ const bool WavefrontObj::loadFromFile(char* path)
             }
             // Attribute assigning
             case 'f': {
+                // Get point index of every column
+                unsigned int p[4]{};
+                int col = 0;
+                std::string val;
+                bool readsNumber = false;
+
+                for (int ch = 2; ch < line.length(); ch++) {
+                    if (readsNumber) {
+                        if (line[ch] == '/') {
+                            p[col] = std::stoi(val);
+                            col++;
+                            readsNumber = false;
+                            val = "";
+                            continue;
+                        }
+                        else {
+                            val += line[ch];
+                        }
+                    }
+
+                    if (line[ch - 1] == ' ') {
+                        val += line[ch];
+                        readsNumber = true;
+                    }
+                }
+
+                // Check if polygons are triangles or else
+                if (col == 3) {
+                    polys.push_back(new Triangle(points[p[0] - 1], points[p[1] - 1], points[p[2] - 1], sf::Color(rand() % 255, rand() % 255, rand() % 255, 255.f), name_ + "triangle_" + std::to_string(polys.size())));
+                }
+                else if (col == 4) {
+                    polys.push_back(new Triangle(points[p[0] - 1], points[p[1] - 1], points[p[2] - 1], sf::Color(rand() % 255, rand() % 255, rand() % 255, 255.f), name_ + "triangle_"));
+                    polys.push_back(new Triangle(points[p[0] - 1], points[p[2] - 1], points[p[3] - 1], sf::Color(rand() % 255, rand() % 255, rand() % 255, 255.f), name_ + "triangle_"));
+                }
+
                 break;
             }
             }
