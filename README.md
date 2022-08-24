@@ -4,10 +4,11 @@
 
 ## Latest Releases
 > - Now supports Wavefront (.obj) loading
-> - Textures Polygons
+> - Textured Polygons
 > - Homogenous- + Z- Clipping
 
 ## Upcoming
+> - Textured Wavefront meshes
 > - Entity-Component-System
 > - Basic lighting
 > - Better GUI handling
