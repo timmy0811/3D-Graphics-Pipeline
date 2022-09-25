@@ -145,42 +145,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AbstractObject.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="config.cpp" />
-    <ClCompile Include="Cube.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GUI.cpp" />
     <ClCompile Include="imgui\imgui-SFML.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_draw.cpp" />
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Matrix.cpp" />
-    <ClCompile Include="Matrix3X3.cpp" />
-    <ClCompile Include="Matrix3X1.cpp" />
-    <ClCompile Include="MatrixOperations.cpp" />
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="ObjectHandler.cpp" />
-    <ClCompile Include="Pipeline.cpp" />
-    <ClCompile Include="Plane.cpp" />
-    <ClCompile Include="Point.cpp" />
-    <ClCompile Include="Renderable.cpp" />
-    <ClCompile Include="RenderQueue.cpp" />
-    <ClCompile Include="Ressources.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="Textured.cpp" />
-    <ClCompile Include="Triangle.cpp" />
-    <ClCompile Include="WavefrontObj.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AbstractObject.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="config.h" />
-    <ClInclude Include="Cube.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GUI.h" />
     <ClInclude Include="imgui\imconfig-SFML.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui-SFML.h" />
@@ -190,23 +161,7 @@
     <ClInclude Include="imgui\imstb_rectpack.h" />
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
-    <ClInclude Include="Matrix.h" />
-    <ClInclude Include="Matrix3X3.h" />
-    <ClInclude Include="Matrix3X1.h" />
-    <ClInclude Include="MatrixOperations.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="ObjectHandler.h" />
-    <ClInclude Include="Pipeline.h" />
-    <ClInclude Include="Plane.h" />
-    <ClInclude Include="Point.h" />
-    <ClInclude Include="Renderable.h" />
-    <ClInclude Include="RenderQueue.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Ressources.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="Textured.h" />
-    <ClInclude Include="Triangle.h" />
-    <ClInclude Include="WavefrontObj.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Perspective_Projection.rc" />
