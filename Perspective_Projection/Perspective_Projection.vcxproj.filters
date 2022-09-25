@@ -69,48 +69,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix.cpp">
-      <Filter>Quelldateien\Matrix</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix3X1.cpp">
-      <Filter>Quelldateien\Matrix</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix3X3.cpp">
-      <Filter>Quelldateien\Matrix</Filter>
-    </ClCompile>
-    <ClCompile Include="MatrixOperations.cpp">
-      <Filter>Quelldateien\Matrix</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderable.cpp">
-      <Filter>Quelldateien\RenderPipeline\Renderable</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderQueue.cpp">
-      <Filter>Quelldateien\RenderPipeline</Filter>
-    </ClCompile>
-    <ClCompile Include="Pipeline.cpp">
-      <Filter>Quelldateien\RenderPipeline</Filter>
-    </ClCompile>
-    <ClCompile Include="Point.cpp">
-      <Filter>Quelldateien\RenderPipeline\Renderable</Filter>
-    </ClCompile>
-    <ClCompile Include="Triangle.cpp">
-      <Filter>Quelldateien\RenderPipeline\Renderable</Filter>
-    </ClCompile>
-    <ClCompile Include="Cube.cpp">
-      <Filter>Quelldateien\RenderPipeline\Renderable\Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Quelldateien\RenderPipeline\Renderable\Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Quelldateien\RenderPipeline\Camera</Filter>
-    </ClCompile>
     <ClCompile Include="imgui\imgui-SFML.cpp">
       <Filter>Quelldateien\ImGuiFramework</Filter>
     </ClCompile>
@@ -126,74 +84,35 @@
     <ClCompile Include="imgui\imgui_widgets.cpp">
       <Filter>Quelldateien\ImGuiFramework</Filter>
     </ClCompile>
-    <ClCompile Include="config.cpp">
+    <ClCompile Include="src\ecs\component\Component.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="GUI.cpp">
-      <Filter>Quelldateien\GUI</Filter>
+    <ClCompile Include="src\ecs\component\MeshComponent.h">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectHandler.cpp">
-      <Filter>Quelldateien\Management</Filter>
+    <ClCompile Include="src\ecs\component\TextureComponent.h">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="AbstractObject.cpp">
-      <Filter>Quelldateien\Management</Filter>
+    <ClCompile Include="src\ecs\component\TransformComponent.h">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Ressources.cpp">
-      <Filter>Quelldateien\RenderPipeline\Ressources</Filter>
+    <ClCompile Include="src\ecs\component\PointComponent.h">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Quelldateien\RenderPipeline\Ressources</Filter>
+    <ClCompile Include="src\ecs\component\CameraComponent.h">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Textured.cpp">
-      <Filter>Quelldateien\RenderPipeline\Renderable</Filter>
+    <ClCompile Include="src\ecs\component\TriangleComponent.h">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Plane.cpp">
-      <Filter>Quelldateien\RenderPipeline\Renderable\Mesh</Filter>
+    <ClCompile Include="src\ecs\Scene.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="WavefrontObj.cpp">
-      <Filter>Quelldateien\RenderPipeline\Renderable\Mesh</Filter>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix3X3.h">
-      <Filter>Headerdateien\Matrix</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix3X1.h">
-      <Filter>Headerdateien\Matrix</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix.h">
-      <Filter>Headerdateien\Matrix</Filter>
-    </ClInclude>
-    <ClInclude Include="MatrixOperations.h">
-      <Filter>Headerdateien\Matrix</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderable.h">
-      <Filter>Headerdateien\RenderPipeline\Renderable</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderQueue.h">
-      <Filter>Headerdateien\RenderPipeline</Filter>
-    </ClInclude>
-    <ClInclude Include="Pipeline.h">
-      <Filter>Headerdateien\RenderPipeline</Filter>
-    </ClInclude>
-    <ClInclude Include="Point.h">
-      <Filter>Headerdateien\RenderPipeline\Renderable</Filter>
-    </ClInclude>
-    <ClInclude Include="Triangle.h">
-      <Filter>Headerdateien\RenderPipeline\Renderable</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Headerdateien\RenderPipeline\Renderable\Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>Headerdateien\RenderPipeline\Renderable\Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Headerdateien\RenderPipeline\Camera</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Headerdateien\ImGuiFramework</Filter>
     </ClInclude>
@@ -224,32 +143,14 @@
     <ClInclude Include="imgui\imstb_truetype.h">
       <Filter>Headerdateien\ImGuiFramework</Filter>
     </ClInclude>
-    <ClInclude Include="config.h">
+    <ClInclude Include="src\ecs\component\Component.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="GUI.h">
-      <Filter>Headerdateien\GUI</Filter>
+    <ClInclude Include="src\ecs\Scene.h">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="AbstractObject.h">
-      <Filter>Headerdateien\Management</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectHandler.h">
-      <Filter>Headerdateien\Management</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Headerdateien\RenderPipeline\Ressources</Filter>
-    </ClInclude>
-    <ClInclude Include="Textured.h">
-      <Filter>Headerdateien\RenderPipeline\Renderable</Filter>
-    </ClInclude>
-    <ClInclude Include="Ressources.h">
-      <Filter>Headerdateien\RenderPipeline\Ressources</Filter>
-    </ClInclude>
-    <ClInclude Include="Plane.h">
-      <Filter>Headerdateien\RenderPipeline\Renderable\Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="WavefrontObj.h">
-      <Filter>Headerdateien\RenderPipeline\Renderable\Mesh</Filter>
+    <ClInclude Include="Entity.h">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
