@@ -31,39 +31,40 @@ namespace projection {
 	{
 	private:
 		// Variables
-		std::string windowTitle = "Window";
-		bool drawAll_;
+		std::string m_windowTitle = "Window";
+		bool m_drawAll_;
 
 		// Window
-		sf::RenderWindow* window;
+		sf::RenderWindow* m_Window;
 		sf::Event ev;
-		sf::VideoMode videoMode;
+		sf::VideoMode m_VideoMode;
 
 		float dt_;
-		float movementCamera_;
+		float m_movementCamera;
 
-		sf::Clock clock;
+		sf::Clock m_Clock;
+
+		// Game objects
+		Pipeline* m_Pipeline;
+		Camera* m_Camera;
+
+		ObjectHandler* m_ObjectHandler;
+
+		GUI* m_GUI;
+
+		// Temporary objects
+		WavefrontObj* obj = new WavefrontObj();
 
 		// Private functions
 		void initVariables();
 		void initWindow();
-		void initGameObjects();
+		void initGameObjects() const;
 		void initPipeline();
 
-		void updateGameObjects();
-		void updateGUI();
+		void updateGameObjects() const;
+		void updateGUI() const;
 
-		void setTitle();
-
-		// Game objects
-		Pipeline* pl;
-		Camera* camera;
-
-		ObjectHandler* objHandler;
-
-		GUI* GUI_;
-
-		WavefrontObj* obj = new WavefrontObj();
+		void setTitle() const;
 
 	public:
 		// Constructors
@@ -76,7 +77,7 @@ namespace projection {
 		// Functions
 		void pollEvents();
 		void update();
-		void render();
+		void render() const;
 	};
 }
 

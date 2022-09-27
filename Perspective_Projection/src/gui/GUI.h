@@ -22,36 +22,36 @@ namespace projection {
 	class GUI
 	{
 	private:
-		sf::Vector3f position;
-		sf::Vector3f scale;
-		sf::Vector3f rotation;
+		sf::Vector3f m_Position;
+		sf::Vector3f m_Scale;
+		sf::Vector3f m_Rotation;
 
-		sf::Sprite* sprt;
-		std::string name;
+		sf::Sprite* m_Sprite;
+		std::string m_Name;
 
 		//const char* textureItems[];
 		//static const char* currentItem;
 
-		std::vector<AbstractObject*> objects;
-		std::vector<Texture*>* textures;
+		std::vector<AbstractObject*> m_Objects;
+		std::vector<Texture*>* m_Textures;
 
-		ObjectHandler* Handler;
+		ObjectHandler* m_Handler;
 
 		void update(AbstractObject* obj);
-		void apply(AbstractObject* obj);
+		void apply(AbstractObject* obj) const;
 
 		void updateBrowser();
 
-		void treeChildren(ImGuiTreeNodeFlags node_flags, bool isOpen, AbstractObject* obj);
+		void treeChildren(ImGuiTreeNodeFlags node_flags, bool isOpen, AbstractObject* obj) const;
 
 	public:
 		GUI(ObjectHandler* objHandler);
 
-		void menuBar();
-		void objectBrowser();
+		void menuBar() const;
+		void objectBrowser() const;
 
 		void objectAttributes();
-		void diagnosticsWindow(sf::Vector3f* cameraPos, int fps);
+		void diagnosticsWindow(sf::Vector3f* cameraPos, int fps) const;
 	};
 }
 

@@ -2,18 +2,18 @@
 
 projection::GUI::GUI(ObjectHandler* objHandler)
 {
-    sprt = nullptr;
-    Handler = objHandler;
+    m_Sprite = nullptr;
+    m_Handler = objHandler;
 
-    objects = *objHandler->getObjects();
-    textures = objHandler->getTextures();
+    m_Objects = *objHandler->getObjects();
+    m_Textures = objHandler->getTextures();
 
     /*for (int i = 0; i < textures->size(); i++) {
         textureItems[i] = (*textures)[i]->getName().c_str();
     }*/
 }
 
-void projection::GUI::menuBar()
+void projection::GUI::menuBar() const
 {
     if (ImGui::BeginMainMenuBar())
     {
@@ -39,7 +39,7 @@ void projection::GUI::menuBar()
     }
 }
 
-void projection::GUI::objectBrowser()
+void projection::GUI::objectBrowser() const
 {
     ImGui::SetNextWindowSize(ImVec2(c_objectBrowserWidth, c_objectBrowserHeight));
     ImGui::SetNextWindowPos(ImVec2(c_Padding, c_PaddingTop));
@@ -56,19 +56,19 @@ void projection::GUI::objectBrowser()
         {
             ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize() * 3);
 
-            for (int i = 0; i < objects.size(); i++)
+            for (int i = 0; i < m_Objects.size(); i++)
             {
                 ImGuiTreeNodeFlags node_flags;
-                if (objects[i]->getChildren().size()) {
+                if (m_Objects[i]->getChildren().size()) {
                     node_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
                 }
                 else {
                     node_flags = ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_OpenOnDoubleClick;
                 }
 
-                bool node_open = ImGui::TreeNodeEx((void*)(intptr_t)i, node_flags, objects[i]->getName().c_str());
+                bool node_open = ImGui::TreeNodeEx((void*)(intptr_t)i, node_flags, m_Objects[i]->getName().c_str());
 
-                treeChildren(node_flags, node_open, objects[i]);
+                treeChildren(node_flags, node_open, m_Objects[i]);
 
             }
             ImGui::TreePop();
@@ -78,7 +78,7 @@ void projection::GUI::objectBrowser()
     ImGui::End();
 }
 
-void projection::GUI::treeChildren(ImGuiTreeNodeFlags node_flags, bool isOpen, AbstractObject* obj)
+void projection::GUI::treeChildren(ImGuiTreeNodeFlags node_flags, bool isOpen, AbstractObject* obj) const
 {
     if (isOpen)
     {
@@ -105,12 +105,12 @@ void projection::GUI::objectAttributes()
 {
     ImGui::SetNextWindowSize(ImVec2(c_objectAttrWidth, c_objectAttrHeight));
     ImGui::SetNextWindowPos(ImVec2(c_winWidth - c_objectAttrWidth - c_Padding, c_PaddingTop));
-    AbstractObject* obj = Handler->getActiveObj();
+    AbstractObject* obj = m_Handler->getActiveObj();
 
     if (obj) {
         ImGui::Begin(("Object Attributes - " + obj->getName()).c_str());
 
-        if (name != obj->getName()) {
+        if (m_Name != obj->getName()) {
             update(obj);
         }
 
@@ -122,15 +122,15 @@ void projection::GUI::objectAttributes()
             // X
             ImGui::SameLine();
             ImGui::SetNextItemWidth(80.f);
-            ImGui::InputFloat("XT", &(position.x));
+            ImGui::InputFloat("XT", &(m_Position.x));
             // Y
             ImGui::SameLine();
             ImGui::SetNextItemWidth(80.f);
-            ImGui::InputFloat("YT", &(position.y));
+            ImGui::InputFloat("YT", &(m_Position.y));
             // Z
             ImGui::SameLine();
             ImGui::SetNextItemWidth(80.f);
-            ImGui::InputFloat("ZT", &(position.z));
+            ImGui::InputFloat("ZT", &(m_Position.z));
             
             ImGui::SetNextItemWidth(200.f);
             ImGui::Text("Rotation   ");
@@ -138,15 +138,15 @@ void projection::GUI::objectAttributes()
             // X
             ImGui::SameLine();
             ImGui::SetNextItemWidth(80.f);
-            ImGui::InputFloat("XR", &(rotation.x));
+            ImGui::InputFloat("XR", &(m_Rotation.x));
             // Y
             ImGui::SameLine();
             ImGui::SetNextItemWidth(80.f);
-            ImGui::InputFloat("YR", &(rotation.y));
+            ImGui::InputFloat("YR", &(m_Rotation.y));
             // Z
             ImGui::SameLine();
             ImGui::SetNextItemWidth(80.f);
-            ImGui::InputFloat("ZR", &(rotation.z));
+            ImGui::InputFloat("ZR", &(m_Rotation.z));
 
             ImGui::SetNextItemWidth(100.f);
             ImGui::Text("Scale      ");
@@ -154,15 +154,15 @@ void projection::GUI::objectAttributes()
             // X
             ImGui::SameLine();
             ImGui::SetNextItemWidth(80.f);
-            ImGui::InputFloat("XS", &(scale.x));
+            ImGui::InputFloat("XS", &(m_Scale.x));
             // Y
             ImGui::SameLine();
             ImGui::SetNextItemWidth(80.f);
-            ImGui::InputFloat("YS", &(scale.y));
+            ImGui::InputFloat("YS", &(m_Scale.y));
             // Z
             ImGui::SameLine();
             ImGui::SetNextItemWidth(80.f);
-            ImGui::InputFloat("ZS", &(scale.z));
+            ImGui::InputFloat("ZS", &(m_Scale.z));
 
             ImGui::Separator();
 
@@ -178,29 +178,29 @@ void projection::GUI::objectAttributes()
         }
         if (dynamic_cast<Textured*>(obj) != nullptr && dynamic_cast<Textured*>(obj)->isTextured) {
             Textured* texPtr = static_cast<Textured*>(obj);
-            if (name != obj->getName() || !sprt) {
+            if (m_Name != obj->getName() || !m_Sprite) {
                 //update(obj);
-                if (sprt) {
-                    delete sprt->getTexture();
-                    delete sprt;
+                if (m_Sprite) {
+                    delete m_Sprite->getTexture();
+                    delete m_Sprite;
                 }
-                sprt = texPtr->getTexture()->getSpriteObject();
-                if (sprt) {
-                    float fx = 150.f / sprt->getTexture()->getSize().x;
-                    float fy = 150.f / sprt->getTexture()->getSize().y;
-                    sprt->setScale(sf::Vector2f(fx, fy));
+                m_Sprite = texPtr->getTexture()->getSpriteObject();
+                if (m_Sprite) {
+                    float fx = 150.f / m_Sprite->getTexture()->getSize().x;
+                    float fy = 150.f / m_Sprite->getTexture()->getSize().y;
+                    m_Sprite->setScale(sf::Vector2f(fx, fy));
                     //currentItem = texPtr->getTexture()->getName().c_str();
                 }
             }
-            if (ImGui::CollapsingHeader("Texture", ImGuiTreeNodeFlags_DefaultOpen) && sprt) {
-                ImGui::Image(*sprt);
+            if (ImGui::CollapsingHeader("Texture", ImGuiTreeNodeFlags_DefaultOpen) && m_Sprite) {
+                ImGui::Image(*m_Sprite);
                 ImGui::SameLine();
                 //ImGui::Text(std::to_string(static_cast<Textured*>(obj)->getTexture()->getType()));
                 ImGui::SameLine();
 
                 ImGui::BeginChild(1);
                 ImGui::Text(("Name: " + texPtr->getTexture()->getName()).c_str());
-                ImGui::Text(("Resolution: " + std::to_string(sprt->getTexture()->getSize().x) + "px / " + std::to_string(sprt->getTexture()->getSize().y) + "px").c_str());
+                ImGui::Text(("Resolution: " + std::to_string(m_Sprite->getTexture()->getSize().x) + "px / " + std::to_string(m_Sprite->getTexture()->getSize().y) + "px").c_str());
                 ImGui::EndChild();
 
                 //ImGui::BeginCombo("test A", "test B");
@@ -220,7 +220,7 @@ void projection::GUI::objectAttributes()
     ImGui::End();
 }
 
-void projection::GUI::diagnosticsWindow(sf::Vector3f* cameraPos, int fps)
+void projection::GUI::diagnosticsWindow(sf::Vector3f* cameraPos, int fps) const
 {
     ImGui::SetNextWindowSize(ImVec2(c_diagnosticsWidth, c_diagnosticsHeight));
     ImGui::SetNextWindowPos(ImVec2(c_winWidth - c_objectAttrWidth - 2 * c_Padding - c_diagnosticsWidth, c_PaddingTop));
@@ -244,23 +244,23 @@ void projection::GUI::diagnosticsWindow(sf::Vector3f* cameraPos, int fps)
 
 void projection::GUI::update(AbstractObject* obj)
 {
-    position = *obj->getPositionAbs();
-    scale = *obj->getScaleAbs();
-    rotation = *obj->getRotationAbs();
+    m_Position = *obj->getPositionAbs();
+    m_Scale = *obj->getScaleAbs();
+    m_Rotation = *obj->getRotationAbs();
 
-    name = obj->getName();
+    m_Name = obj->getName();
 }
 
-void projection::GUI::apply(AbstractObject* obj)
+void projection::GUI::apply(AbstractObject* obj) const
 {
-    obj->setName(name);
+    obj->setName(m_Name);
 
-    obj->moveToPos(position);
-    obj->setPostion(position);
+    obj->moveToPos(m_Position);
+    obj->setPostion(m_Position);
 
-    obj->setRotation(rotation);
+    obj->setRotation(m_Rotation);
 
-    obj->setScale(scale);
+    obj->setScale(m_Scale);
 }
 
 void projection::GUI::updateBrowser()

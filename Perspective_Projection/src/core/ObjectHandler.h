@@ -16,22 +16,22 @@ namespace projection {
 	{
 	private:
 		// Rigids
-		std::vector<Cube*> cubes;
-		std::vector<Point*> points;
-		std::vector<Triangle*> polys;
-		std::vector<Plane*> planes;
+		std::vector<Cube*> m_Cubes;
+		std::vector<Point*> m_Points;
+		std::vector<Triangle*> m_Polys;
+		std::vector<Plane*> m_Planes;
 
 		// Textures
-		std::vector<Texture*> textures;
+		std::vector<Texture*> m_Textures;
 
-		Pipeline* pipeline;
-		Camera* camera;
-		sf::RenderTarget* target;
+		Pipeline* m_Pipeline;
+		Camera* m_Camera;
+		sf::RenderTarget* m_Target;
 
-		AbstractObject* activeObj;
+		AbstractObject* m_ActiveObject;
 
 		// Ressources;
-		Ressources* ressources;
+		Ressources* m_Ressources;
 
 	public:
 		ObjectHandler(Pipeline* pipeLine, Camera* camera, sf::RenderTarget* target);
@@ -62,10 +62,10 @@ namespace projection {
 		Plane* createPlane(sf::Vector3f position = sf::Vector3f(0.f, 0.f, 0.f), sf::Vector2f scale = sf::Vector2f(1.f, 1.f), sf::Color color = sf::Color::White);
 		Plane* createPlane(Texture* texture, sf::Vector3f position = sf::Vector3f(0.f, 0.f, 0.f), sf::Vector2f scale = sf::Vector2f(1.f, 1.f));
 
-		std::vector<AbstractObject*>* getObjects();
-		std::vector<Renderable*> getRenderObjects();
+		std::vector<AbstractObject*>* getObjects() const;
+		std::vector<Renderable*> getRenderObjects() const;
 		std::vector<Texture*>* getTextures();
-		AbstractObject* getActiveObj();
+		AbstractObject* getActiveObj() const;
 
 		void test_rotate(float dt);
 	};

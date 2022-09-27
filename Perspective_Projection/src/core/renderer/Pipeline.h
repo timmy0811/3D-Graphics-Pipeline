@@ -15,16 +15,16 @@ namespace projection {
 	class Pipeline
 	{
 	private:
-		RenderQueue* queue;
-		Matrix3X3 projection;
+		RenderQueue* m_Queue;
+		Matrix3X3 m_ProjectionMat;
 
-		Camera* camera;
+		Camera* m_Camera;
 
 		// Screen-Buffer
-		sf::Texture textureBuffer;
-		sf::Sprite sprtBuffer;
+		sf::Texture m_TextureBuffer;
+		sf::Sprite m_SpriteBuffer;
 
-		sf::Uint8* buffer;
+		sf::Uint8* m_Buffer;
 
 	public:
 		Pipeline();

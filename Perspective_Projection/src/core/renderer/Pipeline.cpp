@@ -2,45 +2,45 @@
 
 projection::Pipeline::Pipeline()
 {
-	queue = new RenderQueue();
-	projection = Matrix3X3(0.f, MATRIX_TYPE::PROJECTION);
+	m_Queue = new RenderQueue();
+	m_ProjectionMat = Matrix3X3(0.f, MATRIX_TYPE::PROJECTION);
 
 	// Screen Buffer init
-	buffer = new sf::Uint8[c_winHeight * c_winWidth * 4];
-	memset(buffer, 0, c_winHeight * c_winWidth * 4);
+	m_Buffer = new sf::Uint8[c_winHeight * c_winWidth * 4];
+	memset(m_Buffer, 0, c_winHeight * c_winWidth * 4);
 
-	textureBuffer.create(c_winWidth, c_winHeight);
-	sprtBuffer.setTexture(textureBuffer, true);
+	m_TextureBuffer.create(c_winWidth, c_winHeight);
+	m_SpriteBuffer.setTexture(m_TextureBuffer, true);
 }
 
 projection::Pipeline::~Pipeline()
 {
-	delete queue;
+	delete m_Queue;
 }
 
 void projection::Pipeline::setCamera(Camera* camera)
 {
-	this->camera = camera;
-	queue->setCamera(camera);
+	this->m_Camera = camera;
+	m_Queue->setCamera(camera);
 }
 
 void projection::Pipeline::renderAll(sf::RenderTarget* target)
 {
-	queue->applyPerspective();
-	queue->renderAll(target,&textureBuffer, &sprtBuffer, buffer);
+	m_Queue->applyPerspective();
+	m_Queue->renderAll(target,&m_TextureBuffer, &m_SpriteBuffer, m_Buffer);
 }
 
 void projection::Pipeline::renderByAdress(Renderable* obj, sf::RenderTarget* target)
 {
-	queue->renderByAdress(obj, target);
+	m_Queue->renderByAdress(obj, target);
 }
 
 void projection::Pipeline::addObjectToQueue(Renderable* obj)
 {
-	queue->addObject(obj);
+	m_Queue->addObject(obj);
 }
 
 bool projection::Pipeline::removeObjectFromQueue(Renderable* obj)
 {
-	return queue->removeObject(obj);
+	return m_Queue->removeObject(obj);
 }
