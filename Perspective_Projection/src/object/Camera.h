@@ -13,10 +13,10 @@ namespace projection {
 	class Camera
 	{
 	private:
-		sf::Vector3f globalOffset_;
+		sf::Vector3f m_GlobalOffset;
 
-		sf::Vector3f position;
-		sf::Vector2f rotation_;
+		sf::Vector3f m_Position;
+		sf::Vector2f m_Rotation;
 
 	public:
 		Camera(sf::Vector3f position = sf::Vector3f(0.f, 0.f, -1.f), sf::Vector2f rotation_ = sf::Vector2f(0.f, 0.f));

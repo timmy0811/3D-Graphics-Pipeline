@@ -8,10 +8,11 @@
 
 // Rendering options
 #define c_z_clipping 0.8f
+#define c_drawMeshPoints false
 
 // Window options
-#define c_winWidth 2140
-#define c_winHeight 1200
+#define c_winWidth 1284		// 2140
+#define c_winHeight 720		// 1200
 #define c_framerate 60
 
 // Widgets

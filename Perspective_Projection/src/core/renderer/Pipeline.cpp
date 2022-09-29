@@ -30,7 +30,7 @@ void projection::Pipeline::renderAll(sf::RenderTarget* target)
 	m_Queue->renderAll(target,&m_TextureBuffer, &m_SpriteBuffer, m_Buffer);
 }
 
-void projection::Pipeline::renderByAdress(Renderable* obj, sf::RenderTarget* target)
+void projection::Pipeline::renderByAdress(Renderable* obj, sf::RenderTarget* target) const
 {
 	m_Queue->renderByAdress(obj, target);
 }

@@ -1,14 +1,14 @@
 #include "Textured.h"
 
-const sf::Uint8* projection::Textured::getPixelPtr(unsigned int x, unsigned int y)
+const sf::Uint8* projection::Textured::getPixelPtr(unsigned int x, unsigned int y) const
 {
-	if (x >= dimRef.x) x = dimRef.x - 1;
-	if (y >= dimRef.y) y = dimRef.y - 1;
+	if (x >= m_DimensionsReference.x) x = m_DimensionsReference.x - 1;
+	if (y >= m_DimensionsReference.y) y = m_DimensionsReference.y - 1;
 
-	return textureArr + (y * dimRef.x + x) * 4;
+	return m_TextureArray + (y * m_DimensionsReference.x + x) * 4;
 }
 
 projection::Texture* projection::Textured::getTexture()
 {
-	return texture;
+	return m_Texture;
 }

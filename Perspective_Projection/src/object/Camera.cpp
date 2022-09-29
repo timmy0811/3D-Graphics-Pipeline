@@ -1,29 +1,29 @@
 #include "Camera.h"
 
 projection::Camera::Camera(sf::Vector3f position, sf::Vector2f rotation_)
-	:position(position), rotation_(rotation_)
+	:m_Position(position), m_Rotation(rotation_)
 {
 	move(position);
 	//rotate(rotation_);
-	this->position = { 0.f, 0.f, (float)c_viewPortDistance };
+	this->m_Position = { 0.f, 0.f, (float)c_viewPortDistance };
 
-	globalOffset_ = sf::Vector3f();
+	m_GlobalOffset = sf::Vector3f();
 }
 
 void projection::Camera::move(sf::Vector3f direction)
 {
-	globalOffset_ += direction;
+	m_GlobalOffset += direction;
 }
 
 void projection::Camera::rotate(sf::Vector2f angle , std::vector<Renderable*> sceneObjects)
 {
-	this->position = { -globalOffset_.x, -globalOffset_.y, -(float)c_viewPortDistance - globalOffset_.z };
+	this->m_Position = { -m_GlobalOffset.x, -m_GlobalOffset.y, -(float)c_viewPortDistance - m_GlobalOffset.z };
 
 	for (Renderable* obj : sceneObjects) {
-		obj->rotateByCamera(angle.x, position);
+		obj->rotateByCamera(angle.x, m_Position);
 	}
 
-	this->rotation_ += angle;
+	this->m_Rotation += angle;
 
 	/*Matrix3X3* rotXMat = new Matrix3X3(angle.x, MATRIX_TYPE::ROTATION_X);
 	Matrix3X3* rotYMat = new Matrix3X3(angle.y, MATRIX_TYPE::ROTATION_Y);
@@ -49,5 +49,5 @@ void projection::Camera::rotate(sf::Vector2f angle , std::vector<Renderable*> sc
 
 sf::Vector3f* projection::Camera::getOffset()
 {
-	return &globalOffset_;
+	return &m_GlobalOffset;
 }

@@ -15,12 +15,12 @@ projection::Ressources::Ressources()
 	textures[TexType::ANDESIT]->loadFromFile("Assets/texture/ANDESIT.png");
 }
 
-sf::Image* projection::Ressources::getTexture(TexType type)
+sf::Image* projection::Ressources::getTexture(TexType type) 
 {
 	return textures[type];
 }
 
-sf::Vector2u projection::Ressources::getDim(TexType type)
+sf::Vector2u projection::Ressources::getDim(TexType type) 
 {
 	return textures[type]->getSize();
 }

@@ -11,9 +11,9 @@ namespace projection {
 	class Mesh : public Textured
 	{
 	protected:
-		std::vector<Triangle*> polys;
-		std::vector<Point*> points;
-		Matrix3X1 meshCenter;
+		std::vector<Triangle*> m_Polys;
+		std::vector<Point*> m_Points;
+		Matrix3X1 m_MeshCenter;
 
 		bool wireFrame_;
 

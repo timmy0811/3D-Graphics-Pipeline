@@ -13,12 +13,12 @@ namespace projection {
 	class Point : public Renderable
 	{
 	private:
-		Matrix3X1 position;
-		Matrix3X1 projectedPositon;
-		sf::CircleShape shape;
+		Matrix3X1 m_Position;
+		Matrix3X1 m_PositionProjected;
+		sf::CircleShape m_Shape;
 
-		float w;
-		float wProj;
+		float m_W;
+		float m_wProjected;
 
 		void rotateByEnum(float angle, sf::Vector3f refPosition, MATRIX_TYPE type);
 

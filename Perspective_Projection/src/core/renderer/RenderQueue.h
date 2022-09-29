@@ -13,10 +13,10 @@ namespace projection {
 	class RenderQueue
 	{
 	private:
-		std::vector<Renderable*> renderQueue;
-		sf::Vector3f* globalOffset_;
+		std::vector<Renderable*> m_RenderQueue;
+		sf::Vector3f* m_GlobalOffset;
 
-		Camera* camera;
+		Camera* m_Camera;
 
 	public:
 		RenderQueue(sf::Vector3f* globalOffset_ = new sf::Vector3f());
@@ -24,9 +24,9 @@ namespace projection {
 
 		void setCamera(Camera* camera);
 
-		void applyPerspective();
-		void renderAll(sf::RenderTarget* target, sf::Texture* textureBuffer, sf::Sprite* sprtBuffer, sf::Uint8* buffer = nullptr);
-		void renderByAdress(Renderable* obj, sf::RenderTarget* target);
+		void applyPerspective() const;
+		void renderAll(sf::RenderTarget* target, sf::Texture* textureBuffer, sf::Sprite* sprtBuffer, sf::Uint8* buffer = nullptr) const;
+		void renderByAdress(Renderable* obj, sf::RenderTarget* target) const;
 
 		void addObject(Renderable* obj);
 		bool removeObject(Renderable* obj);

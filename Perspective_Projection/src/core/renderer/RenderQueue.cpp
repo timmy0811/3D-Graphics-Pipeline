@@ -2,36 +2,36 @@
 
 projection::RenderQueue::RenderQueue(sf::Vector3f* globalOffset_)
 {
-	this->globalOffset_ = globalOffset_;
+	this->m_GlobalOffset = globalOffset_;
 }
 
 projection::RenderQueue::~RenderQueue()
 {
-	for (Renderable* r : renderQueue) {
+	for (Renderable* r : m_RenderQueue) {
 		delete r;
 	}
 }
 
 void projection::RenderQueue::setCamera(Camera* camera)
 {
-	this->camera = camera;
-	globalOffset_ = camera->getOffset();
+	this->m_Camera = camera;
+	m_GlobalOffset = camera->getOffset();
 }
 
-void projection::RenderQueue::applyPerspective()
+void projection::RenderQueue::applyPerspective() const
 {
-	for (Renderable* renderObj : renderQueue) {
+	for (Renderable* renderObj : m_RenderQueue) {
 		renderObj->applyPerspective();
 	}
 }
 
-void projection::RenderQueue::renderAll(sf::RenderTarget* target, sf::Texture* textureBuffer, sf::Sprite* sprtBuffer, sf::Uint8* buffer)
+void projection::RenderQueue::renderAll(sf::RenderTarget* target, sf::Texture* textureBuffer, sf::Sprite* sprtBuffer, sf::Uint8* buffer) const
 {
-	if (camera) {
+	if (m_Camera) {
 		// Clear screen buffer
 		memset(buffer, 0, c_winHeight * c_winWidth * 4);
 
-		for (Renderable* renderObj : renderQueue) {
+		for (Renderable* renderObj : m_RenderQueue) {
 			renderObj->render(target, buffer);
 		}
 
@@ -41,10 +41,10 @@ void projection::RenderQueue::renderAll(sf::RenderTarget* target, sf::Texture* t
 	}
 }
 
-void projection::RenderQueue::renderByAdress(Renderable* obj, sf::RenderTarget* target)
+void projection::RenderQueue::renderByAdress(Renderable* obj, sf::RenderTarget* target) const
 {
-	if (camera) {
-		for (Renderable* renderObj : renderQueue) {
+	if (m_Camera) {
+		for (Renderable* renderObj : m_RenderQueue) {
 			if (renderObj = obj) renderObj->render(target);
 		}
 	}
@@ -52,16 +52,16 @@ void projection::RenderQueue::renderByAdress(Renderable* obj, sf::RenderTarget* 
 
 void projection::RenderQueue::addObject(Renderable* obj)
 {
-	renderQueue.push_back(obj);
-	obj->setGlobalOffset(globalOffset_);
+	m_RenderQueue.push_back(obj);
+	obj->setGlobalOffset(m_GlobalOffset);
 }
 
 bool projection::RenderQueue::removeObject(Renderable* obj)
 {
-	for (int i = 0; i < renderQueue.size(); i++) {
-		if (renderQueue[i] == obj)
+	for (int i = 0; i < m_RenderQueue.size(); i++) {
+		if (m_RenderQueue[i] == obj)
 		{
-			renderQueue.erase(renderQueue.begin() + i);
+			m_RenderQueue.erase(m_RenderQueue.begin() + i);
 			return true;
 		}
 	}

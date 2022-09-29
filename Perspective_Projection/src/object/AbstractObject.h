@@ -11,15 +11,15 @@ namespace projection {
 	protected:
 		std::string name_;
 
-		float* posX;
-		float* posY;
-		float* posZ;
+		float* m_PosX;
+		float* m_PosY;
+		float* m_PosZ;
 
-		sf::Vector3f rotationAbs;
-		sf::Vector3f scaleAbs;
+		sf::Vector3f m_RotationAbsolute;
+		sf::Vector3f m_ScaleAbsolute;
 
 	public:
-		std::string getName();
+		std::string getName() const;
 
 		sf::Vector3f* getPositionAbs();
 		sf::Vector3f* getRotationAbs();

@@ -7,12 +7,12 @@ namespace projection {
 	class Textured : public Renderable
 	{
 	protected:
-		sf::Vector2u dimRef;
+		sf::Vector2u m_DimensionsReference;
 
-		Texture* texture;
-		const sf::Uint8* textureArr;
+		Texture* m_Texture;
+		const sf::Uint8* m_TextureArray;
 
-		const sf::Uint8* getPixelPtr(unsigned int x, unsigned int y);
+		const sf::Uint8* getPixelPtr(unsigned int x, unsigned int y) const;
 
 	public:
 		Texture* getTexture();

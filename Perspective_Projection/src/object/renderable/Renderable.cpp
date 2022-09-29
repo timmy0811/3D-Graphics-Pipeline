@@ -7,12 +7,12 @@ std::vector<projection::AbstractObject*> projection::Renderable::getChildren()
 
 std::vector<sf::VertexArray>* projection::Renderable::getVertices()
 {
-	return &vertices;
+	return &m_Vertices;
 }
 
 void projection::Renderable::setGlobalOffset(sf::Vector3f* vec)
 {
-	globalOffset_ = vec;
+	m_GlobalOffset = vec;
 }
 
 sf::Vector2f projection::Renderable::translateToRel(sf::Vector2f pos, sf::Vector2u windowSize)

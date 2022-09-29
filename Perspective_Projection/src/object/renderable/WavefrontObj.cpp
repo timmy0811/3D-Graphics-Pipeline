@@ -59,7 +59,7 @@ const bool projection::WavefrontObj::loadFromFile(char* path)
                     float z = std::stof(val);
                     val.clear();
 
-                    points.push_back(new Point({ x, -y, z }, "point_" + points.size()));
+                    m_Points.push_back(new Point({ x, -y, z }, "point_" + m_Points.size()));
                     break;
                 }
                 // Texture points
@@ -120,11 +120,11 @@ const bool projection::WavefrontObj::loadFromFile(char* path)
 
                 // Check if polygons are triangles or else
                 if (col == 3) {
-                    polys.push_back(new Triangle(points[p[0] - 1], points[p[1] - 1], points[p[2] - 1], sf::Color(rand() % 255, rand() % 255, rand() % 255, 255.f), name_ + "triangle_" + std::to_string(polys.size())));
+                    m_Polys.push_back(new Triangle(m_Points[p[0] - 1], m_Points[p[1] - 1], m_Points[p[2] - 1], sf::Color(rand() % 255, rand() % 255, rand() % 255, 255.f), name_ + "triangle_" + std::to_string(m_Polys.size())));
                 }
                 else if (col == 4) {
-                    polys.push_back(new Triangle(points[p[0] - 1], points[p[1] - 1], points[p[2] - 1], sf::Color(rand() % 255, rand() % 255, rand() % 255, 255.f), name_ + "triangle_"));
-                    polys.push_back(new Triangle(points[p[0] - 1], points[p[2] - 1], points[p[3] - 1], sf::Color(rand() % 255, rand() % 255, rand() % 255, 255.f), name_ + "triangle_"));
+                    m_Polys.push_back(new Triangle(m_Points[p[0] - 1], m_Points[p[1] - 1], m_Points[p[2] - 1], sf::Color(rand() % 255, rand() % 255, rand() % 255, 255.f), name_ + "triangle_"));
+                    m_Polys.push_back(new Triangle(m_Points[p[0] - 1], m_Points[p[2] - 1], m_Points[p[3] - 1], sf::Color(rand() % 255, rand() % 255, rand() % 255, 255.f), name_ + "triangle_"));
                 }
 
                 break;

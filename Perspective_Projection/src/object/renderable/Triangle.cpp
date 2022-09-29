@@ -2,23 +2,23 @@
 
 projection::Triangle::Triangle(Point* p1, Point* p2, Point* p3, sf::Color color, std::string name)
 {
-	isTextured = false;
-	texture = nullptr;
+	m_IsTextured = false;
+	m_Texture = nullptr;
 	name_ = name;
 
 	this->p1 = p1;
 	this->p2 = p2;
 	this->p3 = p3;
 
-	this->color = color;
+	this->m_Color = color;
 }
 
 projection::Triangle::Triangle(Point* p1, Point* p2, Point* p3, Texture* texture, std::string name, sf::Vector2f texCord1_, sf::Vector2f texCord2_, sf::Vector2f texCord3_)
 {
-	isTextured = true;
-	this->texture = texture;
-	textureArr = texture->getPixelPtr();
-	dimRef = texture->getSize();
+	m_IsTextured = true;
+	this->m_Texture = texture;
+	m_TextureArray = texture->getPixelPtr();
+	m_DimensionsReference = texture->getSize();
 
 	name_ = name;
 
@@ -30,7 +30,7 @@ projection::Triangle::Triangle(Point* p1, Point* p2, Point* p3, Texture* texture
 	this->texCord2_ = texCord2_;
 	this->texCord3_ = texCord3_;
 
-	this->color = color;
+	this->m_Color = m_Color;
 }
 
 projection::Triangle::~Triangle()
@@ -52,13 +52,13 @@ void projection::Triangle::applyPerspective()
 void projection::Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 {
 	// Z Clipping
-	if(globalOffset_) if (p1->getPosition().z + globalOffset_->z > c_z_clipping || p2->getPosition().z + globalOffset_->z > c_z_clipping || p3->getPosition().z + globalOffset_->z > c_z_clipping) return;
+	if(m_GlobalOffset) if (p1->getPosition().z + m_GlobalOffset->z > c_z_clipping || p2->getPosition().z + m_GlobalOffset->z > c_z_clipping || p3->getPosition().z + m_GlobalOffset->z > c_z_clipping) return;
 
 	// Catch if triangle is out of screen
 	if (isOutsideScreen(target)) return;
 
 	if (calculateProjectedZ() < 0.f) {
-		if (isTextured) {
+		if (m_IsTextured) {
 			// Sort points in y order
 			Point* tempPoint;
 			sf::Vector2f tempCord;
@@ -112,8 +112,8 @@ void projection::Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 			float w2 = p2->getW();
 			float w3 = p3->getW();
 
-			int texWidth = texture->getSize().x;
-			int texHeight = texture->getSize().y;
+			int texWidth = m_Texture->getSize().x;
+			int texHeight = m_Texture->getSize().y;
 
 			// Top triangle of polygon
 			if (pos1.y < pos2.y) {
@@ -262,9 +262,9 @@ void projection::Triangle::render(sf::RenderTarget* target, sf::Uint8* buffer)
 				}
 			}
 		}
-		else if (!isTextured) {
+		else if (!m_IsTextured) {
 			createPoly(target);
-			target->draw(vertices[0]);
+			target->draw(m_Vertices[0]);
 		}
 	}
 }
@@ -334,7 +334,7 @@ void projection::Triangle::rotateByCamera(float angle, sf::Vector3f refPosition)
 
 void projection::Triangle::setGlobalOffset(sf::Vector3f* vec)
 {
-	this->globalOffset_ = vec;
+	this->m_GlobalOffset = vec;
 }
 
 const bool projection::Triangle::isOutsideScreen(sf::RenderTarget* target) const
@@ -472,16 +472,16 @@ sf::Vector2f projection::Triangle::getTexCord(unsigned int point)
 
 void projection::Triangle::createPoly(sf::RenderTarget* target)
 {
-	vertices.clear();
+	m_Vertices.clear();
 
 	sf::VertexArray poly(sf::Triangles, 3);
 	poly[0].position = translateToRel(sf::Vector2f(p1->getProjMatrix()->x0, p1->getProjMatrix()->y0), target->getSize());
 	poly[1].position = translateToRel(sf::Vector2f(p2->getProjMatrix()->x0, p2->getProjMatrix()->y0), target->getSize());
 	poly[2].position = translateToRel(sf::Vector2f(p3->getProjMatrix()->x0, p3->getProjMatrix()->y0), target->getSize());
 
-	poly[0].color = color;
-	poly[1].color = color;
-	poly[2].color = color;
+	poly[0].color = m_Color;
+	poly[1].color = m_Color;
+	poly[2].color = m_Color;
 
-	vertices.push_back(poly);
+	m_Vertices.push_back(poly);
 }

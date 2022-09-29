@@ -176,7 +176,7 @@ void projection::GUI::objectAttributes()
                 apply(obj);
             }
         }
-        if (dynamic_cast<Textured*>(obj) != nullptr && dynamic_cast<Textured*>(obj)->isTextured) {
+        if (dynamic_cast<Textured*>(obj) != nullptr && dynamic_cast<Textured*>(obj)->m_IsTextured) {
             Textured* texPtr = static_cast<Textured*>(obj);
             if (m_Name != obj->getName() || !m_Sprite) {
                 //update(obj);

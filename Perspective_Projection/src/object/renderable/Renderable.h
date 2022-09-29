@@ -15,15 +15,15 @@ namespace projection {
 	protected:
 		Renderable();
 
-		sf::RenderTarget* target;
+		sf::RenderTarget* m_Target;
 
-		std::vector<sf::VertexArray> vertices;
-		sf::Color color;
+		std::vector<sf::VertexArray> m_Vertices;
+		sf::Color m_Color;
 
-		sf::Vector3f* globalOffset_;
+		sf::Vector3f* m_GlobalOffset;
 
 	public:
-		bool isTextured;
+		bool m_IsTextured;
 
 		virtual void render(sf::RenderTarget* target, sf::Uint8* buffer = nullptr) = 0;
 		virtual void applyPerspective() = 0;
